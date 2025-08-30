@@ -1,8 +1,7 @@
 import React from "react";
-
 import bookLogo from "../../assets/book.svg";
 import authorLogo from "../../assets/author.svg";
-import trendesetterLogo from "../../assets/trendesetter.svg";
+import trendsetterLogo from "../../assets/trendesetter.svg";
 function Specialization() {
     return (
         <>
@@ -77,10 +76,7 @@ function Specialization() {
     font-size: 1em;
   }
 } 
-            
-            
-
-            `}
+`}
         </style>
         <div className="specialization-container">
             <h1 className="specialization-title">Specialization</h1>
@@ -88,7 +84,7 @@ function Specialization() {
             <ul className="specialization-list">
                 <li><img src={bookLogo} className="logo" alt="Book Logo"/>Made by elite authors</li>
                 <li><img src={authorLogo} className="logo" alt="Author logo"/> Exclusive Author</li>
-                <li><img src={trendesetterLogo} className="logo" alt="Trendsetter Logo"/> Trendsetter playlists</li>
+                <li><img src={trendsetterLogo} className="logo" alt="Trendsetter Logo"/> Trendsetter playlists</li>
             </ul>
         </div>
         </>

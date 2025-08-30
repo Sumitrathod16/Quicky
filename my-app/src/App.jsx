@@ -72,9 +72,6 @@ import LandingPage from './components/Landing';
 
 function App() {
   return (
-    
-
-
     <Router>
       <Routes>
 <Route path="/" element={<LandingPage />} />

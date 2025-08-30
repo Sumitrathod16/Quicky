@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import userImg from '../assets/user.svg';
 import aiImg from '../assets/ai.svg';
 import codeImg from '../assets/code.svg';
@@ -42,6 +42,7 @@ function LandingPage() {
       />
       <style>{`
         .landing-bg {
+          width:auto;
           min-height: 100vh;
           background: linear-gradient(120deg, black 0%, #181818 100%);
           display: flex;

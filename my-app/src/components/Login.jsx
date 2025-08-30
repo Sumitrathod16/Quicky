@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle ,doCreateUserWithEmailAndPassword} from '../firebase/auth';
+import { doSignInWithEmailAndPassword, doSignInWithGoogle} from '../firebase/auth';
 import { useAuth } from '../context/authContext';
 
 const Login = () => {
   const auth = useAuth();
-  const userLoggedIn = auth?.userLoggedIn ?? false;
+  const {user, userLoggedIn} = useAuth();
 
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
@@ -48,6 +48,7 @@ const Login = () => {
     if (validate()) {
       try {
         await doSignInWithEmailAndPassword(formData.email, formData.password);
+        console.log("Logged in as:",user?.email);
         alert('Login successful!');
         navigate('/home'); // redirect after login
       } catch (err) {
