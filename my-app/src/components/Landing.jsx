@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect,useState } from "react";
 import userImg from '../assets/user.svg';
 import aiImg from '../assets/ai.svg';
 import codeImg from '../assets/code.svg';
