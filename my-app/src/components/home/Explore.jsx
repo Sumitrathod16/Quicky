@@ -431,10 +431,6 @@ body {
                     </ul>
                     </div>
                 </div>
-                <div className="img">
-                    <img src={AIIcon} alt="AI" className="Explore-icon" />
-                    
-                    </div>
             </div>
 <div className="card">
                 <div className="card-bg bg-pink"></div>

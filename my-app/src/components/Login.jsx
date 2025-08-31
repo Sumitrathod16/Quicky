@@ -5,12 +5,10 @@ import { useAuth } from '../context/authContext';
 
 const Login = () => {
   const auth = useAuth();
-  const {user, userLoggedIn} = useAuth();
-
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
+   const [firebaseError, setFirebaseError] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [firebaseError, setFirebaseError]= useState("")
   const navigate = useNavigate();
 
   const handleChange = (e) => {
