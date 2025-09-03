@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle} from '../firebase/auth';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
 import { useAuth } from '../context/authContext';
 
 const Login = () => {
-  const auth = useAuth();
+  const { user, userLoggedIn } = useAuth(); // ✅ fixed
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
-   const [firebaseError, setFirebaseError] = useState("");
+  const [firebaseError, setFirebaseError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+
+  // Redirect if already logged in
+  if (userLoggedIn) {
+    return <Navigate to="/home" replace />;
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -46,12 +51,10 @@ const Login = () => {
     if (validate()) {
       try {
         await doSignInWithEmailAndPassword(formData.email, formData.password);
-        console.log("Logged in as:",user?.email);
-        alert('Login successful!');
-        navigate('/home'); // redirect after login
+        console.log("Logged in as:", user?.email);
+        navigate('/home'); 
       } catch (err) {
         setFirebaseError(err.message);
-        alert("Login failed: " + err.message);
       }
     }
   };
@@ -60,117 +63,31 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await doSignInWithGoogle();
-      alert('Google login successful!');
       navigate('/home');
     } catch (err) {
-      console.error("Google login error:", err.message);
-      alert("Google login failed: " + err.message);
+      setFirebaseError(err.message);
     }
   };
 
   return (
     <>
-    <style>{`
-    .login-container {
-          width: 350px;
-          margin: 50px auto;
-          padding: 25px;
-          border-radius: 12px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-          background: #fff;
-          text-align: center;
-          font-family: Arial, sans-serif;
-        }
-
-        .login-title {
-          font-size: 1.5rem;
-          margin-bottom: 10px;
-        }
-
-        .login-desc {
-          font-size: 0.9rem;
-          color: #555;
-          margin-bottom: 20px;
-        }
-
-        .login-form {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-bottom: 15px;
-        }
-
-        .login-input {
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          font-size: 0.9rem;
-        }
-
-        .login-btn {
-          padding: 10px;
-          border: none;
-          border-radius: 8px;
-          background:black;
-          color: white;
-          font-size: 1rem;
-          cursor: pointer;
-          transition: background 0.3s ease;
-        }
-
-        .login-btn:hover {
-          background: #5d0202ff;
-        }
-
-        .google-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          width: 100%;
-          background: #fff;
-          border: 1px solid #ddd;
-          color: #555;
-          font-weight: 500;
-          padding: 10px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .google-btn img {
-          width: 20px;
-          height: 20px;
-        }
-
-        .google-btn:hover {
-          background: #f7f7f7;
-        }
-
-        .account {
-          margin-top: 15px;
-          font-size: 0.9rem;
-        }
-
-        .account a {
-          color:#4338ca;
-          text-decoration: none;
-          font-weight: bold;
-        }
-
-        .error-msg {
-          color: red;
-          font-size: 0.8rem;
-          margin-top: -8px;
-          margin-bottom: 5px;
-          text-align: left;
-        }
-          .info{
-          text-align:center;
-          font-size:15px;
-          }
-      
+      <style>{`
+        .login-container { width: 350px; margin: 50px auto; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: #fff; text-align: center; font-family: Arial, sans-serif; }
+        .login-title { font-size: 1.5rem; margin-bottom: 10px; }
+        .login-desc { font-size: 0.9rem; color: #555; margin-bottom: 20px; }
+        .login-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
+        .login-input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
+        .login-btn { padding: 10px; border: none; border-radius: 8px; background:black; color: white; font-size: 1rem; cursor: pointer; transition: background 0.3s ease; }
+        .login-btn:hover { background: #5d0202ff; }
+        .google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; border: 1px solid #ddd; color: #555; font-weight: 500; padding: 10px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+        .google-btn img { width: 20px; height: 20px; }
+        .google-btn:hover { background: #f7f7f7; }
+        .account { margin-top: 15px; font-size: 0.9rem; }
+        .account a { color:#4338ca; text-decoration: none; font-weight: bold; }
+        .error-msg { color: red; font-size: 0.8rem; margin-top: -8px; margin-bottom: 5px; text-align: left; }
+        .info{ text-align:center; font-size:15px; }
       `}</style>
+
       <div className="login-container">
         <h1 className="login-title">Login</h1>
         <p className="login-desc">Please enter your credentials or use your Google account.</p>
@@ -195,6 +112,8 @@ const Login = () => {
             onChange={handleChange}
           />
           {submitted && errors.password && <div className="error-msg">{errors.password}</div>}
+
+          {firebaseError && <div className="error-msg">{firebaseError}</div>}
 
           <button className="login-btn" type="submit">Login</button>
         </form>

@@ -43,8 +43,8 @@ const SignUp = () => {
       try {
         await doCreateUserWithEmailAndPassword(formData.email, formData.password);
         navigate('/home');
-      } catch (error) {
-        if (error.code === 'auth/email-already-in-use') {
+      } catch (err) {
+        if (err.code === 'auth/email-already-in-use') {
             setFirebaseError('This email is already registered.');
         } else {
             setFirebaseError('Failed to create an account. Please try again.');
@@ -61,7 +61,7 @@ const SignUp = () => {
     try {
       await doSignInWithGoogle();
       navigate('/home');
-    } catch (error) {
+    } catch {
       setFirebaseError("Google sign-up failed. Please try again.");
     } finally {
         setIsLoading(false);

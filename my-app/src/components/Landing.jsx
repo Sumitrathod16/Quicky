@@ -1,19 +1,21 @@
-import React, {useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import userImg from '../assets/user.svg';
 import aiImg from '../assets/ai.svg';
 import codeImg from '../assets/code.svg';
 import trendImg from '../assets/trendesetter.svg';
 import portfolioImg from '../assets/portfolio.svg';
 
+// ✅ Move this OUTSIDE the component so it's not recreated on every render
+const codeLines = [
+  "const user = new User('You');",
+  "user.learn('AI', 'ML', 'Web', 'Cloud');",
+  "user.connect(community);",
+  "user.buildPortfolio();",
+  "user.getOpportunities();",
+  "user.levelUp(); // 🚀",
+];
+
 function LandingPage() {
-  const codeLines = [
-    "const user = new User('You');",
-    "user.learn('AI', 'ML', 'Web', 'Cloud');",
-    "user.connect(community);",
-    "user.buildPortfolio();",
-    "user.getOpportunities();",
-    "user.levelUp(); // 🚀",
-  ];
   const [displayed, setDisplayed] = useState("");
   const [lineIdx, setLineIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
@@ -32,7 +34,7 @@ function LandingPage() {
         setCharIdx(0);
       }
     }
-  }, [charIdx, lineIdx]);
+  }, [charIdx, lineIdx]); // ✅ no more codeLines here
 
   return (
     <>
@@ -179,7 +181,8 @@ function LandingPage() {
           .landing-desc { font-size: 0.9em; }
           .cta-btn { font-size: 1em; padding: 12px 24px; }
           .info-img { width: 48px; height: 48px; }
-        }
+
+
       `}</style>
 
       <div className="landing-bg">
