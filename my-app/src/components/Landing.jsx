@@ -200,7 +200,7 @@ function LandingPage() {
               <li><b>Modern & Secure:</b> Privacy-first design and seamless login.</li>
             </ul>
           </div>
-          <button className="cta-btn" onClick={() => window.location.href='/login'}>
+          <button className="cta-btn" onClick={() => window.location.href='/home'}>
             Enter Website
           </button>
         </div>
