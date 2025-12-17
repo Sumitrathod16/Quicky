@@ -4,6 +4,7 @@ import aiImg from '../assets/ai.svg';
 import codeImg from '../assets/code.svg';
 import trendImg from '../assets/trendesetter.svg';
 import portfolioImg from '../assets/portfolio.svg';
+import Login from '../components/Login';
 
 // ✅ Move this OUTSIDE the component so it's not recreated on every render
 const codeLines = [
@@ -19,6 +20,7 @@ function LandingPage() {
   const [displayed, setDisplayed] = useState("");
   const [lineIdx, setLineIdx] = useState(0);
   const [charIdx, setCharIdx] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     if (lineIdx < codeLines.length) {
@@ -35,6 +37,10 @@ function LandingPage() {
       }
     }
   }, [charIdx, lineIdx]); // ✅ no more codeLines here
+
+  if (showLogin) {
+    return <Login />;
+  }
 
   return (
     <>
@@ -200,7 +206,7 @@ function LandingPage() {
               <li><b>Modern & Secure:</b> Privacy-first design and seamless login.</li>
             </ul>
           </div>
-          <button className="cta-btn" onClick={() => window.location.href='/home'}>
+          <button className="cta-btn" onClick={() => setShowLogin(true)}>
             Enter Website
           </button>
         </div>

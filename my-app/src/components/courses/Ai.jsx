@@ -141,7 +141,7 @@ const Syllabus = () => {
         {syllabusData.map((item) => (
           <div
             key={item.id}
-            className="syllabus-card clickable"
+            className="clickable"
             onClick={() => toggleInfo(item.id)}
           >
             <div className="icon">{item.icon}</div>

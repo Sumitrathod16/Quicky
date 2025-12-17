@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, Navigate } from 'react-router-dom';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
-import { useAuth } from '../context/authContext';
+import React, { useState } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
+import {
+  doSignInWithEmailAndPassword,
+  doSignInWithGoogle
+} from "../firebase/auth";
+import { useAuth } from "../context/authContext";
 
 const Login = () => {
-  const { user, userLoggedIn } = useAuth(); // ✅ fixed
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const { isAuthenticated, loading } = useAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [firebaseError, setFirebaseError] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
+  // Wait until auth state is resolved
+  if (loading) return null;
+
   // Redirect if already logged in
-  if (userLoggedIn) {
+  if (isAuthenticated) {
     return <Navigate to="/home" replace />;
   }
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -28,42 +34,43 @@ const Login = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!emailPattern.test(formData.email)) {
-      newErrors.email = 'Invalid email address';
+      newErrors.email = "Invalid email address";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = "Password must be at least 6 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // ✅ Firebase Email/Password Login
   const handleManualLogin = async (e) => {
     e.preventDefault();
     setSubmitted(true);
+    setFirebaseError("");
 
-    if (validate()) {
-      try {
-        await doSignInWithEmailAndPassword(formData.email, formData.password);
-        console.log("Logged in as:", user?.email);
-        navigate('/home'); 
-      } catch (err) {
-        setFirebaseError(err.message);
-      }
+    if (!validate()) return;
+
+    try {
+      await doSignInWithEmailAndPassword(
+        formData.email,
+        formData.password
+      );
+      navigate("/home");
+    } catch (err) {
+      setFirebaseError(err.message);
     }
   };
 
-  // ✅ Firebase Google Login
   const handleGoogleLogin = async () => {
     try {
       await doSignInWithGoogle();
-      navigate('/home');
+      navigate("/home");
     } catch (err) {
       setFirebaseError(err.message);
     }
@@ -77,21 +84,23 @@ const Login = () => {
         .login-desc { font-size: 0.9rem; color: #555; margin-bottom: 20px; }
         .login-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
         .login-input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
-        .login-btn { padding: 10px; border: none; border-radius: 8px; background:black; color: white; font-size: 1rem; cursor: pointer; transition: background 0.3s ease; }
+        .login-btn { padding: 10px; border: none; border-radius: 8px; background:black; color: white; font-size: 1rem; cursor: pointer; }
         .login-btn:hover { background: #5d0202ff; }
-        .google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; border: 1px solid #ddd; color: #555; font-weight: 500; padding: 10px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+        .google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; border: 1px solid #ddd; color: #555; font-weight: 500; padding: 10px; border-radius: 8px; cursor: pointer; }
         .google-btn img { width: 20px; height: 20px; }
         .google-btn:hover { background: #f7f7f7; }
         .account { margin-top: 15px; font-size: 0.9rem; }
         .account a { color:#4338ca; text-decoration: none; font-weight: bold; }
-        .error-msg { color: red; font-size: 0.8rem; margin-top: -8px; margin-bottom: 5px; text-align: left; }
-        .info{ text-align:center; font-size:15px; }
+        .error-msg { color: red; font-size: 0.8rem; text-align: left; }
+        .info { font-size: 15px; }
       `}</style>
 
       <div className="login-container">
         <h1 className="login-title">Login</h1>
-        <p className="login-desc">Please enter your credentials or use your Google account.</p>
-        
+        <p className="login-desc">
+          Please enter your credentials or use your Google account.
+        </p>
+
         <form className="login-form" onSubmit={handleManualLogin} noValidate>
           <input
             className="login-input"
@@ -101,7 +110,9 @@ const Login = () => {
             value={formData.email}
             onChange={handleChange}
           />
-          {submitted && errors.email && <div className="error-msg">{errors.email}</div>}
+          {submitted && errors.email && (
+            <div className="error-msg">{errors.email}</div>
+          )}
 
           <input
             className="login-input"
@@ -111,23 +122,33 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          {submitted && errors.password && <div className="error-msg">{errors.password}</div>}
+          {submitted && errors.password && (
+            <div className="error-msg">{errors.password}</div>
+          )}
 
-          {firebaseError && <div className="error-msg">{firebaseError}</div>}
+          {firebaseError && (
+            <div className="error-msg">{firebaseError}</div>
+          )}
 
-          <button className="login-btn" type="submit">Login</button>
+          <button className="login-btn" type="submit">
+            Login
+          </button>
         </form>
 
-        <div className="google-btn-container">
-          <button className="google-btn" onClick={handleGoogleLogin}>
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
-            Login with Google
-          </button>
-        </div>
+        <button className="google-btn" onClick={handleGoogleLogin}>
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google"
+          />
+          Login with Google
+        </button>
+
         <p className="info">You can directly login with Google</p>
 
         <div className="account">
-          <p>Don't have an account? <Link to="/signup">Signup</Link></p>
+          <p>
+            Don't have an account? <Link to="/signup">Signup</Link>
+          </p>
         </div>
       </div>
     </>

@@ -25,6 +25,17 @@ return(
     <>
     <style>
         {`
+:root {
+  --color-gray-50: #f9fafb;
+  --color-gray-300: #d1d5db;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-white: #ffffff;
+  --color-blue-600: #2563eb;
+}
+
 body {
             margin: 0;
             font-family: 'Inter', sans-serif;
@@ -166,7 +177,7 @@ body {
         }
             .card-tags ul li a:hover {
             text-decoration: underline;
-            color: var(--color-blue-600);
+            
             background-color:  #e0e0e0;;
             border-radius: 0.25rem; /* 4px */
             cursor: pointer;

@@ -12,7 +12,8 @@ function Main() {
             <style>{`
                 .Container {
                     padding: 80px 20px 20px 20px;
-                    background-color: black;
+                    background-color:black;
+                    color:white;
                     min-height: 60vh;
                     width: 100%;
                     margin: 0 auto;
@@ -52,7 +53,7 @@ function Main() {
 
                 .main-desc {
                     font-size: 1em;
-                    color: #aaa;
+                    color: #555;
                     margin-top: 10px;
                 }
 

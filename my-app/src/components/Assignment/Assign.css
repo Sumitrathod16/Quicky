@@ -10,16 +10,18 @@
 }
 
 .assignment-header h3 {
-  color: #555;
+  color: black;
   margin-bottom: 0;
 }
 
 .assignment-header h1 {
+  color:black;
   font-size: 26px;
   margin-top: 5px;
 }
 
 .progress-bar {
+  color:black;
   background: #eee;
   border-radius: 10px;
   height: 8px;
@@ -35,11 +37,12 @@
 
 .timer {
   font-size: 14px;
-  color: #444;
+  color:black;
   margin-bottom: 20px;
 }
 
 .question-section {
+  color:black;
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -47,6 +50,7 @@
 }
 
 .question-box {
+  color:black;
   flex: 3;
   background-color: #fafafa;
   padding: 20px;
@@ -84,6 +88,7 @@
 }
 
 .score-box {
+  color:black;
   flex: 1;
   padding: 15px;
   border-radius: 10px;
@@ -103,6 +108,7 @@
 }
 
 .button-group {
+  color:white;
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
@@ -118,6 +124,7 @@
 }
 
 .prev-btn, .next-btn {
+  color:black;
   background-color: #f2f2f2;
 }
 
