@@ -4,138 +4,175 @@ import {
   doSignInWithEmailAndPassword,
   doSignInWithGoogle
 } from "../firebase/auth";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/Authcontext";
 
 const Login = () => {
   const { isAuthenticated, loading } = useAuth();
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({});
-  const [firebaseError, setFirebaseError] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
-  // Wait until auth state is resolved
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   if (loading) return null;
+  if (isAuthenticated) return <Navigate to="/home" replace />;
 
-  // Redirect if already logged in
-  if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
-  }
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!emailPattern.test(formData.email)) {
-      newErrors.email = "Invalid email address";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleManualLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFirebaseError("");
+    setError("");
 
-    if (!validate()) return;
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
 
+    setIsLoading(true);
     try {
-      await doSignInWithEmailAndPassword(
-        formData.email,
-        formData.password
-      );
+      await doSignInWithEmailAndPassword(email, password);
       navigate("/home");
-    } catch (err) {
-      setFirebaseError(err.message);
+    } catch {
+      setError("Invalid email or password");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    setError("");
     try {
       await doSignInWithGoogle();
       navigate("/home");
-    } catch (err) {
-      setFirebaseError(err.message);
+    } catch {
+      setError("Google login failed");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <style>{`
-        .login-container { width: 350px; margin: 50px auto; padding: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: #fff; text-align: center; font-family: Arial, sans-serif; }
-        .login-title { font-size: 1.5rem; margin-bottom: 10px; }
-        .login-desc { font-size: 0.9rem; color: #555; margin-bottom: 20px; }
-        .login-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
-        .login-input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
-        .login-btn { padding: 10px; border: none; border-radius: 8px; background:black; color: white; font-size: 1rem; cursor: pointer; }
-        .login-btn:hover { background: #5d0202ff; }
-        .google-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; border: 1px solid #ddd; color: #555; font-weight: 500; padding: 10px; border-radius: 8px; cursor: pointer; }
-        .google-btn img { width: 20px; height: 20px; }
-        .google-btn:hover { background: #f7f7f7; }
-        .account { margin-top: 15px; font-size: 0.9rem; }
-        .account a { color:#4338ca; text-decoration: none; font-weight: bold; }
-        .error-msg { color: red; font-size: 0.8rem; text-align: left; }
-        .info { font-size: 15px; }
+        .login-container {
+          width: 360px;
+          margin: 80px auto;
+          padding: 30px;
+          border-radius: 12px;
+          background: #ffffff;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+          font-family: Arial, sans-serif;
+        }
+        .login-title {
+          font-size: 1.6rem;
+          color:black;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        .login-desc {
+          font-size: 0.9rem;
+          color: #666;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .login-form {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .login-input {
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          font-size: 0.95rem;
+        }
+        .login-btn {
+          margin-top: 10px;
+          padding: 10px;
+          border-radius: 8px;
+          border: none;
+          background: #000;
+          color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+        .login-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+        .google-btn {
+          margin-top: 15px;
+          width: 100%;
+          color:black;
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          background: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          cursor: pointer;
+        }
+        .google-btn img {
+          width: 18px;
+        }
+        .error-msg {
+          color: red;
+          font-size: 0.85rem;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+        .account {
+          margin-top: 15px;
+          text-align: center;
+          font-size: 0.9rem;
+          color:black;
+        }
+        .account a {
+          color: #4338ca;
+          text-decoration: none;
+          font-weight: bold;
+        }
       `}</style>
 
       <div className="login-container">
         <h1 className="login-title">Login</h1>
         <p className="login-desc">
-          Please enter your credentials or use your Google account.
+          Sign in using email/password or Google
         </p>
 
-        <form className="login-form" onSubmit={handleManualLogin} noValidate>
+        {error && <div className="error-msg">{error}</div>}
+
+        <form className="login-form" onSubmit={handleLogin}>
           <input
             className="login-input"
             type="email"
-            name="email"
             placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
           />
-          {submitted && errors.email && (
-            <div className="error-msg">{errors.email}</div>
-          )}
 
           <input
             className="login-input"
             type="password"
-            name="password"
             placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
           />
-          {submitted && errors.password && (
-            <div className="error-msg">{errors.password}</div>
-          )}
 
-          {firebaseError && (
-            <div className="error-msg">{firebaseError}</div>
-          )}
-
-          <button className="login-btn" type="submit">
-            Login
+          <button className="login-btn" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <button className="google-btn" onClick={handleGoogleLogin}>
+        <button
+          className="google-btn"
+          onClick={handleGoogleLogin}
+          disabled={isLoading}
+        >
           <img
             src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
             alt="Google"
@@ -143,12 +180,8 @@ const Login = () => {
           Login with Google
         </button>
 
-        <p className="info">You can directly login with Google</p>
-
         <div className="account">
-          <p>
-            Don't have an account? <Link to="/signup">Signup</Link>
-          </p>
+          Don’t have an account? <Link to="/signup">Signup</Link>
         </div>
       </div>
     </>

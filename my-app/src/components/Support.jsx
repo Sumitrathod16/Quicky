@@ -7,32 +7,26 @@ function Support(){
             <div className="support-list">
                 <div className="support-item">
                     <h2>Contact Us</h2>
-                    <p>
-                        <ul>
-                            <li>Email:saarshop31@gmail.com</li>
-                            <li>Address: Pune, India</li>
-                        </ul>
-                    </p>
+                    <ul>
+                        <li>Email:saarshop31@gmail.com</li>
+                        <li>Address: Pune, India</li>
+                    </ul>
                 </div>
                 <div className="support-item">
                     <h2>FAQs</h2>
-                    <p>
-                        <ul>
-                            <li>How to reset password?</li>
-                            <li>How to contact support?</li>
-                            <li>How to report a bug?</li>
-                        </ul>
-                    </p>
+                    <ul>
+                        <li>How to reset password?</li>
+                        <li>How to contact support?</li>
+                        <li>How to report a bug?</li>
+                    </ul>
                 </div>
                 <div className="support-item">
                     <h2>Feedback</h2>
-                    <p>
-                        <ul>
-                            <li>Submit your feedback</li>
-                            <li>Report an issue</li>
-                            <li>Suggest a feature</li>
-                        </ul>
-                    </p>
+                    <ul>
+                        <li>Submit your feedback</li>
+                        <li>Report an issue</li>
+                        <li>Suggest a feature</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -75,6 +69,7 @@ function Support(){
                 font-weight: bold;
             }
             .support-item ul li {
+            color: #555;
                 text-align: left;
             }
 

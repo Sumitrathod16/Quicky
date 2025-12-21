@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CompanyIcon from "../assets/qlogo.svg";
-import { useAuth } from "../context/authContext"; // 👈 Import auth context
+import { useAuth } from "../context/Authcontext"; // 👈 Import auth context
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, userLoggedIn, logOut } = useAuth() || {}; // fallback to empty object
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    const confirmLogout = window.confirm("Are you sure you want to log out?");
+    if (!confirmLogout) return;
+
     try {
-      await logOut(); // 👈 Use your context's logout method
+      await signOut();
       setMenuOpen(false);
       navigate("/login");
     } catch (error) {
@@ -161,7 +164,7 @@ function Navbar() {
           <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
           <li><Link to="/support" onClick={() => setMenuOpen(false)}>Support</Link></li>
 
-          {userLoggedIn ? (
+          {user ? (
             <>
               <li className="profile">
                 {user?.photoURL ? (

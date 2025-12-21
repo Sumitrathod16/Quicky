@@ -4,72 +4,46 @@ import {
   doCreateUserWithEmailAndPassword,
   doSignInWithGoogle
 } from "../firebase/auth";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/Authcontext";
 
 const SignUp = () => {
   const { isAuthenticated, loading } = useAuth();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
-  const [errors, setErrors] = useState({});
-  const [firebaseError, setFirebaseError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   if (loading) return null;
+  if (isAuthenticated) return <Navigate to="/home" replace />;
 
-  if (isAuthenticated) {
-    return <Navigate to="/home" replace />;
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: null }));
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailPattern.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-
-    if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleManualSignUp = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    setError("");
+
+    if (!email || !password || !confirmPassword) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
 
     setIsLoading(true);
-    setFirebaseError("");
-
     try {
-      await doCreateUserWithEmailAndPassword(
-        formData.email,
-        formData.password,
-        "" // add name field here later if needed
-      );
+      await doCreateUserWithEmailAndPassword(email, password);
       navigate("/home");
-    } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        setFirebaseError("This email is already registered.");
-      } else {
-        setFirebaseError("Failed to create an account.");
-      }
+    } catch {
+      setError("Signup failed. Email may already be in use.");
     } finally {
       setIsLoading(false);
     }
@@ -77,13 +51,12 @@ const SignUp = () => {
 
   const handleGoogleSignUp = async () => {
     setIsLoading(true);
-    setFirebaseError("");
-
+    setError("");
     try {
       await doSignInWithGoogle();
       navigate("/home");
     } catch {
-      setFirebaseError("Google sign-up failed. Please try again.");
+      setError("Google signup failed");
     } finally {
       setIsLoading(false);
     }
@@ -92,71 +65,144 @@ const SignUp = () => {
   return (
     <>
       <style>{`
-        .auth-container {
-          max-width: 400px;
-          margin: 60px auto;
-          padding: 2rem;
-          background: white;
+        .login-container {
+          width: 360px;
+          margin: 80px auto;
+          padding: 30px;
+          border-radius: 12px;
+          background: #ffffff;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+          font-family: Arial, sans-serif;
+        }
+        .login-title {
+          font-size: 1.6rem;
+          color:black;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        .login-desc {
+          font-size: 0.9rem;
+          color: #666;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .login-form {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .login-input {
+          padding: 10px;
           border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          border: 1px solid #ccc;
+          font-size: 0.95rem;
+        }
+        .login-btn {
+          margin-top: 10px;
+          padding: 10px;
+          border-radius: 8px;
+          border: none;
+          background: #000;
+          color: #fff;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+        .login-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+        .google-btn {
+          margin-top: 15px;
+          width: 100%;
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          background: #fff;
+          display: flex;
+          color:black;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          cursor: pointer;
+        }
+        .google-btn img {
+          width: 18px;
+        }
+        .error-msg {
+          color: red;
+          font-size: 0.85rem;
+          margin-bottom: 10px;
           text-align: center;
         }
-        .auth-btn {
-          background: black;
-          color: white;
+        .account {
+          margin-top: 15px;
+          text-align: center;
+          font-size: 0.9rem;
+          color:black;
+        }
+        .account a {
+          color: #4338ca;
+          text-decoration: none;
+          font-weight: bold;
         }
       `}</style>
 
-      <div className="auth-container">
-        <h1>Create Account</h1>
+      <div className="login-container">
+        <h1 className="login-title">Create Account</h1>
+        <p className="login-desc">
+          Sign up using email/password or Google
+        </p>
 
-        {firebaseError && <div className="error-msg">{firebaseError}</div>}
+        {error && <div className="error-msg">{error}</div>}
 
-        <form onSubmit={handleManualSignUp}>
+        <form className="login-form" onSubmit={handleSignUp}>
           <input
-            className="auth-input"
+            className="login-input"
             type="email"
-            name="email"
             placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
           />
-          {errors.email && <div className="error-msg">{errors.email}</div>}
 
           <input
-            className="auth-input"
+            className="login-input"
             type="password"
-            name="password"
             placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
           />
-          {errors.password && <div className="error-msg">{errors.password}</div>}
 
           <input
-            className="auth-input"
+            className="login-input"
             type="password"
-            name="confirmPassword"
             placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            disabled={isLoading}
           />
-          {errors.confirmPassword && (
-            <div className="error-msg">{errors.confirmPassword}</div>
-          )}
 
-          <button className="auth-btn" disabled={isLoading}>
+          <button className="login-btn" disabled={isLoading}>
             {isLoading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
 
-        <button className="google-btn" onClick={handleGoogleSignUp}>
+        <button
+          className="google-btn"
+          onClick={handleGoogleSignUp}
+          disabled={isLoading}
+        >
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google"
+          />
           Sign Up with Google
         </button>
 
-        <p>
-          Already have an account? <Link to="/login">Log In</Link>
-        </p>
+        <div className="account">
+          Already have an account? <Link to="/login">Login</Link>
+        </div>
       </div>
     </>
   );
