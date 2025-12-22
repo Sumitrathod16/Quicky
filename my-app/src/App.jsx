@@ -1,89 +1,97 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
-import Explorepage from './components/ExplorePage'; 
-import Login from './components/Login';
-import Home from './components/home/Home';
-import Features from './components/Features';
-import Signin from './components/Sign-up';
-import Support from './components/Support';
-import Footer from './components/Footer';
-import About from './components/footer/About'; // Importing the About component
-import Careers from './components/footer/Careers'; // Importing the Careers component
-import Press from './components/footer/Press'; // Importing the Press component  
-import Affiliates from './components/footer/Affiliates';
-import Blog from './components/footer/Blog';
-import Study from './components/footer/Study'; // Importing the Study component
-import Practice from './components/footer/Practice';// Importing the Practice component
-import Privacy from './components/footer/Privacy';
-import Terms from './components/footer/Terms';
-import Cookie from './components/footer/Cookie';
-import Html from './components/courses/Html';
-import CSS from './components//courses/Css';
-import Javascript from './components/courses/Javascript';
-import Nodejs from './components/courses/Node';
-import Reactjs from './components/courses/React';
-import Mongodb from './components/courses/Mongodb';
-import Aws from './components/courses/Aws';
-import Azure from './components/courses/Azure';
-import Gcp from './components/courses/Gcp';
-import Flutter from './components/courses/Flutter';
-import Python from './components/courses/Python';
-import Django from './components/courses/Django';
-import Flask from './components/courses/Flask';
-import Java from './components/courses/Java';
-import Spring from './components/courses/Spring';
-import Hibernate from './components/courses/Hibernate';
-import ML from './components/courses/Ml';
-import Dl from './components/courses/Dl';
-import AI from './components/courses/Ai';
-import C from './components/courses/C';
-import Cpp from './components/courses/C++';
-import Php from './components/courses/Php';
-import Dbms from './components/courses/Dbms';
-import Sql from './components/courses/Sql';
-import FAQ from './components//footer/FAQ';
-import Mlassign from './components/Assignment/Mlassign';
-import Dlassign from './components/Assignment/Dlassign'; 
-import Aiassign from './components/Assignment/Aiassign';
-import Flutterassign from './components/Assignment/Flutterassign';
-import Pyassign from './components/Assignment/Pyassign';
-import Djassign from './components/Assignment/Djassign';
-import Flaskassign from './components/Assignment/Flaskassign';
-import Javaassign from './components/Assignment/Javaassign';
-import Springassign from './components/Assignment/Springassign';
-import Hiberassign from './components/Assignment/Hiberassign';
-import Htmlassign from './components/Assignment/Htmlassign';
-import Cssassign from './components/Assignment/Cssassign';
-import Jsassign from './components/Assignment/Jsassign';
-import Nodeassign from './components/Assignment/Nodeassign';
-import Reactassign from './components/Assignment/Reactassign';
-import Mongodbassign from './components/Assignment/Mongodbassign';
-import Awsassign from './components/Assignment/Awsassign';
-import Azureassign from './components/Assignment/Azureassign';
-import Gcpassign from './components/Assignment/Gcpassign';
-import Cassign from './components/Assignment/Cassign';
-import Cppassign from './components/Assignment/Cppassign';
-import Phpassign from './components/Assignment/Phpassign';
-import Dbmsassign from './components/Assignment/Dbmsassign';
-import Sqlassign from './components/Assignment/Sqlassign';
-import LandingPage from './components/Landing';
+
+// Core components
+const Navbar = lazy(() => import('./components/Navbar'));
+const Footer = lazy(() => import('./components/Footer'));
+const LandingPage = lazy(() => import('./components/Landing'));
+const Login = lazy(() => import('./components/Login'));
+const Home = lazy(() => import('./components/home/Home'));
+const Features = lazy(() => import('./components/Features'));
+const Signin = lazy(() => import('./components/Sign-up'));
+const Support = lazy(() => import('./components/Support'));
+const Explorepage = lazy(() => import('./components/ExplorePage'));
+// Footer components
+const About = lazy(() => import('./components/footer/About'));
+const Careers = lazy(() => import('./components/footer/Careers'));
+const Press = lazy(() => import('./components/footer/Press'));
+const Affiliates = lazy(() => import('./components/footer/Affiliates'));
+const Blog = lazy(() => import('./components/footer/Blog'));
+const Study = lazy(() => import('./components/footer/Study'));
+const Practice = lazy(() => import('./components/footer/Practice'));
+const Privacy = lazy(() => import('./components/footer/Privacy'));
+const Terms = lazy(() => import('./components/footer/Terms'));
+const Cookie = lazy(() => import('./components/footer/Cookie'));
+const FAQ = lazy(() => import('./components/footer/FAQ'));
+// Course components
+const Html = lazy(() => import('./components/courses/Html'));
+const CSS = lazy(() => import('./components/courses/Css'));
+const Javascript = lazy(() => import('./components/courses/Javascript'));
+const Nodejs = lazy(() => import('./components/courses/Node'));
+const Reactjs = lazy(() => import('./components/courses/React'));
+const Mongodb = lazy(() => import('./components/courses/Mongodb'));
+const Aws = lazy(() => import('./components/courses/Aws'));
+const Azure = lazy(() => import('./components/courses/Azure'));
+const Gcp = lazy(() => import('./components/courses/Gcp'));
+const Flutter = lazy(() => import('./components/courses/Flutter'));
+const Python = lazy(() => import('./components/courses/Python'));
+const Django = lazy(() => import('./components/courses/Django'));
+const Flask = lazy(() => import('./components/courses/Flask'));
+const Java = lazy(() => import('./components/courses/Java'));
+const Spring = lazy(() => import('./components/courses/Spring'));
+const Hibernate = lazy(() => import('./components/courses/Hibernate'));
+const ML = lazy(() => import('./components/courses/Ml'));
+const Dl = lazy(() => import('./components/courses/Dl'));
+const AI = lazy(() => import('./components/courses/Ai'));
+const C = lazy(() => import('./components/courses/C'));
+const Cpp = lazy(() => import('./components/courses/C++'));
+const Php = lazy(() => import('./components/courses/Php'));
+const Dbms = lazy(() => import('./components/courses/Dbms'));
+const Sql = lazy(() => import('./components/courses/Sql'));
+
+// Assignment components
+const Mlassign = lazy(() => import('./components/Assignment/Mlassign'));
+const Dlassign = lazy(() => import('./components/Assignment/Dlassign'));
+const Aiassign = lazy(() => import('./components/Assignment/Aiassign'));
+const Flutterassign = lazy(() => import('./components/Assignment/Flutterassign'));
+const Pyassign = lazy(() => import('./components/Assignment/Pyassign'));
+const Djassign = lazy(() => import('./components/Assignment/Djassign'));
+const Flaskassign = lazy(() => import('./components/Assignment/Flaskassign'));
+const Javaassign = lazy(() => import('./components/Assignment/Javaassign'));
+const Springassign = lazy(() => import('./components/Assignment/Springassign'));
+const Hiberassign = lazy(() => import('./components/Assignment/Hiberassign'));
+const Htmlassign = lazy(() => import('./components/Assignment/Htmlassign'));
+const Cssassign = lazy(() => import('./components/Assignment/Cssassign'));
+const Jsassign = lazy(() => import('./components/Assignment/Jsassign'));
+const Nodeassign = lazy(() => import('./components/Assignment/Nodeassign'));
+const Reactassign = lazy(() => import('./components/Assignment/Reactassign'));
+const Mongodbassign = lazy(() => import('./components/Assignment/Mongodbassign'));
+const Awsassign = lazy(() => import('./components/Assignment/Awsassign'));
+const Azureassign = lazy(() => import('./components/Assignment/Azureassign'));
+const Gcpassign = lazy(() => import('./components/Assignment/Gcpassign'));
+const Cassign = lazy(() => import('./components/Assignment/Cassign'));
+const Cppassign = lazy(() => import('./components/Assignment/Cppassign'));
+const Phpassign = lazy(() => import('./components/Assignment/Phpassign'));
+const Dbmsassign = lazy(() => import('./components/Assignment/Dbmsassign'));
+const Sqlassign = lazy(() => import('./components/Assignment/Sqlassign'));
 
 function App() {
   return (
     <Router>
-      <Routes>
-<Route path="/" element={<LandingPage />} />
-  <Route path="/login" element={<Login />} />
- <Route path="/signup" element={<Signin />} />
-  All other routes with Navbar and Footer 
-        <Route
-          path="*"
-          element={
-            <>
-              <Navbar />
-              <Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signin />} />
+          {/* All other routes with Navbar and Footer */}
+          <Route
+            path="*"
+            element={
+              <>
+                <Navbar />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Routes>
                 <Route path="/home" element={<Home />} />
         <Route path="/Support" element={<Support />} />
         <Route path="/Explorepage" element={<Explorepage />} /> 
@@ -149,18 +157,16 @@ function App() {
         <Route path="/Phpassign" element={<Phpassign/>}/>
         <Route path="/Dbmsassign" element={<Dbmsassign/>}/>
         <Route path="/Sqlassign" element={<Sqlassign/>}/>
-              </Routes>
-              <Footer />
-            </>
-          }
-        />
-      </Routes>
+                  </Routes>
+                </Suspense>
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Suspense>
     </Router>
-    
-    
-      
   );
-  
 }
 export default App;
 
