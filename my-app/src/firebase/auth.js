@@ -2,7 +2,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   createUserWithEmailAndPassword,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
@@ -57,4 +58,11 @@ export const doCreateUserWithEmailAndPassword = async (
   });
 
   return cred;
+};
+
+/* ======================
+   Password Reset
+====================== */
+export const doSendPasswordResetEmail = (email) => {
+  return sendPasswordResetEmail(auth, email);
 };

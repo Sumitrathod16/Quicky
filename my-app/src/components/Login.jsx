@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import {
   doSignInWithEmailAndPassword,
-  doSignInWithGoogle
+  doSignInWithGoogle,
+  doSendPasswordResetEmail
 } from "../firebase/auth";
 import { useAuth } from "../context/Authcontext";
 
@@ -14,6 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [resetEmailSent, setResetEmailSent] = useState(false);
 
   if (loading) return null;
   if (isAuthenticated) return <Navigate to="/home" replace />;
@@ -46,6 +48,24 @@ const Login = () => {
       navigate("/home");
     } catch {
       setError("Google login failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError("Please enter your email address");
+      return;
+    }
+
+    setIsLoading(true);
+    setError("");
+    try {
+      await doSendPasswordResetEmail(email);
+      setResetEmailSent(true);
+    } catch (error) {
+      setError("Failed to send reset email. Please check your email address.");
     } finally {
       setIsLoading(false);
     }
@@ -143,6 +163,11 @@ const Login = () => {
         </p>
 
         {error && <div className="error-msg">{error}</div>}
+        {resetEmailSent && (
+          <div style={{ color: 'green', fontSize: '0.85rem', marginBottom: '10px', textAlign: 'center' }}>
+            Password reset email sent! Check your inbox.
+          </div>
+        )}
 
         <form className="login-form" onSubmit={handleLogin}>
           <input
@@ -163,6 +188,7 @@ const Login = () => {
             disabled={isLoading}
           />
 
+          
           <button className="login-btn" disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login"}
           </button>
@@ -179,6 +205,24 @@ const Login = () => {
           />
           Login with Google
         </button>
+<div style={{ textAlign: 'right', marginTop: '5px' }}>
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              disabled={isLoading}
+              style={{
+                alignItems: 'center',
+                background: 'none',
+                border: 'none',
+                color:'black',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                textDecoration:'underline'
+              }}
+            >
+              Forgot Password?
+            </button>
+          </div>
 
         <div className="account">
           Don’t have an account? <Link to="/signup">Signup</Link>

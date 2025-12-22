@@ -5,7 +5,7 @@ import { useAuth } from "../context/Authcontext"; // 👈 Import auth context
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -13,7 +13,7 @@ function Navbar() {
     if (!confirmLogout) return;
 
     try {
-      await signOut();
+      await logOut();
       setMenuOpen(false);
       navigate("/login");
     } catch (error) {
