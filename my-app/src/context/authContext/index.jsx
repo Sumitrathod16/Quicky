@@ -44,6 +44,14 @@ export function AuthProvider({ children }) {
     setProfile(null);
   };
 
+  const updateProfile = async (updates) => {
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      await updateDoc(userDocRef, updates);
+      setProfile(prev => ({ ...prev, ...updates }));
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -51,6 +59,7 @@ export function AuthProvider({ children }) {
         profile,
         isAuthenticated: !!user,
         logOut,
+        updateProfile,
         loading
       }}
     >

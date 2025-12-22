@@ -69,6 +69,7 @@ import Phpassign from './components/Assignment/Phpassign';
 import Dbmsassign from './components/Assignment/Dbmsassign';
 import Sqlassign from './components/Assignment/Sqlassign';
 import LandingPage from './components/Landing';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -149,6 +150,7 @@ function App() {
         <Route path="/Phpassign" element={<Phpassign/>}/>
         <Route path="/Dbmsassign" element={<Dbmsassign/>}/>
         <Route path="/Sqlassign" element={<Sqlassign/>}/>
+        <Route path="/profile" element={<Profile />} />
               </Routes>
               <Footer />
             </>
