@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { format, isSameDay } from 'date-fns';
-import { useAuth } from '../context/authContext/index';
+import { useAuth } from '../context/useAuth';
 import { storage } from '../firebase/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './Profile.css'; // We'll create this

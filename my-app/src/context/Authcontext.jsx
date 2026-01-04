@@ -1,6 +1,5 @@
 import {
   createContext,
-  useContext,
   useEffect,
   useState
 } from "react";
@@ -10,6 +9,7 @@ import { auth, db } from "../firebase/firebase";
 
 const AuthContext = createContext(null);
 
+export { AuthContext };
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -73,12 +73,4 @@ export const AuthProvider = ({ children }) => {
       {!loading && children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used inside AuthProvider");
-  }
-  return context;
 };

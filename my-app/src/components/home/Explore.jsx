@@ -33,7 +33,7 @@ return(
   --color-gray-700: #374151;
   --color-gray-800: #1f2937;
   --color-white: #ffffff;
-  --color-blue-600: #2563eb;
+  --color-blue-600: #dcdde1ff;
 }
 
 body {

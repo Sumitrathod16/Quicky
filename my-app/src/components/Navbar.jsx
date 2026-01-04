@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CompanyIcon from "../assets/qlogo.svg";
-import { useAuth } from "../context/Authcontext"; // 👈 Import auth context
+import { useAuth } from "../context/useAuth"; // 👈 Import auth context
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -162,6 +162,8 @@ function Navbar() {
         {/* 🔗 Navigation Links */}
         <ul className={menuOpen ? "open" : ""}>
           <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
+          <li><Link to="/pricing" onClick={() => setMenuOpen(false)}>Pricing</Link></li>
+          <li><Link to="/testimonials" onClick={() => setMenuOpen(false)}>Testimonials</Link></li>
           <li><Link to="/support" onClick={() => setMenuOpen(false)}>Support</Link></li>
 
           {user ? (

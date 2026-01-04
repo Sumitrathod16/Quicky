@@ -4,51 +4,75 @@ import './Syllabus.css';
 const syllabusData = [
   {
     id: 1,
-    title: 'Introduction to html',
-    description: 'Fundamental concepts of HTML',
-    details: '',
-  
+    title: 'Introduction to HTML',
+    description: 'Master the fundamentals of HTML and web page structure',
+    details: 'Learn what HTML is, its role in web development, document structure, basic tags, headings, paragraphs, and essential HTML concepts.',
+    duration: '2 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/88PXJAA6szs',
+    thumbnail: 'https://img.youtube.com/vi/88PXJAA6szs/maxresdefault.jpg',
     chapters: [
     "What is HTML and its role in web development",
     "Structure of an HTML document",
     "Basic tag:<html>,<head>,<body>",
     "Headings(<h1>to<h6>), paragraphs(<p>),line breaks(<br>),horizontal rule(<hr>)",
     "Comments in HTML"
+    ],
+    resources: [
+      { name: 'HTML MDN Docs', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+      { name: 'W3Schools HTML', url: 'https://www.w3schools.com/html/' }
     ]
   },
   {
     id: 2,
     title: 'Text Formatting & Links',
-    description: 'Understanding text formats and links',
-    details: '',
-  
+    description: 'Master text formatting and hyperlink creation in HTML',
+    details: 'Learn text formatting tags, different types of lists, creating hyperlinks, and navigation elements in HTML.',
+    duration: '2.5 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/0PZZ2vOlkKs',
+    thumbnail: 'https://img.youtube.com/vi/0PZZ2vOlkKs/maxresdefault.jpg',
     chapters: [
       "Bold,italic,underline (<b>,<i>,<u>,<strong>,<em>)",
       "Superscript &  subscript(<sup>,<sub>)",
       "Lists:ordered(<ol>), unordered(<ul>), description(<dl>)",
       "Links (<a>): absolute and relative URLs, target attribute",
       "Email and telephone links"
+    ],
+    resources: [
+      { name: 'HTML Links', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a' },
+      { name: 'HTML Lists', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul' }
     ]
   },
   {
     id: 3,
     title: 'Images, Multimedia & Tables',
-    description: 'Exploring images, multimedia and tables in HTML',
-    details: '',
-    
+    description: 'Master images, multimedia content, and table creation in HTML',
+    details: 'Learn to add images, embed audio and video, create responsive tables, and work with multimedia content in HTML.',
+    duration: '2.5 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/UB1O30fR-EE',
+    thumbnail: 'https://img.youtube.com/vi/UB1O30fR-EE/maxresdefault.jpg',
     chapters: [
       "Adding images(<img> , attributes like src,alt,width,height)",
       "Image maps",
       "Embedding audio and video(<audio>,<video>",
       "Tables (<table>, <tr>, <td>, <th>, colspan, rowspan, table stylling basics)"
+    ],
+    resources: [
+      { name: 'HTML Images', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img' },
+      { name: 'HTML Tables', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table' }
     ]
   },
   {
     id: 4,
-    title: 'Forms and Input elements',
-    description: 'Forms and input elements in HTML',
-    details: '',
-    
+    title: 'Forms and Input Elements',
+    description: 'Master HTML forms and user input collection',
+    details: 'Learn to create interactive forms, handle different input types, validate user input, and collect data from users.',
+    duration: '3 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/GcFjSPcBj-0',
+    thumbnail: 'https://img.youtube.com/vi/GcFjSPcBj-0/maxresdefault.jpg',
     chapters: [
       "Creating forms (<form>)",
       "Input types (text, password, email, number, date, file, etc.)",
@@ -56,6 +80,10 @@ const syllabusData = [
       "Dropdowns (<select>, <option>), checkboxes, radio buttons",
       "Buttons (<button>, submit, reset)",
       "Textarea for multiline input"
+    ],
+    resources: [
+      { name: 'HTML Forms', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form' },
+      { name: 'Form Validation', url: 'https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation' }
     ]
   },
     {
@@ -154,6 +182,41 @@ const Syllabus = () => {
                         <li key={idx}>{chapter}</li>
                       ))}
                     </ul>
+                  )}
+
+                  {item.videoUrl && (
+                    <div className="video-section">
+                      <h4>📹 Video Lecture</h4>
+                      <div className="video-container">
+                        <iframe
+                          src={item.videoUrl}
+                          title={`${item.title} video`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  )}
+
+                  {item.resources && (
+                    <div className="resources-section">
+                      <h4>🔗 Additional Resources</h4>
+                      <ul className="resource-list">
+                        {item.resources.map((resource, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="resource-link"
+                            >
+                              {resource.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
 
                   {item.notes && Array.isArray(item.notes) && (

@@ -4,7 +4,7 @@ import {
   doCreateUserWithEmailAndPassword,
   doSignInWithGoogle
 } from "../firebase/auth";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/useAuth";
 
 const SignUp = () => {
   const { isAuthenticated, loading } = useAuth();
