@@ -169,14 +169,16 @@ function Navbar() {
           {user ? (
             <>
               <li className="profile">
-                {user?.photoURL ? (
-                  <img src={user.photoURL} alt="Profile" className="profile-img" />
-                ) : (
-                  <span style={{ background: '#333', padding: '6px 10px', borderRadius: '50%' }}>
-                    {user?.email?.[0]?.toUpperCase()}
-                  </span>
-                )}
-                <span>{user?.displayName || user?.email}</span>
+                <Link to="/profile" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
+                  {user?.photoURL ? (
+                    <img src={user.photoURL} alt="Profile" className="profile-img" />
+                  ) : (
+                    <span style={{ background: '#333', padding: '6px 10px', borderRadius: '50%' }}>
+                      {user?.email?.[0]?.toUpperCase()}
+                    </span>
+                  )}
+                  <span>{user?.displayName || user?.email}</span>
+                </Link>
               </li>
               <li>
                 <button className="logout-button" onClick={handleLogout}>

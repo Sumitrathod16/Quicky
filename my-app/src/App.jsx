@@ -13,6 +13,7 @@ const Features = lazy(() => import('./components/Features'));
 const Signin = lazy(() => import('./components/Sign-up'));
 const Support = lazy(() => import('./components/Support'));
 const Explorepage = lazy(() => import('./components/ExplorePage'));
+const Profile = lazy(() => import('./components/Profile'));
 // New enhanced components
 const HeroSection = lazy(() => import('./components/HeroSection'));
 const PricingSection = lazy(() => import('./components/PricingSection'));
@@ -99,6 +100,7 @@ function App() {
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
                 <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/Support" element={<Support />} />
         <Route path="/Explorepage" element={<Explorepage />} /> 
         <Route path="/pricing" element={<PricingSection />} />
