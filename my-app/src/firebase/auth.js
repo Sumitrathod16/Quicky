@@ -1,92 +1,68 @@
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signOut
+  sendPasswordResetEmail
 } from "firebase/auth";
-
-import {
-  doc,
-  setDoc,
-  getDoc,
-  serverTimestamp
-} from "firebase/firestore";
-
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
-/* --------------------------------
-   PROVIDERS
---------------------------------- */
 const googleProvider = new GoogleAuthProvider();
 
-/* --------------------------------
-   EMAIL / PASSWORD
---------------------------------- */
-
-// Login
+/* ======================
+   Email / Password Login
+====================== */
 export const doSignInWithEmailAndPassword = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-// Signup + Firestore
+/* ======================
+   Google Login
+====================== */
+export const doSignInWithGoogle = async () => {
+  const result = await signInWithPopup(auth, googleProvider);
+
+  const userRef = doc(db, "users", result.user.uid);
+  const snap = await getDoc(userRef);
+
+  if (!snap.exists()) {
+    await setDoc(userRef, {
+      email: result.user.email,
+      name: result.user.displayName,
+      provider: "google",
+      createdAt: new Date()
+    });
+  }
+
+  return result;
+};
+
+/* ======================
+   Signup
+====================== */
 export const doCreateUserWithEmailAndPassword = async (
   email,
-  password,
-  name
+  password
 ) => {
-  const userCredential = await createUserWithEmailAndPassword(
+  const cred = await createUserWithEmailAndPassword(
     auth,
     email,
     password
   );
 
-  const user = userCredential.user;
+  await setDoc(doc(db, "users", cred.user.uid), {
+    email: cred.user.email,
+    provider: "password",
+    createdAt: new Date()
+  });
 
-  await createUserIfNotExists(user, name);
-
-  return user;
+  return cred;
 };
 
-/* --------------------------------
-   GOOGLE AUTH
---------------------------------- */
-
-export const doSignInWithGoogle = async () => {
-  const result = await signInWithPopup(auth, googleProvider);
-  const user = result.user;
-
-  await createUserIfNotExists(user, user.displayName);
-
-  return user;
-};
-
-/* --------------------------------
-   LOGOUT
---------------------------------- */
-
-export const doSignOut = () => signOut(auth);
-
-/* --------------------------------
-   FIRESTORE HELPERS
---------------------------------- */
-
-const createUserIfNotExists = async (user, name = "") => {
-  const userRef = doc(db, "users", user.uid);
-  const userSnap = await getDoc(userRef);
-
-  if (!userSnap.exists()) {
-    await setDoc(userRef, {
-      uid: user.uid,
-      name: name || "",
-      email: user.email,
-      provider: user.providerData[0]?.providerId,
-      createdAt: serverTimestamp()
-    });
-  }
-};
-
-export const getUserProfile = async (uid) => {
-  const userSnap = await getDoc(doc(db, "users", uid));
-  return userSnap.exists() ? userSnap.data() : null;
+/* ======================
+   Password Reset
+====================== */
+export const doSendPasswordResetEmail = (email) => {
+  return sendPasswordResetEmail(auth, email);
 };
