@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CompanyIcon from "../assets/qlogo.svg";
-import { useAuth } from "../context/Authcontext"; // 👈 Import auth context
+import { useAuth } from "../context/useAuth"; // 👈 Import auth context
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -162,19 +162,23 @@ function Navbar() {
         {/* 🔗 Navigation Links */}
         <ul className={menuOpen ? "open" : ""}>
           <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
+          <li><Link to="/pricing" onClick={() => setMenuOpen(false)}>Pricing</Link></li>
+          <li><Link to="/testimonials" onClick={() => setMenuOpen(false)}>Testimonials</Link></li>
           <li><Link to="/support" onClick={() => setMenuOpen(false)}>Support</Link></li>
 
           {user ? (
             <>
               <li className="profile">
-                {user?.photoURL ? (
-                  <img src={user.photoURL} alt="Profile" className="profile-img" />
-                ) : (
-                  <span style={{ background: '#333', padding: '6px 10px', borderRadius: '50%' }}>
-                    {user?.email?.[0]?.toUpperCase()}
-                  </span>
-                )}
-                <span>{user?.displayName || user?.email}</span>
+                <Link to="/profile" onClick={() => setMenuOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
+                  {user?.photoURL ? (
+                    <img src={user.photoURL} alt="Profile" className="profile-img" />
+                  ) : (
+                    <span style={{ background: '#333', padding: '6px 10px', borderRadius: '50%' }}>
+                      {user?.email?.[0]?.toUpperCase()}
+                    </span>
+                  )}
+                  <span>{user?.displayName || user?.email}</span>
+                </Link>
               </li>
               <li>
                 <button className="logout-button" onClick={handleLogout}>

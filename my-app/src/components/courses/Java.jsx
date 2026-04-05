@@ -5,21 +5,31 @@ const syllabusData = [
   {
     id: 1,
     title: 'Introduction to Java',
-    description: '',
-    details: 'This section covers the foundations of deep learning, including definitions, types, and how it’s used in modern applications.',
-  
+    description: 'Master Java fundamentals and programming environment setup',
+    details: 'Learn what Java is, its history, versions, platform independence, JDK/JRE/JVM concepts, and development environment setup.',
+    duration: '2.5 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/eIrMbAQSU34',
+    thumbnail: 'https://img.youtube.com/vi/eIrMbAQSU34/maxresdefault.jpg',
     chapters: [
     "Java why? What? How? When? Where?",
       "Different Java Versions",
       "How java is different from other technologies",
+    ],
+    resources: [
+      { name: 'Oracle Java Docs', url: 'https://docs.oracle.com/en/java/' },
+      { name: 'Java Tutorials', url: 'https://docs.oracle.com/javase/tutorial/' }
     ]
   },
   {
     id: 2,
-    title: 'Introduction to Java programming Environment',
-    description: 'Understanding the architecture and function of ANNs',
-    details: 'Here, we dive into perceptrons, activation functions, and forward/backward propagation.',
-
+    title: 'Java Programming Environment',
+    description: 'Master Java development environment setup and compilation',
+    details: 'Learn to install Java, set up environment variables, write your first Java program, understand compilation process, and handle errors.',
+    duration: '2 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/8cm1x4bC610',
+    thumbnail: 'https://img.youtube.com/vi/8cm1x4bC610/maxresdefault.jpg',
     chapters: [
       "How to install & set path",
       "A simple java program",
@@ -33,14 +43,21 @@ const syllabusData = [
       "Java technology (JDK,JRE,JVM,JIT)",
       "Text Editors",
       "Consoles"
-]
+    ],
+    resources: [
+      { name: 'JDK Download', url: 'https://www.oracle.com/java/technologies/downloads/' },
+      { name: 'Environment Setup', url: 'https://www.javatpoint.com/how-to-set-path-in-java' }
+    ]
   },
   {
     id: 3,
-    title: 'Fundamentals of Java programming',
-    description: '',
-    details: 'This module explains how deep architectures differ and how to train them effectively.',
-    
+    title: 'Java Fundamentals',
+    description: 'Master Java syntax, data types, variables, and operators',
+    details: 'Learn Java naming conventions, comments, data types, variables, type casting, operators, and fundamental programming concepts.',
+    duration: '3 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/8RE9oWJ7pOU',
+    thumbnail: 'https://img.youtube.com/vi/8RE9oWJ7pOU/maxresdefault.jpg',
     chapters: [
      "The naming convention of Java program",
     "Comments Statement",
@@ -51,20 +68,32 @@ const syllabusData = [
     "Variables(Primitive ,Reference)",
     "Type casting, Default value",
     "Operators"
-]
+    ],
+    resources: [
+      { name: 'Java Data Types', url: 'https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html' },
+      { name: 'Java Operators', url: 'https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html' }
+    ]
   },
   {
     id: 4,
     title: 'Control Structures',
-    description: 'Latest advancements and future directions of the field',
-    details: 'You’ll learn about transformers, foundation models, and cutting-edge applications.',
+    description: 'Master decision making and loops in Java',
+    details: 'Learn conditional statements (if-else, switch), looping constructs (for, while, do-while), and control flow in Java programs.',
+    duration: '2.5 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/0H6-8d9VjOI',
+    thumbnail: 'https://img.youtube.com/vi/0H6-8d9VjOI/maxresdefault.jpg',
     
     chapters: [
       "Working with control structures",
       "Types of control structures",
       "Decision control structure(if,if-else,if-else-if,switch-case)",
       "Repetition control structure(for,while,do-while)"
-]
+    ],
+    resources: [
+      { name: 'Control Flow', url: 'https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html' },
+      { name: 'Branching Statements', url: 'https://docs.oracle.com/javase/tutorial/java/nutsandbolts/branch.html' }
+    ]
   },
   {
     id: 5,
@@ -313,6 +342,41 @@ const Syllabus = () => {
                         <li key={idx}>{chapter}</li>
                       ))}
                     </ul>
+                  )}
+
+                  {item.videoUrl && (
+                    <div className="video-section">
+                      <h4>📹 Video Lecture</h4>
+                      <div className="video-container">
+                        <iframe
+                          src={item.videoUrl}
+                          title={`${item.title} video`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  )}
+
+                  {item.resources && (
+                    <div className="resources-section">
+                      <h4>🔗 Additional Resources</h4>
+                      <ul className="resource-list">
+                        {item.resources.map((resource, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="resource-link"
+                            >
+                              {resource.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
 
                   {item.notes && Array.isArray(item.notes) && (

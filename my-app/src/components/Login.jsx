@@ -5,7 +5,7 @@ import {
   doSignInWithGoogle,
   doSendPasswordResetEmail
 } from "../firebase/auth";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/useAuth";
 
 const Login = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -46,8 +46,9 @@ const Login = () => {
     try {
       await doSignInWithGoogle();
       navigate("/home");
-    } catch {
-      setError("Google login failed");
+    } catch (error) {
+      console.error("Google login error:", error);
+      setError(`Google login failed: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -64,7 +65,7 @@ const Login = () => {
     try {
       await doSendPasswordResetEmail(email);
       setResetEmailSent(true);
-    } catch (error) {
+    } catch {
       setError("Failed to send reset email. Please check your email address.");
     } finally {
       setIsLoading(false);

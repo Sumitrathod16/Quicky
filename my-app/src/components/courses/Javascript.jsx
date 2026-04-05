@@ -5,9 +5,12 @@ const syllabusData = [
   {
     id: 1,
     title: 'Introduction to Javascript',
-    description: 'Fundamental concepts of deep learning and its applications',
-    details: 'This section covers the foundations of deep learning, including definitions, types, and how it’s used in modern applications.',
-    
+    description: 'Master JavaScript fundamentals, data types, and core concepts',
+    details: 'Learn what JavaScript is, its history, how to embed it in HTML, variables, data types, operators, and essential programming concepts.',
+    duration: '2.5 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/W6NZfCO5SIk',
+    thumbnail: 'https://img.youtube.com/vi/W6NZfCO5SIk/maxresdefault.jpg',
     chapters: [
     "What is JavaScript? (History, usage, role in web dev)",
      "Embedding JavaScript in HTML (<script> tag)",
@@ -22,14 +25,21 @@ const syllabusData = [
      "String Manipulation",
      "Template Literals",
      "Console Methods (console.log, error, table, etc.)"  
+    ],
+    resources: [
+      { name: 'MDN JavaScript Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide' },
+      { name: 'JavaScript.info', url: 'https://javascript.info/' }
     ]
   },
   {
     id: 2,
     title: 'Control Structures & Functions',
-    description: 'Understanding the architecture and function of ANNs',
-    details: 'Here, we dive into perceptrons, activation functions, and forward/backward propagation.',
-    
+    description: 'Master control flow, loops, and function programming in JavaScript',
+    details: 'Learn conditional statements, loops, function declarations, scope, closures, and advanced function concepts.',
+    duration: '3 hours',
+    difficulty: 'Beginner',
+    videoUrl: 'https://www.youtube.com/embed/xuyyXn2iAL8',
+    thumbnail: 'https://img.youtube.com/vi/xuyyXn2iAL8/maxresdefault.jpg',
     chapters: [
       "Conditionals:",
           
@@ -52,14 +62,21 @@ const syllabusData = [
           "Function scope",
            "Hoisting",
           "Closures"
+    ],
+    resources: [
+      { name: 'Control Flow', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling' },
+      { name: 'Functions Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions' }
     ]
   },
   {
     id: 3,
-    title: 'Introduction to Javascript Libraries',
-    description: 'Exploring multi-layered neural networks and their power',
-    details: 'This module explains how deep architectures differ and how to train them effectively.',
-  
+    title: 'Object-Oriented JavaScript',
+    description: 'Master objects, prototypes, classes, and OOP concepts in JavaScript',
+    details: 'Learn object literals, constructor functions, prototypes, ES6 classes, inheritance, and modern JavaScript OOP patterns.',
+    duration: '2.5 hours',
+    difficulty: 'Intermediate',
+    videoUrl: 'https://www.youtube.com/embed/PFmuCDHHpwk',
+    thumbnail: 'https://img.youtube.com/vi/PFmuCDHHpwk/maxresdefault.jpg',
     chapters: [
       "Objects and Object Literals",
       "this in objects",
@@ -68,13 +85,21 @@ const syllabusData = [
       "ES6 Classes",
       "Encapsulation, Inheritance, Polymorphism",
       "Private Fields and Methods"
+    ],
+    resources: [
+      { name: 'Working with Objects', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects' },
+      { name: 'Classes', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes' }
     ]
   },
   {
     id: 4,
-    title: 'Recent trends in Javascript and its uses',
-    description: 'Latest advancements and future directions of the field',
-    details: 'You’ll learn about transformers, foundation models, and cutting-edge applications.',
+    title: 'DOM Manipulation & Events',
+    description: 'Master DOM manipulation, event handling, and dynamic web interactions',
+    details: 'Learn to interact with HTML elements, handle user events, create dynamic content, and build interactive web applications.',
+    duration: '3 hours',
+    difficulty: 'Intermediate',
+    videoUrl: 'https://www.youtube.com/embed/y17RuWkWdn8',
+    thumbnail: 'https://img.youtube.com/vi/y17RuWkWdn8/maxresdefault.jpg',
     
     chapters: [
       "DOM (Document Object Model)",
@@ -90,14 +115,21 @@ const syllabusData = [
      "Geolocation, Clipboard, Notifications, etc.",
     "Form validation",
      "Timers & intervals"
+    ],
+    resources: [
+      { name: 'DOM Introduction', url: 'https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction' },
+      { name: 'Event Reference', url: 'https://developer.mozilla.org/en-US/docs/Web/Events' }
     ]
   },
   {
      id: 5,
     title: ' ES6+ and Modern JavaScript',
-    description: 'Latest advancements and future directions of the field',
-    details: 'You will learn about transformers, foundation models, and cutting-edge applications.',
-  
+    description: 'Master modern JavaScript features and advanced concepts',
+    details: 'Learn ES6+ features including modules, promises, async/await, destructuring, and modern JavaScript patterns.',
+    duration: '2.5 hours',
+    difficulty: 'Intermediate',
+    videoUrl: 'https://www.youtube.com/embed/nZ1DMMsyVyI',
+    thumbnail: 'https://img.youtube.com/vi/nZ1DMMsyVyI/maxresdefault.jpg',
     chapters: [
      "Let & Const (Block Scoping)",
      "Arrow Functions",
@@ -110,6 +142,10 @@ const syllabusData = [
      "Optional Chaining (?.), Nullish Coalescing (??)",
      "Generators and Iterators",
      "Symbol and BigInt"
+    ],
+    resources: [
+      { name: 'ES6 Features', url: 'https://babeljs.io/docs/en/learn' },
+      { name: 'Async Programming', url: 'https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous' }
     ]
     },
     {
@@ -191,6 +227,41 @@ const Syllabus = () => {
                         <li key={idx}>{chapter}</li>
                       ))}
                     </ul>
+                  )}
+
+                  {item.videoUrl && (
+                    <div className="video-section">
+                      <h4>📹 Video Lecture</h4>
+                      <div className="video-container">
+                        <iframe
+                          src={item.videoUrl}
+                          title={`${item.title} video`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  )}
+
+                  {item.resources && (
+                    <div className="resources-section">
+                      <h4>🔗 Additional Resources</h4>
+                      <ul className="resource-list">
+                        {item.resources.map((resource, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="resource-link"
+                            >
+                              {resource.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
 
                   {item.notes && Array.isArray(item.notes) && (

@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 
 // Core components
@@ -12,6 +13,12 @@ const Features = lazy(() => import('./components/Features'));
 const Signin = lazy(() => import('./components/Sign-up'));
 const Support = lazy(() => import('./components/Support'));
 const Explorepage = lazy(() => import('./components/ExplorePage'));
+const Profile = lazy(() => import('./components/Profile'));
+// New enhanced components
+const HeroSection = lazy(() => import('./components/HeroSection'));
+const PricingSection = lazy(() => import('./components/PricingSection'));
+const TestimonialsSection = lazy(() => import('./components/TestimonialsSection'));
+const FooterSection = lazy(() => import('./components/FooterSection'));
 // Footer components
 const About = lazy(() => import('./components/footer/About'));
 const Careers = lazy(() => import('./components/footer/Careers'));
@@ -93,8 +100,11 @@ function App() {
                 <Suspense fallback={<div>Loading...</div>}>
                   <Routes>
                 <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/Support" element={<Support />} />
         <Route path="/Explorepage" element={<Explorepage />} /> 
+        <Route path="/pricing" element={<PricingSection />} />
+        <Route path="/testimonials" element={<TestimonialsSection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/features" element={<Features />} />
         <Route path="/signup" element={<Signin />} />
@@ -165,6 +175,7 @@ function App() {
           />
         </Routes>
       </Suspense>
+      <Analytics />
     </Router>
   );
 }

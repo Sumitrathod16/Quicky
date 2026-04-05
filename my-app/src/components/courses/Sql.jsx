@@ -7,7 +7,7 @@ const syllabusData = [
     title: 'Introduction to SQL',
     description: 'Fundamental concepts of SQL',
     details: '',
-  
+    icon: '🚀',
     chapters: [
 "What is SQL?",
 "History & importance of SQL in databases",
@@ -20,7 +20,7 @@ const syllabusData = [
     title: 'Data Definition Language (DDL)',
     description: 'Understanding DDL',
     details: '',
-  
+    icon: '🏗️',
     chapters: [
       "CREATE, ALTER, DROP",
       "Data types in SQL",
@@ -30,10 +30,10 @@ const syllabusData = [
   },
   {
     id: 3,
-    title: 'Data Manipualtion Language(DML)',
+    title: 'Data Manipulation Language(DML)',
     description: 'Understanding DML',
     details: '',
-    
+    icon: '✏️',
     chapters: [
       "INSERT, UPDATE, DELETE",
       "SELECT basics",
@@ -47,7 +47,7 @@ const syllabusData = [
     title: 'Joins & Subqueries',
     description: 'Joins and subqueries',
     details: '',
-    
+    icon: '🔗',
     chapters: [
       "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN",
       "CROSS JOIN, SELF JOIN",
@@ -61,7 +61,7 @@ const syllabusData = [
     title: 'Functions and Grouping',
     description: 'Functions and Grouping in SQL',
     details: '',
-    
+    icon: '📊',
     chapters: [
       "Aggregate functions (COUNT, SUM, AVG, MIN, MAX)",
       "GROUP BY and HAVING",
@@ -74,7 +74,7 @@ const syllabusData = [
     title: 'Advanced SQL',
     description: 'Advance',
     details: '',
-    
+    icon: '⚡',
     chapters: [
       "Views (CREATE VIEW, UPDATE VIEW)",
       "Indexes (Clustered, Non-clustered)",
@@ -87,6 +87,7 @@ const syllabusData = [
     id:7,
     title:'Notes',
     description:'Notes to understand the concept',
+    icon: '📝',
     notes:[
       {name:"Sql notes",link:'/files/sql_notes.pdf'}
     ]
@@ -96,6 +97,7 @@ const syllabusData = [
     title:"Sources",
     description: 'Additional resources for further learning',
     details: 'Links to online courses, books, and articles for deeper understanding.',
+    icon: '🔍',
     chapters:[
       "Online Courses: Coursera, Udemy, Khan Academy",
     "SQL Documentation: PostgreSQL, MySQL, W3Schools",
@@ -123,10 +125,16 @@ const syllabusData = [
 
 const Syllabus = () => {
   const [openId, setOpenId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const toggleInfo = (id) => {
     setOpenId(openId === id ? null : id);
   };
+
+  const filteredData = syllabusData.filter(item =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="main-container">
@@ -139,10 +147,20 @@ const Syllabus = () => {
       </aside>
 
       <section className="content">
-        {syllabusData.map((item) => (
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search syllabus topics..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+        </div>
+
+        {filteredData.map((item) => (
           <div
             key={item.id}
-            className="syllabus-card clickable"
+            className={`syllabus-card clickable ${openId === item.id ? 'expanded' : ''}`}
             onClick={() => toggleInfo(item.id)}
           >
             <div className="icon">{item.icon}</div>
