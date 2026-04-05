@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         totalAssignments: 0,
         averageGrade: 'N/A',
         courses: {
+          html: { completed: 0, total: 100 },
           python: { completed: 0, total: 100 },
           react: { completed: 0, total: 100 },
           javascript: { completed: 0, total: 100 },
@@ -117,7 +118,8 @@ export const AuthProvider = ({ children }) => {
 
       // Calculate total points based on progress
       const currentData = await getDoc(userRef);
-      const courses = currentData.data().courses;
+      const courses = currentData.data().courses || {};
+      if (!courses[courseId]) courses[courseId] = { completed: 0, total: 100 };
       courses[courseId].completed = progress;
 
       const totalProgress = Object.values(courses).reduce((sum, course) => sum + course.completed, 0);

@@ -169,7 +169,6 @@ function App() {
         <Route path="/Sqlassign" element={<Sqlassign/>}/>
                   </Routes>
                 </Suspense>
-                <Footer />
               </>
             }
           />

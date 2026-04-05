@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from '../../context/useAuth';
+import { submitAssignment } from '../../services/userService';
 import './Assign.css';
 const questionsData = [
   {
@@ -54,16 +56,18 @@ const questionsData = [
 ];
 
 const Springassign = () => {
+  const { user } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(1200); // 20 minutes in seconds
 
   useEffect(() => {
-    if (secondsLeft <= 0) return;
+    if (secondsLeft <= 0 || isSubmitted) return;
     const timer = setInterval(() => setSecondsLeft(s => s - 1), 1000);
     return () => clearInterval(timer);
-  }, [secondsLeft]);
+  }, [secondsLeft, isSubmitted]);
 
   const handleOptionClick = (index) => {
     setSelectedAnswers({ ...selectedAnswers, [currentQuestion]: index });
@@ -81,8 +85,24 @@ const Springassign = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    const score = calculateScore();
+    const grade = score >= 9 ? 'A+' : score >= 8 ? 'A' : score >= 6 ? 'B' : score >= 4 ? 'C' : 'F';
+    
     setIsSubmitted(true);
+    setIsSubmitting(false);
+    
+    if (user?.uid) {
+      submitAssignment(user.uid, {
+        name: 'SPRING Basics Assignment',
+        courseId: 'spring',
+        score: score,
+        total: questionsData.length,
+        grade: grade,
+        status: 'completed'
+      }).catch(err => console.error("Failed to sync score:", err));
+    }
   };
 
   const calculateScore = () => {
@@ -146,14 +166,14 @@ const Springassign = () => {
       </div>
 
       <div className="button-group">
-        <button onClick={handlePrevious} disabled={currentQuestion === 0} className="prev-btn">
+        <button onClick={handlePrevious} disabled={currentQuestion === 0 || isSubmitted} className="prev-btn">
           ← Previous Question
         </button>
-        <button onClick={handleNext} disabled={currentQuestion === questionsData.length - 1} className="next-btn">
+        <button onClick={handleNext} disabled={currentQuestion === questionsData.length - 1 || isSubmitted} className="next-btn">
           Next Question →
         </button>
-        <button onClick={handleSubmit} className="submit-btn">
-          Submit Assignment
+        <button onClick={handleSubmit} disabled={isSubmitted || isSubmitting} className="submit-btn">
+          {isSubmitting ? 'Submitting...' : isSubmitted ? 'Submitted!' : 'Submit Assignment'}
         </button>
       </div>
     </div>

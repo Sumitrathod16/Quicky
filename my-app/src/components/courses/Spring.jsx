@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../context/useAuth';
 import { Link } from 'react-router-dom';
 import './Syllabus.css';
 
@@ -125,6 +126,26 @@ const syllabusData = [
 ];
 
 const Syllabus = () => {
+  const { profile, updateProgress } = useAuth();
+  const [completedChapters, setCompletedChapters] = useState([]);
+
+  useEffect(() => {
+    if (profile?.courses?.['spring']?.completed) {
+      const numCompleted = Math.floor((profile.courses['spring'].completed / 100) * 5);
+      const arr = Array.from({length: numCompleted}, (_, i) => i + 1);
+      setCompletedChapters(arr);
+    }
+  }, [profile]);
+
+  const completeChapter = async (id) => {
+    if (!completedChapters.includes(id)) {
+      const newCompleted = [...completedChapters, id];
+      setCompletedChapters(newCompleted);
+      const newProgress = Math.min(100, Math.floor((newCompleted.length / 5) * 100));
+      await updateProgress('spring', newProgress);
+    }
+  };
+
   const [openId, setOpenId] = useState(null);
 
   const toggleInfo = (id) => {
@@ -153,15 +174,35 @@ const Syllabus = () => {
               <h3>{item.id}. {item.title}</h3>
               <p>{item.description}</p>
 
-              {item.id === 1 && (
+              {item.id <= 5 && (
                 <div className="progress-bar">
-                  <div className="bar-fill" />
+                  <div className="bar-fill" style={{ width: completedChapters.includes(item.id) ? '100%' : '0%' }} />
                 </div>
               )}
 
               {openId === item.id && (
                 <div className="extra-info">
                   {item.details && <p>{item.details}</p>}
+
+                  {item.id <= 5 && (
+                    <div style={{ marginTop: '20px' }}>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); completeChapter(item.id); }}
+                        disabled={completedChapters.includes(item.id)}
+                        style={{
+                          padding: '10px 20px',
+                          background: completedChapters.includes(item.id) ? '#10b981' : '#4f46e5',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: completedChapters.includes(item.id) ? 'default' : 'pointer'
+                        }}
+                      >
+                        {completedChapters.includes(item.id) ? '✓ Completed' : 'Mark as Complete'}
+                      </button>
+                    </div>
+                  )}
+
 
                   {item.chapters && (
                     <ul className="chapter-list">

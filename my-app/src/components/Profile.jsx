@@ -170,19 +170,7 @@ const Profile = () => {
     }
   };
 
-  // Mock data - in real app, fetch from Firestore
-  const mockPastAssignments = [
-    { date: '2023-12-01', name: 'React Basics Assignment', status: 'completed', grade: 'A' },
-    { date: '2023-12-02', name: 'JavaScript Fundamentals', status: 'completed', grade: 'B+' },
-    { date: '2023-12-05', name: 'CSS Grid Layout', status: 'completed', grade: 'A-' },
-    { date: '2023-12-10', name: 'Node.js API', status: 'completed', grade: 'A' },
-    { date: '2023-12-15', name: 'Python Data Structures', status: 'completed', grade: 'B' },
-  ];
 
-  const mockLoginHistory = [
-    '2023-12-01', '2023-12-02', '2023-12-03', '2023-12-05', '2023-12-07',
-    '2023-12-10', '2023-12-12', '2023-12-15', '2023-12-16', '2023-12-18'
-  ];
 
   // New mock data for enhanced profile
 
@@ -197,15 +185,18 @@ const Profile = () => {
   // Helper functions for calendar
 
   const getAssignmentsForDate = (date) => {
-    return mockPastAssignments.filter(assignment =>
-      isSameDay(new Date(assignment.date), date)
-    );
+    return userAssignments.filter(assignment => {
+      const assignmentDate = assignment.submittedAt ? new Date(assignment.submittedAt.seconds * 1000) : new Date();
+      return isSameDay(assignmentDate, date);
+    });
   };
 
   const isLoggedInOnDate = (date) => {
-    return mockLoginHistory.some(loginDate =>
-      isSameDay(new Date(loginDate), date)
-    );
+    if (!profile?.loginHistory) return false;
+    return profile.loginHistory.some(login => {
+      const loginDate = new Date(login.seconds * 1000);
+      return isSameDay(loginDate, date);
+    });
   };
 
   const handleDateChange = (date) => {
@@ -279,7 +270,7 @@ const Profile = () => {
         <p>{user?.email}</p>
         <div className="account-info">
           <p><strong>Account Type:</strong> {profile?.accountType || 'Free'}</p>
-          <p><strong>Ranking:</strong> {mockPastAssignments.length * 10} points</p>
+          <p><strong>Points:</strong> {profile?.totalPoints || 0} points</p>
         </div>
       </motion.div>
 
@@ -338,20 +329,7 @@ const Profile = () => {
                   ></div>
                 </div>
                 <div className="progress-controls">
-                  <button
-                    onClick={() => handleProgressUpdate(course.name.toLowerCase(), -10)}
-                    className="progress-btn"
-                    disabled={course.completed <= 0}
-                  >
-                    -10%
-                  </button>
-                  <button
-                    onClick={() => handleProgressUpdate(course.name.toLowerCase(), 10)}
-                    className="progress-btn"
-                    disabled={course.completed >= 100}
-                  >
-                    +10%
-                  </button>
+                  <span>{course.completed === 100 ? '✅ Mastery' : 'In Progress'}</span>
                 </div>
               </div>
             ))}

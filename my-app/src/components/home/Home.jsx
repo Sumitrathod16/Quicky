@@ -4,6 +4,7 @@ import Specialization from './Specialization';
 import Exclusive from './Exclusive';
 import Explore from './Explore';
 import Unique from './Unique';
+import Footer from '../Footer';
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
       <Explore/>
       <Exclusive />
       <Unique/>
-      
+      <Footer />
      </div>
   );
 }

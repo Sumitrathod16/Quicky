@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/useAuth';
 import './Syllabus.css';
 const syllabusData = [
   {
@@ -139,9 +140,30 @@ const syllabusData = [
 
 const Syllabus = () => {
   const [openId, setOpenId] = useState(null);
+  const { profile, updateProgress } = useAuth();
+  const [completedChapters, setCompletedChapters] = useState([]);
+
+  // Calculate existing progress mapping back to chapters
+  useEffect(() => {
+    if (profile?.courses?.html?.completed) {
+      const numCompleted = Math.floor((profile.courses.html.completed / 100) * 5); // 5 primary chapters
+      const arr = Array.from({length: numCompleted}, (_, i) => i + 1);
+      setCompletedChapters(arr);
+    }
+  }, [profile]);
 
   const toggleInfo = (id) => {
     setOpenId(openId === id ? null : id);
+  };
+
+  const completeChapter = async (id) => {
+    if (!completedChapters.includes(id)) {
+      const newCompleted = [...completedChapters, id];
+      setCompletedChapters(newCompleted);
+      
+      const newProgress = Math.min(100, Math.floor((newCompleted.length / 5) * 100));
+      await updateProgress('html', newProgress);
+    }
   };
 
   return (
@@ -166,9 +188,9 @@ const Syllabus = () => {
               <h3>{item.id}. {item.title}</h3>
               <p>{item.description}</p>
 
-              {item.id === 1 && (
+              {item.id <= 5 && (
                 <div className="progress-bar">
-                  <div className="bar-fill" />
+                  <div className="bar-fill" style={{ width: completedChapters.includes(item.id) ? '100%' : '0%' }} />
                 </div>
               )}
 
@@ -216,6 +238,25 @@ const Syllabus = () => {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  )}
+
+                  {item.id <= 5 && (
+                    <div style={{ marginTop: '20px' }}>
+                      <button 
+                        onClick={(e) => { e.stopPropagation(); completeChapter(item.id); }}
+                        disabled={completedChapters.includes(item.id)}
+                        style={{
+                          padding: '10px 20px',
+                          background: completedChapters.includes(item.id) ? '#10b981' : '#4f46e5',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: completedChapters.includes(item.id) ? 'default' : 'pointer'
+                        }}
+                      >
+                        {completedChapters.includes(item.id) ? '✓ Completed' : 'Mark as Complete'}
+                      </button>
                     </div>
                   )}
 

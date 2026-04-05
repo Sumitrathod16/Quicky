@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Footer from "./Footer";
 
 // Professional images and icons (using placeholder URLs that can be replaced with actual images)
 const aiImage = "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80";
@@ -492,7 +493,78 @@ function LandingPage() {
           .landing-desc { font-size: 0.9em; }
           .cta-btn { font-size: 1em; padding: 12px 24px; }
           .info-img { width: 48px; height: 48px; }
+        }
+
+        .landing-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 40px;
+          z-index: 100;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .landing-logo {
+          color: white;
+          font-weight: 800;
+          font-size: 1.5rem;
+          text-decoration: none;
+        }
+
+        .landing-nav-links {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+        }
+
+        .landing-nav-link {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 1rem;
+          transition: opacity 0.3s ease;
+        }
+
+        .landing-nav-link:hover {
+          opacity: 0.8;
+        }
+
+        .landing-btn-login {
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          margin-right: 15px;
+        }
+
+        .landing-btn-signup {
+          background: #ff6b6b;
+          color: white;
+          padding: 8px 20px;
+          border-radius: 20px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: background 0.3s ease;
+        }
+
+        .landing-btn-signup:hover {
+          background: #ee5a24;
+        }
       `}</style>
+
+      {/* Header Section */}
+      <header className="landing-header">
+        <Link to="/" className="landing-logo">Quicky</Link>
+        <div className="landing-nav-links">
+          <Link to="/login" className="landing-btn-login">Log In</Link>
+          <Link to="/signup" className="landing-btn-signup">Sign Up</Link>
+        </div>
+      </header>
 
       {/* Hero Section */}
       <section className="hero-section">
@@ -507,7 +579,7 @@ function LandingPage() {
               Get personalized mentorship, build real projects, and land your dream job.
             </p>
             <div className="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
-              <button className="btn-primary" onClick={() => navigate('/home')}>
+              <button className="btn-primary" onClick={() => navigate('/signup')}>
                 Start Learning Free
               </button>
               <button className="btn-secondary" onClick={() => document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})}>
@@ -608,7 +680,7 @@ function LandingPage() {
                 <li>Limited project reviews</li>
                 <li>Email support</li>
               </ul>
-              <button className="pricing-button" onClick={() => navigate('/home')}>
+              <button className="pricing-button" onClick={() => navigate('/signup')}>
                 Get Started
               </button>
             </div>
@@ -628,7 +700,7 @@ function LandingPage() {
                 <li>Resume & portfolio review</li>
                 <li>Job placement assistance</li>
               </ul>
-              <button className="pricing-button" onClick={() => navigate('/home')}>
+              <button className="pricing-button" onClick={() => navigate('/signup')}>
                 Start Pro Trial
               </button>
             </div>
@@ -648,7 +720,7 @@ function LandingPage() {
                 <li>API access</li>
                 <li>Priority support</li>
               </ul>
-              <button className="pricing-button" onClick={() => navigate('/home')}>
+              <button className="pricing-button" onClick={() => navigate('/signup')}>
                 Contact Sales
               </button>
             </div>
@@ -677,6 +749,7 @@ function LandingPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
