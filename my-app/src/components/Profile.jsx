@@ -223,13 +223,7 @@ const Profile = () => {
   if (!user || !profile) {
     return (
       <div className="loading-container">
-        <motion.div
-          className="loading-spinner"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        >
-          Loading...
-        </motion.div>
+        <div className="loading-spinner">⏳ Loading your dashboard…</div>
       </div>
     );
   }
@@ -239,25 +233,18 @@ const Profile = () => {
       className="profile-container"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.5 }}
     >
-      <motion.div
-        className="profile-header"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
+      {/* ── Header ── */}
+      <div className="profile-header">
         <div className="profile-image-container">
-          <motion.img
-            src={imageUrl || 'https://via.placeholder.com/150'}
+          <img
+            src={imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile?.name || user?.displayName || 'U')}&background=7c3aed&color=fff&size=110`}
             alt="Profile"
             className="profile-image"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.3 }}
           />
           <label htmlFor="image-upload" className={`image-upload-label ${uploading ? 'uploading' : ''}`}>
-            {uploading ? 'Uploading...' : 'Change Image'}
+            {uploading ? '⏳ Uploading…' : '📷 Change'}
           </label>
           <input
             id="image-upload"
@@ -267,13 +254,14 @@ const Profile = () => {
             style={{ display: 'none' }}
           />
         </div>
-        <h1>Welcome, {profile?.name || user?.displayName || 'User'}!</h1>
+        <h1>👋 {profile?.name || user?.displayName || 'Developer'}</h1>
         <p>{user?.email}</p>
         <div className="account-info">
-          <p><strong>Account Type:</strong> {profile?.accountType || 'Free'}</p>
-          <p><strong>Points:</strong> {profile?.totalPoints || 0} points</p>
+          <p><strong>Plan:</strong> {profile?.accountType || 'Free'}</p>
+          <p><strong>Points:</strong> {(profile?.totalPoints || 0).toLocaleString()} XP</p>
+          {userRank > 0 && <p><strong>Rank:</strong> #{userRank} globally</p>}
         </div>
-      </motion.div>
+      </div>
 
       <div className="profile-content">
         {/* Progress Overview */}
@@ -281,25 +269,25 @@ const Profile = () => {
           className="progress-overview"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+          transition={{ delay: 0.15, duration: 0.45 }}
         >
           <h2>📊 Progress Overview</h2>
           <div className="stats-grid">
             <div className="stat-card">
-              <h3>{currentStreak}</h3>
+              <h3>🔥 {currentStreak}</h3>
               <p>Day Streak</p>
               <button onClick={handleStreakUpdate} className="streak-btn">+1 Day</button>
             </div>
             <div className="stat-card">
-              <h3>{completedAssignments}/{totalAssignments}</h3>
-              <p>Assignments Completed</p>
+              <h3>{completedAssignments}<span style={{fontSize:'1.1rem',color:'rgba(255,255,255,0.3'}}>/{totalAssignments}</span></h3>
+              <p>Assignments Done</p>
             </div>
             <div className="stat-card">
               <h3>{averageGrade}</h3>
-              <p>Average Grade</p>
+              <p>Avg Grade</p>
             </div>
             <div className="stat-card">
-              <h3>{userRank || 'N/A'}</h3>
+              <h3>#{userRank || '–'}</h3>
               <p>Global Rank</p>
             </div>
           </div>
@@ -310,7 +298,7 @@ const Profile = () => {
           className="course-progress"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.45 }}
         >
           <h2>🎯 Course Progress</h2>
           <div className="progress-bars">
@@ -342,16 +330,25 @@ const Profile = () => {
           className="weekly-activity"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          transition={{ delay: 0.25, duration: 0.45 }}
         >
           <h2>📈 Weekly Activity</h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={weeklyActivity}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" />
-              <YAxis />
-              <Tooltip formatter={(value) => [`${value} hours`, 'Study Time']} />
-              <Bar dataKey="hours" fill="#8884d8" />
+          <ResponsiveContainer width="100%" height={180}>
+            <BarChart data={weeklyActivity} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="2 4" vertical={false} />
+              <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip
+                formatter={(value) => [`${value} hrs`, 'Study Time']}
+                contentStyle={{ background: 'rgba(10,8,30,0.95)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: 10, fontSize: 12 }}
+              />
+              <Bar dataKey="hours" fill="url(#barGrad)" radius={[6,6,0,0]} />
+              <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"  stopColor="#a78bfa" stopOpacity={0.9} />
+                  <stop offset="100%" stopColor="#4f46e5" stopOpacity={0.6} />
+                </linearGradient>
+              </defs>
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
@@ -361,24 +358,29 @@ const Profile = () => {
           className="skills-distribution"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 0.3, duration: 0.45 }}
         >
-          <h2>🛠️ Skills Distribution</h2>
-          <ResponsiveContainer width="100%" height={250}>
+          <h2>🛠️ Skills</h2>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
                 data={skillDistribution}
                 cx="50%"
                 cy="50%"
-                outerRadius={80}
+                innerRadius={50}
+                outerRadius={78}
+                paddingAngle={3}
                 dataKey="value"
                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                labelLine={{ stroke: 'rgba(255,255,255,0.2)' }}
               >
                 {skillDistribution.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip
+                contentStyle={{ background: 'rgba(10,8,30,0.95)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: 10, fontSize: 12 }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </motion.div>
@@ -427,20 +429,22 @@ const Profile = () => {
           className="leaderboard"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
+          transition={{ delay: 0.4, duration: 0.45 }}
         >
-          <h2>🏆 Global Leaderboard</h2>
+          <h2>🏆 Leaderboard</h2>
           <div className="leaderboard-list">
-            {leaderboard.map((userData, index) => (
+            {leaderboard.length === 0 ? (
+              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', padding: '20px 0' }}>No leaderboard data yet.</div>
+            ) : leaderboard.map((userData, index) => (
               <div
                 key={userData.uid}
                 className={`leaderboard-item ${userData.uid === user?.uid ? 'current-user' : ''}`}
               >
                 <div className="rank">#{index + 1}</div>
-                <div className="avatar">{userData.avatar}</div>
+                <div className="avatar">{(userData.avatar || userData.name?.[0] || '?').toString().toUpperCase()}</div>
                 <div className="user-info">
                   <span className="name">{userData.name}</span>
-                  <span className="points">{userData.points} pts</span>
+                  <span className="points">{(userData.points || 0).toLocaleString()} XP</span>
                 </div>
               </div>
             ))}
