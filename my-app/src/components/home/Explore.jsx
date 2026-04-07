@@ -1,469 +1,403 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import htmlIcon from '../../assets/html.svg'; // Assuming you have an HTML icon
-import CSS from '../../assets/css.svg'; // Assuming you have a CSS icon
-import js from '../../assets/js.svg'; // Assuming you have a JavaScript icon
-import nodeIcon from '../../assets/nodejs.svg'; // Assuming you have a Node.js icon
-import ReactIcon from '../../assets/react.svg'; // Assuming you have a React icon
-import MongodbIcon from '../../assets/mongodb.svg'; // Assuming you have a MongoDB icon
-import AWSIcon from '../../assets/aws.svg'; // Assuming you have an AWS icon
-import AzureIcon from '../../assets/azure.svg'; // Assuming you have an Azure icon
-import GcpIcon from '../../assets/gcp.svg'; // Assuming you have a GCP icon
-import FlutterIcon from '../../assets/flutter.svg'; // Assuming you have a Flutter icon
-import PythonIcon from '../../assets/python.svg'; // Assuming you have a Python icon
-import DjangoIcon from '../../assets/django.svg'; // Assuming you have a Django icon
-import FlaskIcon from '../../assets/flask.svg'; // Assuming you have a Flask icon
-import JavaIcon from '../../assets/java.svg'; // Assuming you have a Java icon
-import SpringIcon from '../../assets/spring.svg'; // Assuming you have a Spring icon
-import HibernateIcon from '../../assets/hibernate.svg'; // Assuming you have a Hibernate icon
-import MLIcon from '../../assets/ml.svg'; // Assuming you have a Machine Learning icon
-import DeepLearningIcon from '../../assets/dl.svg'; // Assuming you have a Deep Learning
-import AIIcon from '../../assets/ai.svg'; // Assuming you have an AI icon
+import htmlIcon from '../../assets/html.svg';
+import CSS from '../../assets/css.svg';
+import js from '../../assets/js.svg';
+import nodeIcon from '../../assets/nodejs.svg';
+import ReactIcon from '../../assets/react.svg';
+import MongodbIcon from '../../assets/mongodb.svg';
+import AWSIcon from '../../assets/aws.svg';
+import AzureIcon from '../../assets/azure.svg';
+import GcpIcon from '../../assets/gcp.svg';
+import FlutterIcon from '../../assets/flutter.svg';
+import PythonIcon from '../../assets/python.svg';
+import DjangoIcon from '../../assets/django.svg';
+import FlaskIcon from '../../assets/flask.svg';
+import JavaIcon from '../../assets/java.svg';
+import SpringIcon from '../../assets/spring.svg';
+import HibernateIcon from '../../assets/hibernate.svg';
+import MLIcon from '../../assets/ml.svg';
+import DeepLearningIcon from '../../assets/dl.svg';
+import AIIcon from '../../assets/ai.svg';
 import SQL from '../../assets/sql.svg';
-function Explore(){
-return(
+
+const courses = [
+  {
+    title: 'Frontend Developer',
+    emoji: '🎨',
+    accent: '#f97316',
+    accentBg: 'rgba(249,115,22,0.1)',
+    accentBorder: 'rgba(249,115,22,0.25)',
+    tags: [
+      { label: 'HTML', to: '/HTML' },
+      { label: 'CSS', to: '/CSS' },
+      { label: 'JavaScript', to: '/JavaScript' },
+    ],
+    icons: [{ src: htmlIcon, alt: 'HTML' }, { src: CSS, alt: 'CSS' }, { src: js, alt: 'JS' }],
+  },
+  {
+    title: 'Backend Developer',
+    emoji: '⚙️',
+    accent: '#22c55e',
+    accentBg: 'rgba(34,197,94,0.1)',
+    accentBorder: 'rgba(34,197,94,0.25)',
+    tags: [
+      { label: 'NodeJS', to: '/NodeJS' },
+      { label: 'ReactJS', to: '/ReactJS' },
+      { label: 'MongoDB', to: '/MongoDB' },
+    ],
+    icons: [{ src: nodeIcon, alt: 'Node' }, { src: ReactIcon, alt: 'React' }, { src: MongodbIcon, alt: 'MongoDB' }],
+  },
+  {
+    title: 'Cloud Computing',
+    emoji: '☁️',
+    accent: '#0ea5e9',
+    accentBg: 'rgba(14,165,233,0.1)',
+    accentBorder: 'rgba(14,165,233,0.25)',
+    tags: [
+      { label: 'AWS', to: '/AWS' },
+      { label: 'Azure', to: '/Azure' },
+      { label: 'GCP', to: '/GCP' },
+    ],
+    icons: [{ src: AWSIcon, alt: 'AWS' }, { src: AzureIcon, alt: 'Azure' }, { src: GcpIcon, alt: 'GCP' }],
+  },
+  {
+    title: 'Flutter',
+    emoji: '📱',
+    accent: '#38bdf8',
+    accentBg: 'rgba(56,189,248,0.1)',
+    accentBorder: 'rgba(56,189,248,0.25)',
+    tags: [{ label: 'Flutter', to: '/Flutter' }],
+    icons: [{ src: FlutterIcon, alt: 'Flutter' }],
+  },
+  {
+    title: 'Python',
+    emoji: '🐍',
+    accent: '#facc15',
+    accentBg: 'rgba(250,204,21,0.1)',
+    accentBorder: 'rgba(250,204,21,0.25)',
+    tags: [
+      { label: 'Python', to: '/Python' },
+      { label: 'Django', to: '/Django' },
+      { label: 'Flask', to: '/Flask' },
+    ],
+    icons: [{ src: PythonIcon, alt: 'Python' }, { src: DjangoIcon, alt: 'Django' }, { src: FlaskIcon, alt: 'Flask' }],
+  },
+  {
+    title: 'Java',
+    emoji: '☕',
+    accent: '#f43f5e',
+    accentBg: 'rgba(244,63,94,0.1)',
+    accentBorder: 'rgba(244,63,94,0.25)',
+    tags: [
+      { label: 'Java', to: '/Java' },
+      { label: 'Spring', to: '/Spring' },
+      { label: 'Hibernate', to: '/Hibernate' },
+    ],
+    icons: [{ src: JavaIcon, alt: 'Java' }, { src: SpringIcon, alt: 'Spring' }, { src: HibernateIcon, alt: 'Hibernate' }],
+  },
+  {
+    title: 'Machine Learning',
+    emoji: '🤖',
+    accent: '#a78bfa',
+    accentBg: 'rgba(167,139,250,0.1)',
+    accentBorder: 'rgba(167,139,250,0.25)',
+    tags: [
+      { label: 'ML', to: '/Ml' },
+      { label: 'Deep Learning', to: '/Dl' },
+      { label: 'AI', to: '/AI' },
+    ],
+    icons: [{ src: MLIcon, alt: 'ML' }, { src: DeepLearningIcon, alt: 'DL' }, { src: AIIcon, alt: 'AI' }],
+  },
+  {
+    title: 'Base Languages',
+    emoji: '💾',
+    accent: '#34d399',
+    accentBg: 'rgba(52,211,153,0.1)',
+    accentBorder: 'rgba(52,211,153,0.25)',
+    tags: [
+      { label: 'C', to: '/C' },
+      { label: 'C++', to: '/C++' },
+      { label: 'PHP', to: '/Php' },
+    ],
+    icons: [],
+  },
+  {
+    title: 'Projects',
+    emoji: '🚀',
+    accent: '#f97316',
+    accentBg: 'rgba(249,115,22,0.1)',
+    accentBorder: 'rgba(249,115,22,0.25)',
+    tags: [
+      { label: 'DBMS', to: '/DBMS' },
+      { label: 'SQL', to: '/SQL' },
+    ],
+    icons: [{ src: SQL, alt: 'SQL' }],
+  },
+];
+
+function Explore() {
+  return (
     <>
-    <style>
-        {`
-:root {
-  --color-gray-50: #f9fafb;
-  --color-gray-300: #d1d5db;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-white: #ffffff;
-  --color-blue-600: #dcdde1ff;
-}
-
-body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-gray-50);
-            color: var(--color-gray-800);
+      <style>{`
+        .explore-section {
+          padding: 90px 20px;
+          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 100%);
+          font-family: 'Inter', sans-serif;
+          position: relative;
+          overflow: hidden;
         }
 
-        /* --- Main Container & Header --- */
-        .container {
-            max-width: 72rem; /* 1152px */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2rem 1rem; /* 32px 16px */
+        .explore-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent);
         }
 
-        .header-text {
-            text-align: center;
-            margin-bottom: 3rem; /* 48px */
+        .explore-header {
+          text-align: center;
+          margin-bottom: 56px;
+          position: relative;
+          z-index: 1;
         }
 
-        .header-text h1 {
-            font-size: 2.25rem; /* 36px */
-            font-weight: 800;
-            color: var(--color-gray-800);
-            margin-bottom: 0.5rem; /* 8px */
+        .explore-eyebrow {
+          display: inline-block;
+          padding: 6px 18px;
+          background: rgba(139,92,246,0.12);
+          border: 1px solid rgba(139,92,246,0.25);
+          border-radius: 100px;
+          color: #a78bfa;
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 1.2rem;
         }
 
-        .header-text p {
-            color: var(--color-gray-500);
-            margin: 0;
+        .explore-title {
+          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0 0 1rem;
+          letter-spacing: -0.02em;
         }
 
-        /* --- Card Grid Layout --- */
-        .card-grid {
-            display: grid;
-            border-radius: 0.75rem;
-            gap: 2rem; /* 32px */
-            grid-template-columns: 1fr; /* Default to 1 column on small screens */
-        }
-        .card-grid .hover {
-            transition:  ease-in-out;
-             color:black;
-             drop-shadow: 0 0 10px black;
-            }
-        /* Responsive grid columns for 3x3 layout */
-        @media (min-width: 768px) { /* md */
-            .card-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .explore-subtitle {
+          font-size: 1.05rem;
+          color: rgba(255,255,255,0.45);
+          max-width: 520px;
+          margin: 0 auto;
+          line-height: 1.65;
         }
 
-        /* --- Individual Card Styling --- */
-        .card {
-            position: relative;
-            background-color: var(--color-white);
-            padding: 1.5rem; /* 24px */
-            border-radius: 0.75rem; /* 12px */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease-in-out;
-            overflow: hidden;
-            height: 14rem; /* 224px */
-            display: flex;
-            flex-direction: column;
-
+        .explore-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          max-width: 1100px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
         }
 
-        .card:hover {
-            box-shadow: 15px 10px 15px 10px rgba(0, 0, 0, 0.1);
+        .course-card {
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 20px;
+          padding: 28px 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          text-decoration: none;
         }
 
-        /* Decorative background circle */
-        .card-bg {
-            position: absolute;
-            top: -3rem; /* -48px */
-            right: -3rem; /* -48px */
-            width: 12rem; /* 192px */
-            height: 12rem; /* 192px */
-            border-radius: 9999px; /* full circle */
-            opacity: 0.5;
+        .course-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
         }
-        
-        /* Card Content Wrapper */
-        .card-content {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap:10px;
-            height: 100%;
-            margin-right:20px;
-        
+
+        .course-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(255,255,255,0.12);
+        }
+
+        .course-card:hover::before {
+          opacity: 1;
+        }
+
+        .card-header-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .card-emoji-wrap {
+          width: 46px;
+          height: 46px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.4rem;
+          flex-shrink: 0;
+          transition: transform 0.3s ease;
+        }
+
+        .course-card:hover .card-emoji-wrap {
+          transform: rotate(-5deg) scale(1.1);
+        }
+
+        .card-icon-row {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          flex-wrap: wrap;
+        }
+
+        .card-tech-icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+          object-fit: contain;
+          padding: 4px;
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.08);
+          transition: transform 0.2s ease;
+        }
+
+        .course-card:hover .card-tech-icon {
+          transform: scale(1.1);
         }
 
         .card-title {
-            font-size: 1.5rem; /* 24px */
-            font-weight: 700;
-            color: var(--color-gray-800);
-            margin: 0 0 0.75rem 0; /* 12px */
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+          line-height: 1.3;
         }
 
-        .card-tags ul  {
-            display: flex;
-            flex-direction: row;
-            gap: 0.5rem; /* 8px */
-            flex-wrap: wrap;
-            gap: 0.5rem; /* 8px */
-            margin-bottom: 1rem; /* 16px */
-            text-decoration: none;
-
+        .card-tags-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: auto;
         }
 
-        .card-tags .tag {
-            font-size: 0.75rem; /* 12px */
-            font-weight: 500;
-            color: var(--color-gray-600);
-            background-color: var(--color-white);
-            border: 1px solid var(--color-gray-300);
-            border-radius: 9999px;
-            padding: 0.25rem 0.75rem; /* 4px 12px */
-            align-items:flex-end;
-            display: inline-flex;
-        
-        
-        }
-            .card-tags ul li {
-            margin-right: 0.5rem; /* 8px */
-            margin-bottom: 0.5rem; /* 8px */
-            font-size: 0.875rem; /* 14px */
-            font-weight: 500;
-            color: var(--color-gray-700);
-            
-            list-style:none;
-        
-        }
-            .card-tags ul li a {
-            color: var(--color-gray-700);
-            text-decoration: none;
-            font-weight: 600;
-        }
-            .card-tags ul li a:hover {
-            text-decoration: underline;
-            
-            background-color:  #e0e0e0;;
-            border-radius: 0.25rem; /* 4px */
-            cursor: pointer;
-            transform: scale(1.05);
-            transition: transform 0.2s ease-in-out;
-
+        .card-tag {
+          padding: 5px 12px;
+          border-radius: 100px;
+          font-size: 0.78rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          letter-spacing: 0.01em;
         }
 
-        /* Explore Link */
-        .card-explore-link {
-            margin-top: auto; /* Pushes to the bottom */
-            display: flex;
-            align-items: center;
-            color: var(--color-gray-700);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .card-explore-link .arrow-icon {
-            margin-left: 0.5rem; /* 8px */
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
-            transition: transform 0.3s ease-in-out;
+        .card-tag:hover {
+          transform: translateY(-1px);
+          filter: brightness(1.2);
         }
 
-        .card-explore-link:hover .arrow-icon {
-            transform: translateX(0.25rem); /* 4px */
+        @media (max-width: 900px) {
+          .explore-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Icon on the right */
-        .card-icon {
-            position: absolute;
-            top: 50%;
-            right: 1.5rem; /* 24px */
-            transform: translateY(-50%);
-            z-index: 10;
+        @media (max-width: 580px) {
+          .explore-section { padding: 70px 16px; }
+          .explore-grid { grid-template-columns: 1fr; max-width: 420px; }
         }
-            .img{
-                          padding: 5px;
-                            display: flex;
-                            flex-direction: row;
-                            gap: 10px;
-                            max-width: 600px;
-                            justify-content: space-evenly;
-                            align-items: center;
-                            margin-top: 20px;
-                            margin-right: 150px;
-            }
-        .Explore-icon {
-            width: 60px; /* 60px */
-            height: 60px; /* 60px */
-            border-radius: 50%;
-            margin-right:20px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-            .Explore-icon:hover{
-            transform:scale(1.1);
-            }
-            .Explore-icon:active{
-            transform:scale(0.9);
-            }
-@media (max-width: 768px) {
-  .card-grid {
-    gap: 1rem; /* smaller gap on mobile */
-  }
+      `}</style>
 
-  .card {
-    height: auto;           /* let content decide height */
-    padding: 1rem;          /* less padding */
-  }
-
-  .card-title {
-    font-size: 1.2rem;      /* smaller headings */
-  }
-
-  .card-tags ul li {
-    font-size: 0.8rem;
-  }
-
-  .img {
-    margin: 10px auto 0 auto; /* center icons on mobile */
-    flex-wrap: wrap;          /* icons wrap if screen is too small */
-    justify-content: center;
-  }
-
-  .Explore-icon {
-    width: 45px;   /* shrink icons */
-    height: 45px;
-    margin: 5px;
-  }
-
-  .header-text h1 {
-    font-size: 1.75rem; /* smaller hero heading */
-  }
-
-  .header-text p {
-    font-size: 0.9rem;
-    padding: 0 10px; /* add breathing room */
-  }
-}
-
-    `}
-    </style>
-
-
-    <div className="container">
-
-        <div className="header-text">
-            <h1>Explore Our Courses</h1>
-            <p>Preparing students for different coding languages. Scroll down to find the one you are preparing for</p>
+      <section className="explore-section">
+        <div className="explore-header">
+          <div className="explore-eyebrow">What we teach</div>
+          <h2 className="explore-title">Explore Our Courses</h2>
+          <p className="explore-subtitle">
+            Preparing students for different coding languages. Find the one you are preparing for.
+          </p>
         </div>
-        
 
-        <div className="card-grid">
-        
-            <div className="card">
-                <div className="card-bg bg-red"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Frontend Developer</h3>
-                    <div className="card-tags">
-                    <ul>
-                         <li> <Link to="/HTML">HTML</Link></li>
-                         <li> <Link to="/CSS">CSS</Link></li>
-                         <li> <Link to="/JavaScript">JavaScript</Link></li>
-                    </ul> 
-                   </div> 
+        <div className="explore-grid">
+          {courses.map((course, i) => (
+            <div
+              key={i}
+              className="course-card"
+              style={{
+                '--accent': course.accent,
+                boxShadow: `0 0 0 0 ${course.accent}`,
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = course.accentBg;
+                e.currentTarget.style.borderColor = course.accentBorder;
+                e.currentTarget.style.boxShadow = `0 16px 40px ${course.accent}22`;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              {/* Top accent line on hover via inline pseudo — use a div instead */}
+              <div style={{
+                position: 'absolute', top: 0, left: 0, right: 0, height: '2px',
+                background: `linear-gradient(90deg, ${course.accent}, transparent)`,
+                opacity: 0.6, borderRadius: '20px 20px 0 0'
+              }} />
+
+              <div className="card-header-row">
+                <div
+                  className="card-emoji-wrap"
+                  style={{ background: course.accentBg, border: `1px solid ${course.accentBorder}` }}
+                >
+                  {course.emoji}
                 </div>
-                <div className="img">
-                    <img src={htmlIcon} alt="HTML" className="Explore-icon" />
-                    <img src={CSS} alt="CSS" className="Explore-icon" />
-                    <img src={js} alt="JavaScript" className="Explore-icon" />
-                </div>
-                </div>
+                {course.icons.length > 0 && (
+                  <div className="card-icon-row">
+                    {course.icons.map((icon, j) => (
+                      <img key={j} src={icon.src} alt={icon.alt} className="card-tech-icon" />
+                    ))}
+                  </div>
+                )}
+              </div>
 
-        
-            <div className="card">
-                <div className="card-bg bg-orange"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Backend Developer</h3>
-                   <div className="card-tags">
-                    <ul>
-                            <li> <Link to="/NodeJS">NodeJS</Link></li>
-                            <li> <Link to="/ReactJS">ReactJS</Link></li>
-                            <li> <Link to="/MongoDB">MongoDB</Link></li>
-                    </ul>
-                   </div> 
-                </div>   
-                <div className="img">
-                    <img src={nodeIcon} alt="Node js" className="Explore-icon" />
-                    <img src={ReactIcon} alt="React js" className="Explore-icon" />
-                    <img src={MongodbIcon} alt="Mongodb" className="Explore-icon" />
-                </div>
+              <h3 className="card-title">{course.title}</h3>
+
+              <div className="card-tags-row">
+                {course.tags.map((tag, j) => (
+                  <Link
+                    key={j}
+                    to={tag.to}
+                    className="card-tag"
+                    style={{
+                      color: course.accent,
+                      background: course.accentBg,
+                      border: `1px solid ${course.accentBorder}`,
+                    }}
+                    onClick={e => e.stopPropagation()}
+                  >
+                    {tag.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-
-
-            <div className="card">
-                <div className="card-bg bg-yellow"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Cloud-Computing</h3>
-                    <div className="card-tags">
-                        <ul>
-                            <li> <Link to="/AWS">AWS</Link></li>
-                            <li> <Link to="/Azure">Azure</Link></li> 
-                            <li> <Link to="/GCP">GCP</Link></li>
-                        </ul>
-</div>
-                                   </div>
-    <div className="img">
-        <img src={AWSIcon} alt="AWS" className="Explore-icon" />
-        <img src={AzureIcon} alt="Azure" className="Explore-icon" />
-        <img src={GcpIcon} alt="GCP" className="Explore-icon" />
-    </div>
-     </div>
-            <div className="card">
-                <div className="card-bg bg-indigo"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Flutter</h3>
-                   <div className="card-tags">
-                    <ul>
-                            <li> <Link to="/Flutter">Flutter</Link></li>
-                
-                    </ul>
-                    </div>
-                 </div>
-                 
-                <div className="img">
-                    <img src={FlutterIcon} alt="Flutter" className="Explore-icon" />
-            </div>
-            </div>
-
-            
-            <div className="card">
-                <div className="card-bg bg-blue"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Python</h3>
-                  <div className="card-tags">
-                    <ul>
-                            <li> <Link to="/Python">Python</Link></li>
-                            <li> <Link to="/Django">Django</Link></li>
-                            <li> <Link to="/Flask">Flask</Link></li>
-                    </ul>
-                   </div>
-                   </div>
-                <div className="img">
-                    <img src={PythonIcon} alt="Python" className="Explore-icon" />
-                    <img src={DjangoIcon} alt="Django" className="Explore-icon" />
-                    <img src={FlaskIcon} alt="Flask" className="Explore-icon" />
-                    </div>            </div>
-
-            
-            <div className="card">
-                <div className="card-bg bg-gray"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Java</h3>
-                    <div className="card-tags">
-                    <ul>
-                        <li> <Link to="/Java">Java</Link></li>
-                        <li> <Link to="/Spring">Spring</Link></li>
-                        <li> <Link to="/Hibernate">Hibernate</Link></li>
-                    </ul>
-                    </div>
-                </div>
-                <div className="img">
-                    <img src={JavaIcon} alt="Java" className="Explore-icon" />
-                    <img src={SpringIcon} alt="Spring" className="Explore-icon" />
-                    <img src={HibernateIcon} alt="Hibernate" className="Explore-icon" />
-</div>
-
-            </div>
-
-            
-            <div className="card">
-                 <div className="card-bg bg-teal"></div>
-                 <div className="card-content">
-                    <h3 className="card-title">Machine Learning</h3>
-                    <div className="card-tags">
-                    <ul>
-                        <li> <Link to="/Ml">ML</Link></li>
-                        <li> <Link to="/Dl">Deep Learning</Link></li>
-                        <li> <Link to="/AI">AI</Link></li>
-                    </ul>
-                    </div>
-                 </div>
-                <div className="img">
-                    <img src={MLIcon} alt="Machine Learning" className="Explore-icon" />
-                    <img src={DeepLearningIcon} alt="Deep Learning" className="Explore-icon" />
-                    <img src={AIIcon} alt="AI" className="Explore-icon" />
-                        </div>
-            </div>
-
-            
-            <div className="card">
-                <div className="card-bg bg-purple"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Base languages</h3>
-                    <div className="card-tags">
-                    <ul>
-                        <li> <Link to="/C">C</Link></li>
-                        <li> <Link to="/C++">C++</Link></li>
-                        <li> <Link to="/Php">PHP</Link></li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
-<div className="card">
-                <div className="card-bg bg-pink"></div>
-                <div className="card-content">
-                    <h3 className="card-title">Projects</h3>
-                    <div className="card-tags">
-                    <ul>
-                        <li> <Link to="/DBMS">DBMS</Link></li>
-                        <li> <Link to="/SQL">SQL</Link></li>
-                        
-                    </ul>
-                    </div>                   
-                </div>
-                <div className="img">
-                    <img src={SQL} alt="DBMS" className="Explore-icon" />
-                    <img src={SQL} alt="SQL" className="Explore-icon" />
-                    
-            </div>
-</div>
+          ))}
         </div>
-    </div>
+      </section>
     </>
-);
+  );
 }
+
 export default Explore;

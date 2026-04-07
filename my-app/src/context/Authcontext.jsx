@@ -1,13 +1,8 @@
-import {
-  createContext,
-  useEffect,
-  useState
-} from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut, getRedirectResult } from "firebase/auth";
 import { doc, getDoc, updateDoc, setDoc, collection, query, orderBy, limit, getDocs, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
-
-export const AuthContext = createContext(null);
+import { AuthContext } from "./authContext";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -15,27 +10,21 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    getRedirectResult(auth).catch(() => {});
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      try {
-        setLoading(true);
+      setLoading(true);
 
-        if (!currentUser) {
-          setUser(null);
-          setProfile(null);
-          return;
-        }
-
-        setUser(currentUser);
-
-        // Initialize user data
-        await initializeUserData(currentUser);
-      } catch (error) {
-        console.error("AuthContext error:", error);
+      if (!currentUser) {
         setUser(null);
         setProfile(null);
-      } finally {
         setLoading(false);
+        return;
       }
+
+      setUser(currentUser);
+      await initializeUserData(currentUser);
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -61,48 +50,78 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Initialize user data on first login
+  // Initialize user data on first login (never clears Firebase Auth user on Firestore errors)
   const initializeUserData = async (currentUser) => {
     const userRef = doc(db, "users", currentUser.uid);
-    const userSnap = await getDoc(userRef);
+    const fallbackProfile = {
+      uid: currentUser.uid,
+      email: currentUser.email,
+      displayName: currentUser.displayName || currentUser.email?.split("@")[0] || "User",
+      photoURL: currentUser.photoURL || null,
+    };
 
-    if (!userSnap.exists()) {
-      // Create initial user data
-      const initialData = {
-        uid: currentUser.uid,
-        email: currentUser.email,
-        displayName: currentUser.displayName || currentUser.email.split('@')[0],
-        photoURL: currentUser.photoURL || null,
-        accountType: 'free',
-        createdAt: new Date(),
-        lastLogin: new Date(),
-        totalPoints: 0,
-        currentStreak: 0,
-        longestStreak: 0,
-        assignmentsCompleted: 0,
-        totalAssignments: 0,
-        averageGrade: 'N/A',
-        courses: {
-          html: { completed: 0, total: 100 },
-          python: { completed: 0, total: 100 },
-          react: { completed: 0, total: 100 },
-          javascript: { completed: 0, total: 100 },
-          nodejs: { completed: 0, total: 100 },
-          css: { completed: 0, total: 100 }
-        },
-        achievements: [],
-        weeklyActivity: [],
-        loginHistory: []
-      };
-      await setDoc(userRef, initialData);
-      setProfile(initialData);
-    } else {
-      // Update last login
-      await updateDoc(userRef, {
-        lastLogin: new Date(),
-        loginHistory: [...(userSnap.data().loginHistory || []), new Date()].slice(-30) // Keep last 30 logins
-      });
-      setProfile(userSnap.data());
+    const defaultCourses = {
+      html: { completed: 0, total: 100 },
+      python: { completed: 0, total: 100 },
+      react: { completed: 0, total: 100 },
+      javascript: { completed: 0, total: 100 },
+      nodejs: { completed: 0, total: 100 },
+      css: { completed: 0, total: 100 },
+    };
+
+    const buildFullProfile = (partial = {}) => ({
+      ...fallbackProfile,
+      ...partial,
+      displayName: partial.displayName || partial.name || fallbackProfile.displayName,
+      photoURL: partial.photoURL ?? fallbackProfile.photoURL,
+      accountType: partial.accountType || "free",
+      createdAt: partial.createdAt || new Date(),
+      lastLogin: new Date(),
+      totalPoints: partial.totalPoints ?? 0,
+      currentStreak: partial.currentStreak ?? 0,
+      longestStreak: partial.longestStreak ?? 0,
+      assignmentsCompleted: partial.assignmentsCompleted ?? 0,
+      totalAssignments: partial.totalAssignments ?? 0,
+      averageGrade: partial.averageGrade || "N/A",
+      courses: { ...defaultCourses, ...(partial.courses || {}) },
+      achievements: Array.isArray(partial.achievements) ? partial.achievements : [],
+      weeklyActivity: Array.isArray(partial.weeklyActivity) ? partial.weeklyActivity : [],
+      loginHistory: Array.isArray(partial.loginHistory) ? partial.loginHistory : [],
+    });
+
+    try {
+      const userSnap = await getDoc(userRef);
+      const existing = userSnap.exists ? userSnap.data() : null;
+      const needsFullProfile =
+        !existing ||
+        !existing.courses ||
+        typeof existing.courses !== "object";
+
+      if (needsFullProfile) {
+        const partial = existing || {};
+        const initialData = buildFullProfile(partial);
+        try {
+          await setDoc(userRef, initialData, { merge: true });
+          setProfile(initialData);
+        } catch (writeErr) {
+          console.error("Could not create Firestore user profile:", writeErr);
+          setProfile(initialData);
+        }
+      } else {
+        const data = userSnap.data();
+        try {
+          await updateDoc(userRef, {
+            lastLogin: new Date(),
+            loginHistory: [...(data.loginHistory || []), new Date()].slice(-30),
+          });
+        } catch (updateErr) {
+          console.warn("Could not update last login in Firestore:", updateErr);
+        }
+        setProfile(data);
+      }
+    } catch (error) {
+      console.error("Firestore user profile unavailable:", error);
+      setProfile(fallbackProfile);
     }
   };
 

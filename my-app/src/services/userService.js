@@ -1,4 +1,4 @@
-import { collection, query, orderBy, limit, getDocs, onSnapshot, doc, updateDoc, arrayUnion, setDoc, where } from 'firebase/firestore';
+import { collection, query, orderBy, limit, getDocs, getDoc, onSnapshot, doc, updateDoc, arrayUnion, setDoc, where } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
 // Leaderboard service
@@ -7,11 +7,11 @@ export const getLeaderboard = async (limitCount = 10) => {
     const q = query(collection(db, "users"), orderBy("totalPoints", "desc"), limit(limitCount));
     const querySnapshot = await getDocs(q);
     const leaderboard = [];
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
       leaderboard.push({
-        uid: doc.id,
-        name: data.displayName || data.email.split('@')[0],
+        uid: docSnap.id,
+        name: data.displayName || data.email?.split("@")?.[0] || "User",
         points: data.totalPoints || 0,
         avatar: data.photoURL || data.displayName?.[0]?.toUpperCase() || data.email?.[0]?.toUpperCase(),
         achievements: data.achievements || [],
@@ -28,21 +28,28 @@ export const getLeaderboard = async (limitCount = 10) => {
 // Real-time leaderboard subscription
 export const subscribeToLeaderboard = (callback, limitCount = 10) => {
   const q = query(collection(db, "users"), orderBy("totalPoints", "desc"), limit(limitCount));
-  return onSnapshot(q, (querySnapshot) => {
-    const leaderboard = [];
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      leaderboard.push({
-        uid: doc.id,
-        name: data.displayName || data.email.split('@')[0],
-        points: data.totalPoints || 0,
-        avatar: data.photoURL || data.displayName?.[0]?.toUpperCase() || data.email?.[0]?.toUpperCase(),
-        achievements: data.achievements || [],
-        currentStreak: data.currentStreak || 0
+  return onSnapshot(
+    q,
+    (querySnapshot) => {
+      const leaderboard = [];
+      querySnapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        leaderboard.push({
+          uid: docSnap.id,
+          name: data.displayName || data.email?.split("@")?.[0] || "User",
+          points: data.totalPoints || 0,
+          avatar: data.photoURL || data.displayName?.[0]?.toUpperCase() || data.email?.[0]?.toUpperCase(),
+          achievements: data.achievements || [],
+          currentStreak: data.currentStreak || 0,
+        });
       });
-    });
-    callback(leaderboard);
-  });
+      callback(leaderboard);
+    },
+    (error) => {
+      console.error("Leaderboard subscription error (check Firestore rules / indexes):", error);
+      callback([]);
+    }
+  );
 };
 
 // Achievement definitions
@@ -151,10 +158,10 @@ export const submitAssignment = async (userId, assignmentData) => {
     // Update user assignment count
     const userRef = doc(db, "users", userId);
     const userSnap = await getDoc(userRef);
-    const currentData = userSnap.data();
+    const prevTotal = userSnap.exists ? (userSnap.data().totalAssignments || 0) : 0;
 
     await updateDoc(userRef, {
-      totalAssignments: (currentData.totalAssignments || 0) + 1
+      totalAssignments: prevTotal + 1,
     });
 
     return assignmentRef.id;

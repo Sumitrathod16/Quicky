@@ -8,6 +8,7 @@ import { storage } from '../firebase/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { getLeaderboard, subscribeToLeaderboard, ACHIEVEMENTS, getUserAssignments, checkAndUnlockAchievements } from '../services/userService';
+import PracticeDashboard from './PracticeDashboard';
 import './Profile.css';
 
 const Profile = () => {
@@ -402,6 +403,23 @@ const Profile = () => {
               </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Practice Analytics Dashboard */}
+        <motion.div
+          className="practice-analytics"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.5 }}
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            borderRadius: 20,
+            padding: '24px',
+            marginBottom: 24,
+          }}
+        >
+          <PracticeDashboard />
         </motion.div>
 
         {/* Leaderboard */}

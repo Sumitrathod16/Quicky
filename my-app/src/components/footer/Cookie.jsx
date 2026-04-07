@@ -1,127 +1,132 @@
-function Careers() {
-    return(
-        <>
-        <style>
-            {`
-            .careers-container {
-  max-width: 850px;
-  margin: 40px auto;
-  padding: 30px;
-  background-color: #fefefe;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.7;
-  color: #333;
-}
+import React from 'react';
 
-.title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #007bff;
-}
+function Cookie() {
+  const sections = [
+    {
+      title: '1. What Are Cookies?',
+      body: 'Cookies are small text files stored on your device when you visit a website. They help us remember your preferences, keep you logged in, and understand how you use Quicky so we can continuously improve the experience.',
+    },
+    {
+      title: '2. Types of Cookies We Use',
+      body: 'We use essential cookies (required for the platform to function), preference cookies (to remember your settings like dark mode and language), analytics cookies (via Vercel Analytics to understand usage patterns), and authentication cookies (via Firebase Auth to keep you securely signed in).',
+    },
+    {
+      title: '3. How We Use Cookies',
+      body: 'Cookies help us maintain your login session, save your code editor preferences, track your learning progress across sessions, and gather anonymized analytics data that helps us improve course quality, performance, and user experience.',
+    },
+    {
+      title: '4. Third-Party Cookies',
+      body: 'Some cookies on our platform are set by trusted third-party services we use — including Google Firebase (authentication), Vercel (analytics and performance), and potentially embedded content. These third parties have their own privacy and cookie policies.',
+    },
+    {
+      title: '5. Managing Your Cookies',
+      body: 'You can control or delete cookies through your browser settings at any time. Please note that disabling essential cookies may impact your ability to use certain features of Quicky, such as staying logged in or saving your progress.',
+    },
+    {
+      title: '6. Changes to This Policy',
+      body: 'We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our services. We recommend checking this page periodically. Continued use of Quicky after changes constitutes your acceptance of the updated policy.',
+    },
+  ];
 
-.intro {
-  font-size: 1.2rem;
-  margin-bottom: 25px;
-  text-align: center;
-}
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-.section {
-  margin-bottom: 40px;
-}
+        .cookie-page {
+          min-height: 100vh;
+          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          font-family: 'Inter', sans-serif;
+          padding: 80px 24px 100px;
+          position: relative;
+        }
+        .cookie-page::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 50%;
+          transform: translateX(-50%);
+          width: 600px; height: 300px;
+          background: radial-gradient(ellipse, rgba(251,191,36,0.07) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .cookie-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+        .cookie-hero { text-align: center; margin-bottom: 56px; }
+        .cookie-eyebrow {
+          display: inline-block;
+          padding: 6px 18px;
+          background: rgba(251,191,36,0.1);
+          border: 1px solid rgba(251,191,36,0.22);
+          border-radius: 100px;
+          color: #fbbf24;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 1.2rem;
+        }
+        .cookie-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 0.5rem; letter-spacing: -0.03em; }
+        .cookie-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+        .cookie-updated { font-size: 0.82rem; color: rgba(255,255,255,0.3); margin: 0; }
+        .cookie-sections { display: flex; flex-direction: column; gap: 14px; }
+        .cookie-section {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 14px;
+          padding: 22px 26px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        .cookie-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0;
+          width: 3px; height: 100%;
+          background: linear-gradient(180deg, #fbbf24, #f97316);
+          border-radius: 3px 0 0 3px;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+        .cookie-section:hover { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
+        .cookie-section:hover::before { opacity: 1; }
+        .cookie-sec-title { font-size: 0.95rem; font-weight: 700; color: rgba(255,255,255,0.88); margin: 0 0 10px; }
+        .cookie-sec-body { font-size: 0.86rem; color: rgba(255,255,255,0.5); line-height: 1.75; margin: 0; }
+        .cookie-footer {
+          margin-top: 48px; padding: 24px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 12px; text-align: center;
+        }
+        .cookie-footer p { font-size: 0.82rem; color: rgba(255,255,255,0.28); margin: 0; }
+        .cookie-footer a { color: #fbbf24; text-decoration: none; }
+        .cookie-footer a:hover { text-decoration: underline; }
+      `}</style>
 
-.section h2 {
-  font-size: 1.5rem;
-  color: #2c3e50;
-  margin-bottom: 15px;
-}
+      <div className="cookie-page">
+        <div className="cookie-inner">
+          <div className="cookie-hero">
+            <span className="cookie-icon">🍪</span>
+            <div className="cookie-eyebrow">Legal</div>
+            <h1 className="cookie-title">Cookie Policy</h1>
+            <p className="cookie-updated">Last updated: August 20, 2025</p>
+          </div>
 
-.section ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
+          <div className="cookie-sections">
+            {sections.map((s, i) => (
+              <div key={i} className="cookie-section">
+                <h2 className="cookie-sec-title">{s.title}</h2>
+                <p className="cookie-sec-body">{s.body}</p>
+              </div>
+            ))}
+          </div>
 
-.section ul li {
-  margin-bottom: 10px;
-}
-
-.slogans p {
-  font-style: italic;
-  margin: 10px 0;
-  color: #444;
-  text-align: center;
-}
-
-.apply {
-  text-align: center;
-}
-
-.apply-button {
-  display: inline-block;
-  padding: 12px 25px;
-  font-size: 1rem;
-  background-color: #28a745;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.apply-button:hover {
-  background-color: #218838;
-}
-`}
-</style>
-
-    <div className="careers-container">
-      <h1 className="title">Careers in Development 🚀</h1>
-      <p className="intro">
-        Welcome, future developer! Whether you're just starting out or switching careers, software development is an exciting field full of opportunities. At DevLearn, we believe developers are the builders of the future — and we’re here to help you grow.
-      </p>
-
-      <div className="section">
-        <h2>💡 Why Software Development Matters</h2>
-        <ul>
-          <li>It powers everything — from mobile apps to healthcare systems.</li>
-          <li>It solves real-world problems and improves lives.</li>
-          <li>It gives you the freedom to create, innovate, and explore.</li>
-          <li>It offers high-demand, high-growth career paths globally.</li>
-        </ul>
+          <div className="cookie-footer">
+            <p>© {new Date().getFullYear()} Quicky. All Rights Reserved. · <a href="/Privacy">Privacy Policy</a> · <a href="/Terms">Terms of Service</a></p>
+          </div>
+        </div>
       </div>
-
-      <div className="section slogans">
-        <h2>✨ Slogans to Keep You Going</h2>
-        <p><em>"Code the future you want to see."</em></p>
-        <p><em>"Every great app was once just a blank file."</em></p>
-        <p><em>"Debugging is like being a detective in a crime movie where you are also the murderer."</em></p>
-        <p><em>"Think logically, code magically."</em></p>
-        <p><em>"Build, break, learn, repeat."</em></p>
-      </div>
-
-      <div className="section">
-        <h2>🌱 Advice for New Developers</h2>
-        <ul>
-          <li>Start small. Build something real, no matter how simple.</li>
-          <li>Practice daily. Consistency is more powerful than intensity.</li>
-          <li>Break things. You’ll learn more from mistakes than from tutorials.</li>
-          <li>Ask questions. The best developers are curious, not perfect.</li>
-          <li>Join the community. Collaborate, contribute, and grow together.</li>
-        </ul>
-      </div>
-
-      <div className="section apply">
-        <h2>📬 Ready to Begin?</h2>
-        <p>
-          Join our community of learners, builders, and thinkers. Your journey in development can start today — and it might just change your life.
-        </p>
-        <a href=":careers@devlearn.com" className="apply-button">Get Started</a>
-      </div>
-    </div>
-   </>
+    </>
   );
-};
+}
 
-export default Careers;
+export default Cookie;

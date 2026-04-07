@@ -1,219 +1,200 @@
 import React, { useState } from 'react';
 
+const faqs = [
+  { q: 'Do I need a technical background to start?', a: 'No! Most beginner courses assume no prior experience. A logical mindset and consistency are more important than a technical background.' },
+  { q: 'What programming language should I start with?', a: 'Start with Python or JavaScript depending on your goals. Python is great for beginners and data science; JavaScript is ideal for web development.' },
+  { q: 'What tools or software do I need to install?', a: 'You can start in-browser with zero setup. Locally, you\'ll want VS Code, Git, Node.js, or a Python interpreter — all free.' },
+  { q: 'How long does it take to become a developer?', a: 'With consistent effort, 6–12 months can prepare you for a junior role. Our structured paths are designed to get you there efficiently.' },
+  { q: 'How do I keep my skills up to date?', a: 'Follow updates on GitHub and Dev.to, take regular courses, and build side projects. Quicky\'s course library is updated weekly with the latest tools and trends.' },
+  { q: 'Which frameworks and libraries are covered?', a: 'React, Next.js, Express.js, Django, Flask, Spring Boot, Flutter, and many more. We cover both frontend and backend ecosystems comprehensively.' },
+  { q: 'Should I contribute to open-source projects?', a: 'Absolutely! Contributing to open source builds your portfolio, improves collaboration skills, and helps you learn from real production codebases.' },
+  { q: 'Is Quicky free to use?', a: 'Quicky offers a generous free tier with access to core courses and the practice arena. Premium plans unlock advanced content, projects, and mentorship.' },
+];
 
-const FAQAccordion = () => {
+export default function FAQAccordion() {
   const [activeIndex, setActiveIndex] = useState(null);
-
-  const faqs = [
-    {
-      question: "Do I need a technical background to start learning programming?",
-      answer: "No! Most beginner courses assume no prior experience. A logical mindset and consistency are more important than a technical background."
-    },
-    {
-      question: "What programming language should I start with?",
-      answer: "Start with Python or JavaScript, depending on your goals. Python is great for beginners and data science, JavaScript for web development."
-    },
-    {
-      question: "What tools or software do I need to install",
-      answer: "You can start in-browser, but locally you'll need tools like VS Code, Git, Node.js, or a Python interpreter."
-    },
-    {
-      question: "How long does it take to become a developer?",
-      answer: "On average, 6-12 months with consistent effort can prepare you for a junior role."
-    },
-    {
-      question:"How do one keep your skills up to date?",
-      answer:"Regularly read documentation, follow updates on platforms like GitHub and Dev.to, take online courses (e.g. Udemy, Frontend Masters), and build side projects to try new tools."
-    },
-    {
-      question:"Which frameworks and libraries are commonly use?",
-      answer:"React, Next.js, Express.js, Tailwind CSS, Prisma, Redux, and Axios are some I regularly use. I also work with tools like Jest, Vite, and Webpack for builds and testing"
-    },
-    {
-      question:"Should one contribute to open-source projects?",
-      answer:"Yes, one should contribute to small open-source libraries and fix issues or add features and also maintain  own public repos and share reusable components."
-    }
-
-  ];
-
-  const toggleFAQ = (index) => {
-    setActiveIndex(prevIndex => (prevIndex === index ? null : index));
-  };
+  const toggle = (i) => setActiveIndex(prev => prev === i ? null : i);
 
   return (
-    <> 
-    <style>
-    {`  
-     .faq-container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 40px 20px;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-}
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-.faq-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
-  pointer-events: none;
-}
+        .faq-page {
+          min-height: 100vh;
+          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          font-family: 'Inter', sans-serif;
+          padding: 80px 24px 100px;
+          position: relative;
+        }
+        .faq-page::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 50%;
+          transform: translateX(-50%);
+          width: 700px; height: 350px;
+          background: radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%);
+          pointer-events: none;
+        }
+        .faq-inner {
+          max-width: 760px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+        .faq-hero {
+          text-align: center;
+          margin-bottom: 56px;
+        }
+        .faq-eyebrow {
+          display: inline-block;
+          padding: 6px 18px;
+          background: rgba(139,92,246,0.12);
+          border: 1px solid rgba(139,92,246,0.25);
+          border-radius: 100px;
+          color: #a78bfa;
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin-bottom: 1.2rem;
+        }
+        .faq-title {
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-weight: 900;
+          color: #fff;
+          margin: 0 0 1rem;
+          letter-spacing: -0.03em;
+        }
+        .faq-title span {
+          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .faq-subtitle {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.45);
+          max-width: 480px;
+          margin: 0 auto;
+          line-height: 1.7;
+        }
+        .faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .faq-item {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 14px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        .faq-item.open {
+          background: rgba(124,58,237,0.06);
+          border-color: rgba(124,58,237,0.22);
+        }
+        .faq-question-btn {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 18px 22px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          gap: 12px;
+        }
+        .faq-q-text {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: rgba(255,255,255,0.85);
+          line-height: 1.5;
+          font-family: 'Inter', sans-serif;
+        }
+        .faq-item.open .faq-q-text { color: #fff; }
+        .faq-arrow {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          font-size: 0.85rem;
+          color: rgba(255,255,255,0.4);
+          transition: all 0.3s ease;
+        }
+        .faq-item.open .faq-arrow {
+          background: rgba(124,58,237,0.2);
+          border-color: rgba(124,58,237,0.3);
+          color: #a78bfa;
+          transform: rotate(45deg);
+        }
+        .faq-answer {
+          padding: 0 22px 18px;
+          font-size: 0.88rem;
+          color: rgba(255,255,255,0.55);
+          line-height: 1.75;
+          border-top: 1px solid rgba(255,255,255,0.05);
+          padding-top: 14px;
+        }
+        .faq-still {
+          margin-top: 48px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 16px;
+          padding: 32px;
+          text-align: center;
+        }
+        .faq-still h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 8px; }
+        .faq-still p { font-size: 0.88rem; color: rgba(255,255,255,0.45); margin: 0 0 18px; }
+        .faq-contact-btn {
+          display: inline-block;
+          padding: 11px 28px;
+          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          color: #fff;
+          border-radius: 10px;
+          font-weight: 600;
+          font-size: 0.88rem;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+        }
+        .faq-contact-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.5); }
+      `}</style>
 
-.faq-container h2 {
-  color: white;
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: relative;
-  z-index: 1;
-}
-
-.accordion {
-  border-top: 2px solid rgba(255,255,255,0.2);
-  width: auto;
-  position: relative;
-  z-index: 1;
-}
-
-.faq-item {
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
-  margin-bottom: 8px;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.1);
-}
-
-.faq-item:hover {
-  background: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.faq-item.active {
-  background: rgba(255,255,255,0.15);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-}
-
-.faq-question {
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.1rem;
-  color: white;
-  line-height: 1.4;
-}
-
-.faq-answer {
-  margin-top: 15px;
-  font-size: 1rem;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.6;
-  padding: 15px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 8px;
-  border-left: 3px solid rgba(255,255,255,0.3);
-}
-
-
-.arrow {
-  font-size: 1.4rem;
-  color: white;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.faq-item.active .arrow {
-  transform: rotate(45deg);
-}
-
-
- @media (max-width: 768px) {
-  .faq-container {
-    margin: 30px auto;
-    padding: 30px 15px;
-    max-width: 95%;
-  }
-
-  .faq-container h2 {
-    font-size: 2rem;
-  }
-
-  .faq-item {
-    padding: 15px;
-  }
-
-  .faq-question {
-    font-size: 1rem;
-  }
-
-  .faq-answer {
-    font-size: 0.95rem;
-    padding: 12px;
-  }
-}
-
- @media (max-width: 480px) {
-  .faq-container {
-    margin: 20px auto;
-    padding: 20px 10px;
-  }
-
-  .faq-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-  }
-
-  .faq-question {
-    font-size: 0.95rem;
-  }
-
-  .faq-answer {
-    font-size: 0.9rem;
-  }
-
-  .arrow {
-    font-size: 1.2rem;
-  }
-
-    
-`}
-    </style>
-    <div className="faq-container">
-      <h2>Frequently Asked Questions</h2>
-      <div className="accordion">
-        {faqs.map((faq, index) => (
-          <div key={index} className={`faq-item ${activeIndex === index ? 'active' : ''}`}>
-            <div className="faq-question" onClick={() => toggleFAQ(index)}>
-              {faq.question}
-              <span className="arrow">{activeIndex === index ? '-' : '+'}</span>
-            </div>
-            {activeIndex === index && (
-              <div className="faq-answer">
-                {faq.answer}
-              </div>
-            )}
+      <div className="faq-page">
+        <div className="faq-inner">
+          <div className="faq-hero">
+            <div className="faq-eyebrow">FAQ</div>
+            <h1 className="faq-title">Frequently Asked <span>Questions</span></h1>
+            <p className="faq-subtitle">Everything you need to know about getting started and making the most of Quicky.</p>
           </div>
-        ))}
-      </div>
-    </div>
-   </>
-  ); 
-};
 
-export default FAQAccordion;
+          <div className="faq-list">
+            {faqs.map((faq, i) => (
+              <div key={i} className={`faq-item${activeIndex === i ? ' open' : ''}`}>
+                <button className="faq-question-btn" onClick={() => toggle(i)}>
+                  <span className="faq-q-text">{faq.q}</span>
+                  <span className="faq-arrow">+</span>
+                </button>
+                {activeIndex === i && <div className="faq-answer">{faq.a}</div>}
+              </div>
+            ))}
+          </div>
+
+          <div className="faq-still">
+            <h3>Still have questions?</h3>
+            <p>Can't find what you're looking for? Our team is happy to help.</p>
+            <a href="/Support" className="faq-contact-btn">Contact Support →</a>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
