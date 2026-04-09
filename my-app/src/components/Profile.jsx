@@ -9,6 +9,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { getLeaderboard, subscribeToLeaderboard, ACHIEVEMENTS, getUserAssignments, checkAndUnlockAchievements } from '../services/userService';
 import PracticeDashboard from './PracticeDashboard';
+import toast from 'react-hot-toast';
 import './Profile.css';
 
 const Profile = () => {
@@ -163,9 +164,10 @@ const Profile = () => {
       // Update profile with new image URL
       await updateProfile({ photoURL: downloadURL });
       setImageUrl(downloadURL);
+      toast.success('Profile photo updated');
     } catch (error) {
       console.error('Error uploading image:', error);
-      alert('Failed to upload image. Please try again.');
+      toast.error('Failed to upload image. Please try again.');
     } finally {
       setUploading(false);
     }

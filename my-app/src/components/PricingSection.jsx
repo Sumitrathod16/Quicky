@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const PLANS = [
   {
@@ -325,7 +326,7 @@ export default function PricingSection() {
 
                 <button
                   className={`price-btn ${plan.btnStyle}`}
-                  onClick={() => alert(`Redirecting to ${plan.name} plan…`)}
+                  onClick={() => toast(`Redirecting to ${plan.name} plan…`)}
                 >
                   {plan.btn}
                 </button>

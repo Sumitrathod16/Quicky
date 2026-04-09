@@ -5,6 +5,7 @@ import {
   doSignInWithGoogle,
   getFirebaseAuthErrorMessage,
 } from "../firebase/auth";
+import toast from "react-hot-toast";
 import { useAuth } from "../context/useAuth";
 
 const SignUp = () => {
@@ -23,15 +24,33 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     setError("");
-    if (!email || !password || !confirmPassword) { setError("All fields are required"); return; }
-    if (password.length < 6) { setError("Password must be at least 6 characters"); return; }
-    if (password !== confirmPassword) { setError("Passwords do not match"); return; }
+    if (!email || !password || !confirmPassword) {
+      const msg = "All fields are required";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
+    if (password.length < 6) {
+      const msg = "Password must be at least 6 characters";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
+    if (password !== confirmPassword) {
+      const msg = "Passwords do not match";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
     setIsLoading(true);
     try {
       await doCreateUserWithEmailAndPassword(email, password);
+      toast.success("Account created");
       navigate("/home");
     } catch {
-      setError("Signup failed. Email may already be in use.");
+      const msg = "Signup failed. Email may already be in use.";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
@@ -42,9 +61,14 @@ const SignUp = () => {
     setError("");
     try {
       const cred = await doSignInWithGoogle();
-      if (cred) navigate("/home");
+      if (cred) {
+        toast.success("Signed up with Google");
+        navigate("/home");
+      }
     } catch (error) {
-      setError(getFirebaseAuthErrorMessage(error));
+      const msg = getFirebaseAuthErrorMessage(error);
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

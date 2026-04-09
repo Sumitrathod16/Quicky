@@ -6,6 +6,7 @@ import {
   doSendPasswordResetEmail,
   getFirebaseAuthErrorMessage,
 } from "../firebase/auth";
+import toast from "react-hot-toast";
 import { useAuth } from "../context/useAuth";
 
 const Login = () => {
@@ -24,13 +25,21 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    if (!email || !password) { setError("Email and password are required"); return; }
+    if (!email || !password) {
+      const msg = "Email and password are required";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
     setIsLoading(true);
     try {
       await doSignInWithEmailAndPassword(email, password);
+      toast.success("Logged in");
       navigate("/home");
     } catch {
-      setError("Invalid email or password");
+      const msg = "Invalid email or password";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
@@ -41,23 +50,36 @@ const Login = () => {
     setError("");
     try {
       const cred = await doSignInWithGoogle();
-      if (cred) navigate("/home");
+      if (cred) {
+        toast.success("Logged in with Google");
+        navigate("/home");
+      }
     } catch (error) {
-      setError(getFirebaseAuthErrorMessage(error));
+      const msg = getFirebaseAuthErrorMessage(error);
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleForgotPassword = async () => {
-    if (!email) { setError("Please enter your email address first"); return; }
+    if (!email) {
+      const msg = "Please enter your email address first";
+      setError(msg);
+      toast.error(msg);
+      return;
+    }
     setIsLoading(true);
     setError("");
     try {
       await doSendPasswordResetEmail(email);
       setResetEmailSent(true);
+      toast.success("Password reset email sent");
     } catch {
-      setError("Failed to send reset email. Please check your email address.");
+      const msg = "Failed to send reset email. Please check your email address.";
+      setError(msg);
+      toast.error(msg);
     } finally {
       setIsLoading(false);
     }

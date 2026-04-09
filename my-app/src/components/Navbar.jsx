@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import CompanyIcon from "../assets/qlogo.svg";
 import { useAuth } from "../context/useAuth";
+import toast from "react-hot-toast";
 
 const COURSES = [
   { label: "HTML & CSS", path: "/Html", icon: "🌐" },
@@ -51,7 +52,14 @@ function Navbar() {
   const handleLogout = async () => {
     const ok = window.confirm("Are you sure you want to log out?");
     if (!ok) return;
-    try { await logOut(); navigate("/login"); } catch (e) { console.error(e); }
+    try {
+      await logOut();
+      toast.success("Logged out");
+      navigate("/login");
+    } catch (e) {
+      console.error(e);
+      toast.error("Logout failed. Please try again.");
+    }
   };
 
   const isActive = (path) => location.pathname === path;

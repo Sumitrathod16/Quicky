@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { saveCode, loadAllCodes, saveSolvedIds, loadSolvedIds } from '../../services/practiceService';
+import toast from 'react-hot-toast';
 
 // ─── Language Config ───────────────────────────────────────────────
 const LANGUAGES = {
@@ -197,6 +198,7 @@ export default function Practice() {
   const [saveStatus, setSaveStatus]   = useState('idle'); // idle | saving | saved | error
   const textareaRef = useRef(null);
   const saveTimer   = useRef(null);
+  const saveToastId = useRef('practice-save');
 
   // ── Load saved codes + solved IDs from Firestore on mount ──────
   useEffect(() => {
@@ -226,13 +228,16 @@ export default function Practice() {
     if (!user?.uid) return;
     clearTimeout(saveTimer.current);
     setSaveStatus('saving');
+    toast.loading('Saving code…', { id: saveToastId.current });
     saveTimer.current = setTimeout(async () => {
       try {
         await saveCode(user.uid, problemId, langId, code);
         setSaveStatus('saved');
+        toast.success('Code saved', { id: saveToastId.current });
         setTimeout(() => setSaveStatus('idle'), 2000);
       } catch {
         setSaveStatus('error');
+        toast.error('Save failed', { id: saveToastId.current });
       }
     }, 1500);
   }, [user?.uid]);
@@ -278,7 +283,14 @@ export default function Practice() {
         if (res.every(r => r.passed)) {
           const next = new Set([...solvedIds, selectedId]);
           setSolvedIds(next);
-          if (user?.uid) saveSolvedIds(user.uid, next).catch(console.error);
+          if (user?.uid) {
+            saveSolvedIds(user.uid, next)
+              .then(() => toast.success('Progress saved', { id: 'practice-progress' }))
+              .catch((e) => {
+                console.error(e);
+                toast.error('Progress save failed', { id: 'practice-progress' });
+              });
+          }
         }
       }, 400);
     } else {
@@ -289,7 +301,14 @@ export default function Practice() {
         if (!out.stderr && out.code === 0) {
           const next = new Set([...solvedIds, selectedId]);
           setSolvedIds(next);
-          if (user?.uid) saveSolvedIds(user.uid, next).catch(console.error);
+          if (user?.uid) {
+            saveSolvedIds(user.uid, next)
+              .then(() => toast.success('Progress saved', { id: 'practice-progress' }))
+              .catch((e) => {
+                console.error(e);
+                toast.error('Progress save failed', { id: 'practice-progress' });
+              });
+          }
         }
       } catch {
         setStderr('Network error.'); setRunning(false);
