@@ -71,7 +71,6 @@ function Navbar() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-        /* ── Root ── */
         .nb-root {
           width: 100%;
           height: 68px;
@@ -82,20 +81,19 @@ function Navbar() {
           transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
         .nb-root.nb-scrolled {
-          background: rgba(10, 8, 30, 0.88);
+          background: rgba(255,255,255,0.95);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(139,92,246,0.18);
-          box-shadow: 0 4px 40px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(139,92,246,0.08) inset;
+          border-bottom: 1px solid rgba(79,70,229,0.12);
+          box-shadow: 0 4px 24px rgba(79,70,229,0.08);
         }
         .nb-root:not(.nb-scrolled) {
-          background: rgba(15,12,41,0.55);
+          background: rgba(255,255,255,0.88);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid rgba(255,255,255,0.05);
+          border-bottom: 1px solid rgba(79,70,229,0.08);
         }
 
-        /* ── Inner layout ── */
         .nb-inner {
           max-width: 1320px;
           height: 100%;
@@ -107,7 +105,6 @@ function Navbar() {
           gap: 16px;
         }
 
-        /* ── Logo ── */
         .nb-logo {
           display: flex;
           align-items: center;
@@ -121,15 +118,14 @@ function Navbar() {
           pointer-events: none;
           transition: filter 0.3s;
         }
-        .nb-logo:hover img { filter: brightness(1.15) drop-shadow(0 0 8px rgba(167,139,250,0.5)); }
+        .nb-logo:hover img { filter: brightness(0.85) drop-shadow(0 0 8px rgba(79,70,229,0.3)); }
 
-        /* ── Center pill nav ── */
         .nb-center {
           display: flex;
           align-items: center;
           gap: 2px;
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #f3f4f6;
+          border: 1px solid #e5e7eb;
           border-radius: 100px;
           padding: 4px;
           list-style: none;
@@ -141,7 +137,7 @@ function Navbar() {
           display: flex;
           align-items: center;
           gap: 6px;
-          color: rgba(255,255,255,0.58);
+          color: #6b7280;
           text-decoration: none;
           font-weight: 500;
           font-size: 0.875rem;
@@ -155,18 +151,18 @@ function Navbar() {
           border: none;
           font-family: 'Inter', sans-serif;
         }
-        .nb-link:hover { color: #fff; background: rgba(255,255,255,0.07); }
+        .nb-link:hover { color: #1e1b4b; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
         .nb-link.nb-active {
-          color: #c4b5fd;
-          background: rgba(124,58,237,0.18);
+          color: #4f46e5;
+          background: #fff;
           font-weight: 600;
+          box-shadow: 0 1px 4px rgba(79,70,229,0.15);
         }
 
-        /* "New" badge */
         .nb-badge {
           font-size: 0.6rem;
           font-weight: 700;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          background: linear-gradient(135deg, #ef4444, #f97316);
           color: #fff;
           padding: 2px 6px;
           border-radius: 100px;
@@ -175,7 +171,6 @@ function Navbar() {
           line-height: 1;
         }
 
-        /* Dropdown arrow */
         .nb-arrow {
           font-size: 0.6rem;
           opacity: 0.55;
@@ -184,22 +179,20 @@ function Navbar() {
         }
         .nb-drop-open .nb-arrow { transform: rotate(180deg); opacity: 1; }
 
-        /* ── Courses Dropdown ── */
         .nb-dropdown {
           position: absolute;
           top: calc(100% + 12px);
           left: 50%;
           transform: translateX(-50%);
-          background: rgba(13,10,35,0.97);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #fff;
+          border: 1px solid #e5e7eb;
           border-radius: 18px;
           padding: 12px;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 4px;
           min-width: 380px;
-          box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.08);
-          backdrop-filter: blur(20px);
+          box-shadow: 0 16px 48px rgba(0,0,0,0.12);
           animation: nbFadeIn 0.18s ease;
           z-index: 200;
         }
@@ -213,22 +206,19 @@ function Navbar() {
           gap: 8px;
           padding: 9px 12px;
           border-radius: 10px;
-          color: rgba(255,255,255,0.6);
+          color: #374151;
           text-decoration: none;
           font-size: 0.82rem;
           font-weight: 500;
           transition: all 0.18s ease;
           white-space: nowrap;
         }
-        .nb-drop-item:hover {
-          background: rgba(124,58,237,0.14);
-          color: #c4b5fd;
-        }
+        .nb-drop-item:hover { background: #f0f4ff; color: #4f46e5; }
         .nb-drop-icon { font-size: 1rem; }
         .nb-drop-divider {
           grid-column: 1 / -1;
           height: 1px;
-          background: rgba(255,255,255,0.06);
+          background: #f3f4f6;
           margin: 6px 0;
         }
         .nb-drop-all {
@@ -239,17 +229,16 @@ function Navbar() {
           gap: 6px;
           padding: 10px;
           border-radius: 10px;
-          background: rgba(124,58,237,0.08);
-          border: 1px solid rgba(124,58,237,0.15);
-          color: #a78bfa;
+          background: #f0f4ff;
+          border: 1px solid rgba(79,70,229,0.18);
+          color: #4f46e5;
           font-size: 0.82rem;
           font-weight: 600;
           text-decoration: none;
           transition: all 0.18s ease;
         }
-        .nb-drop-all:hover { background: rgba(124,58,237,0.18); border-color: rgba(124,58,237,0.3); }
+        .nb-drop-all:hover { background: #e0e7ff; border-color: rgba(79,70,229,0.3); }
 
-        /* ── Right section ── */
         .nb-right {
           display: flex;
           align-items: center;
@@ -257,69 +246,67 @@ function Navbar() {
           justify-content: flex-end;
         }
 
-        /* Auth buttons */
         .nb-login {
           padding: 8px 18px;
           background: transparent;
-          border: 1px solid rgba(255,255,255,0.12);
+          border: 1px solid #e5e7eb;
           border-radius: 10px;
-          color: rgba(255,255,255,0.7);
+          color: #374151;
           font-size: 0.875rem;
           font-weight: 500;
           text-decoration: none;
           transition: all 0.22s ease;
           font-family: 'Inter', sans-serif;
         }
-        .nb-login:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.22); color: #fff; }
+        .nb-login:hover { background: #f9fafb; border-color: #d1d5db; color: #111827; }
 
         .nb-signup {
           padding: 8px 20px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           border: none;
           border-radius: 10px;
           color: #fff;
           font-size: 0.875rem;
           font-weight: 600;
           text-decoration: none;
-          box-shadow: 0 2px 14px rgba(124,58,237,0.35);
+          box-shadow: 0 2px 12px rgba(79,70,229,0.3);
           transition: all 0.25s ease;
           font-family: 'Inter', sans-serif;
         }
-        .nb-signup:hover { transform: translateY(-1px); box-shadow: 0 4px 22px rgba(124,58,237,0.55); color: #fff; }
+        .nb-signup:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(79,70,229,0.45); color: #fff; }
 
-        /* User dropdown */
         .nb-user-wrap { position: relative; }
         .nb-user-btn {
           display: flex;
           align-items: center;
           gap: 9px;
           padding: 5px 12px 5px 5px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #f9fafb;
+          border: 1px solid #e5e7eb;
           border-radius: 100px;
           cursor: pointer;
           transition: all 0.22s ease;
           font-family: 'Inter', sans-serif;
         }
-        .nb-user-btn:hover { background: rgba(139,92,246,0.12); border-color: rgba(139,92,246,0.28); }
-        .nb-user-btn.nb-user-open { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.32); }
+        .nb-user-btn:hover { background: #f0f4ff; border-color: rgba(79,70,229,0.28); }
+        .nb-user-btn.nb-user-open { background: #f0f4ff; border-color: rgba(79,70,229,0.32); }
 
         .nb-avatar {
           width: 32px; height: 32px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           display: flex; align-items: center; justify-content: center;
           font-size: 0.82rem; font-weight: 700; color: #fff;
           flex-shrink: 0;
           overflow: hidden;
-          box-shadow: 0 0 0 2px rgba(124,58,237,0.3);
+          box-shadow: 0 0 0 2px rgba(79,70,229,0.2);
         }
         .nb-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .nb-user-name {
           font-size: 0.85rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.8);
+          color: #374151;
           max-width: 130px;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -327,24 +314,22 @@ function Navbar() {
         }
         .nb-user-chevron {
           font-size: 0.55rem;
-          color: rgba(255,255,255,0.35);
+          color: #9ca3af;
           transition: transform 0.22s ease;
           margin-left: -2px;
         }
-        .nb-user-btn.nb-user-open .nb-user-chevron { transform: rotate(180deg); color: rgba(255,255,255,0.6); }
+        .nb-user-btn.nb-user-open .nb-user-chevron { transform: rotate(180deg); color: #6b7280; }
 
-        /* User dropdown panel */
         .nb-user-drop {
           position: absolute;
           top: calc(100% + 10px);
           right: 0;
           min-width: 220px;
-          background: rgba(13,10,35,0.97);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #fff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 8px;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-          backdrop-filter: blur(20px);
+          box-shadow: 0 16px 48px rgba(0,0,0,0.12);
           animation: nbFadeInRight 0.18s ease;
           z-index: 200;
         }
@@ -354,11 +339,11 @@ function Navbar() {
         }
         .nb-user-drop-header {
           padding: 12px 14px 10px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid #f3f4f6;
           margin-bottom: 6px;
         }
-        .nb-udh-name { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
-        .nb-udh-email { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+        .nb-udh-name { font-size: 0.9rem; font-weight: 700; color: #111827; margin-bottom: 2px; }
+        .nb-udh-email { font-size: 0.75rem; color: #9ca3af; }
 
         .nb-user-drop-item {
           display: flex;
@@ -366,7 +351,7 @@ function Navbar() {
           gap: 10px;
           padding: 9px 14px;
           border-radius: 10px;
-          color: rgba(255,255,255,0.6);
+          color: #374151;
           text-decoration: none;
           font-size: 0.85rem;
           font-weight: 500;
@@ -378,28 +363,27 @@ function Navbar() {
           text-align: left;
           font-family: 'Inter', sans-serif;
         }
-        .nb-user-drop-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
-        .nb-user-drop-item.nb-drop-danger { color: rgba(248,113,113,0.75); }
-        .nb-user-drop-item.nb-drop-danger:hover { background: rgba(239,68,68,0.08); color: #f87171; }
-        .nb-udrop-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 6px 0; }
-        .nb-udrop-icon { font-size: 1rem; opacity: 0.8; }
+        .nb-user-drop-item:hover { background: #f9fafb; color: #111827; }
+        .nb-user-drop-item.nb-drop-danger { color: #ef4444; }
+        .nb-user-drop-item.nb-drop-danger:hover { background: #fef2f2; color: #dc2626; }
+        .nb-udrop-divider { height: 1px; background: #f3f4f6; margin: 6px 0; }
+        .nb-udrop-icon { font-size: 1rem; opacity: 0.85; }
 
-        /* ── Hamburger ── */
         .nb-burger {
           display: none;
           flex-direction: column;
           gap: 5px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #f9fafb;
+          border: 1px solid #e5e7eb;
           border-radius: 10px;
           cursor: pointer;
           padding: 8px 10px;
           transition: all 0.2s;
         }
-        .nb-burger:hover { background: rgba(255,255,255,0.1); }
+        .nb-burger:hover { background: #f0f4ff; }
         .nb-burger span {
           width: 20px; height: 2px;
-          background: rgba(255,255,255,0.75);
+          background: #374151;
           border-radius: 2px;
           transition: all 0.3s ease;
           display: block;
@@ -408,14 +392,13 @@ function Navbar() {
         .nb-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
         .nb-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* ── Mobile drawer ── */
         .nb-mobile-drawer {
           display: none;
           position: fixed;
           top: 68px; left: 0; right: 0;
-          background: rgba(10,8,30,0.98);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(139,92,246,0.15);
+          background: #fff;
+          border-bottom: 1px solid #e5e7eb;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
           padding: 16px;
           flex-direction: column;
           gap: 6px;
@@ -434,24 +417,24 @@ function Navbar() {
           display: flex; align-items: center; gap: 8px;
           padding: 12px 16px;
           border-radius: 12px;
-          color: rgba(255,255,255,0.65);
+          color: #374151;
           text-decoration: none;
           font-size: 0.9rem;
           font-weight: 500;
           transition: all 0.2s;
         }
-        .nb-m-link:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .nb-m-link.nb-active { background: rgba(124,58,237,0.15); color: #c4b5fd; }
+        .nb-m-link:hover { background: #f9fafb; color: #111827; }
+        .nb-m-link.nb-active { background: #f0f4ff; color: #4f46e5; }
 
         .nb-m-section {
           font-size: 0.7rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.25);
+          color: #9ca3af;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           padding: 8px 16px 4px;
         }
-        .nb-m-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 6px 0; }
+        .nb-m-divider { height: 1px; background: #f3f4f6; margin: 6px 0; }
         .nb-m-courses {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -463,7 +446,7 @@ function Navbar() {
         }
         .nb-m-btn-primary {
           padding: 12px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           border: none; border-radius: 12px;
           color: #fff; font-weight: 700; font-size: 0.9rem;
           text-align: center; text-decoration: none;
@@ -472,29 +455,28 @@ function Navbar() {
         .nb-m-btn-secondary {
           padding: 12px;
           background: transparent;
-          border: 1px solid rgba(255,255,255,0.12);
+          border: 1px solid #e5e7eb;
           border-radius: 12px;
-          color: rgba(255,255,255,0.7); font-weight: 500; font-size: 0.9rem;
+          color: #374151; font-weight: 500; font-size: 0.9rem;
           text-align: center; text-decoration: none;
           font-family: 'Inter', sans-serif;
         }
         .nb-m-logout {
           padding: 12px; border-radius: 12px;
-          background: rgba(239,68,68,0.08);
-          border: 1px solid rgba(239,68,68,0.18);
-          color: #f87171; font-weight: 600; font-size: 0.9rem;
+          background: #fef2f2;
+          border: 1px solid #fecaca;
+          color: #ef4444; font-weight: 600; font-size: 0.9rem;
           cursor: pointer; font-family: 'Inter', sans-serif;
           width: 100%;
         }
 
-        /* ── Responsive ── */
         @media (max-width: 900px) {
           .nb-inner { grid-template-columns: 1fr auto; }
           .nb-center { display: none; }
           .nb-right { display: none; }
           .nb-burger { display: flex; }
         }
-      `}</style>
+            `}</style>
 
       <nav className={`nb-root${scrolled ? " nb-scrolled" : ""}`}>
         <div className="nb-inner">
@@ -546,11 +528,6 @@ function Navbar() {
               </Link>
             </li>
 
-            <li>
-              <Link to="/pricing" className={`nb-link${isActive("/pricing") ? " nb-active" : ""}`}>
-                Pricing
-              </Link>
-            </li>
 
             <li>
               <Link to="/Support" className={`nb-link${isActive("/Support") ? " nb-active" : ""}`}>
@@ -622,7 +599,6 @@ function Navbar() {
       <div className={`nb-mobile-drawer${menuOpen ? " open" : ""}`}>
         <Link to="/features" className={`nb-m-link${isActive("/features") ? " nb-active" : ""}`}>⚡ Features</Link>
         <Link to="/Practice" className={`nb-m-link${isActive("/Practice") ? " nb-active" : ""}`}>🧩 Practice <span className="nb-badge" style={{marginLeft:4}}>Hot</span></Link>
-        <Link to="/pricing"  className={`nb-m-link${isActive("/pricing")  ? " nb-active" : ""}`}>💎 Pricing</Link>
         <Link to="/Support"  className={`nb-m-link${isActive("/Support")  ? " nb-active" : ""}`}>💬 Support</Link>
 
         <div className="nb-m-divider" />

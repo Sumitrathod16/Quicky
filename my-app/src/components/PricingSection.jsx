@@ -92,7 +92,7 @@ export default function PricingSection() {
 
         .price-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 55%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative; overflow: hidden;
@@ -101,112 +101,106 @@ export default function PricingSection() {
           content: '';
           position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
           width: 800px; height: 450px;
-          background: radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(79,70,229,0.07) 0%, transparent 70%);
           pointer-events: none;
         }
         .price-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* Hero */
         .price-hero { text-align: center; margin-bottom: 56px; }
         .price-eyebrow {
           display: inline-block; padding: 6px 18px;
-          background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.25);
-          border-radius: 100px; color: #a78bfa; font-size: 0.78rem; font-weight: 600;
+          background: rgba(79,70,229,0.08); border: 1px solid rgba(79,70,229,0.18);
+          border-radius: 100px; color: #4f46e5; font-size: 0.78rem; font-weight: 600;
           letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem;
         }
-        .price-title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: #fff; margin: 0 0 1rem; letter-spacing: -0.04em; }
+        .price-title { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: #1e1b4b; margin: 0 0 1rem; letter-spacing: -0.04em; }
         .price-title span {
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
-        .price-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+        .price-subtitle { font-size: 1rem; color: #6b7280; max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
 
-        /* Toggle */
         .price-toggle {
           display: inline-flex; align-items: center; gap: 12px;
-          background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+          background: #fff; border: 1px solid #e5e7eb;
           border-radius: 100px; padding: 6px 20px;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.06);
         }
-        .price-toggle-label { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.45); cursor: pointer; transition: color 0.2s; }
-        .price-toggle-label.active { color: #fff; }
+        .price-toggle-label { font-size: 0.875rem; font-weight: 600; color: #9ca3af; cursor: pointer; transition: color 0.2s; }
+        .price-toggle-label.active { color: #1e1b4b; }
         .price-switch {
           position: relative; width: 44px; height: 24px;
-          background: rgba(255,255,255,0.1); border-radius: 100px;
-          cursor: pointer; transition: background 0.3s; border: 1px solid rgba(255,255,255,0.12);
+          background: #e5e7eb; border-radius: 100px;
+          cursor: pointer; transition: background 0.3s; border: 1px solid #d1d5db;
         }
-        .price-switch.on { background: linear-gradient(135deg, #7c3aed, #4f46e5); border-color: transparent; }
+        .price-switch.on { background: linear-gradient(135deg, #4f46e5, #0ea5e9); border-color: transparent; }
         .price-switch-knob {
           position: absolute; top: 3px; left: 3px;
           width: 16px; height: 16px; border-radius: 50%; background: #fff;
           transition: transform 0.3s ease;
-          box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+          box-shadow: 0 1px 4px rgba(0,0,0,0.2);
         }
         .price-switch.on .price-switch-knob { transform: translateX(20px); }
         .price-save-badge {
           font-size: 0.68rem; font-weight: 700;
-          background: linear-gradient(135deg, #059669, #0284c7);
+          background: linear-gradient(135deg, #10b981, #0284c7);
           color: #fff; padding: 3px 9px; border-radius: 100px; letter-spacing: 0.04em;
         }
 
-        /* Grid */
         .price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 64px; align-items: start; }
 
         .price-card {
-          background: rgba(255,255,255,0.025);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #fff;
+          border: 1px solid #e5e7eb;
           border-radius: 24px; padding: 32px 28px;
           transition: all 0.35s ease;
           position: relative; overflow: hidden;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.05);
         }
-        .price-card:hover { transform: translateY(-6px); box-shadow: 0 30px 70px rgba(0,0,0,0.3); }
+        .price-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(79,70,229,0.12); border-color: rgba(79,70,229,0.2); }
         .price-card.popular {
-          background: rgba(167,139,250,0.07);
-          border-color: rgba(167,139,250,0.3);
-          box-shadow: 0 0 0 1px rgba(167,139,250,0.15), 0 20px 60px rgba(124,58,237,0.15);
+          background: #fff;
+          border-color: rgba(79,70,229,0.35);
+          box-shadow: 0 0 0 1px rgba(79,70,229,0.15), 0 20px 60px rgba(79,70,229,0.12);
           transform: scale(1.03);
         }
         .price-card.popular:hover { transform: scale(1.03) translateY(-6px); }
         .price-card.popular::before {
           content: '';
           position: absolute; top: 0; left: 0; right: 0; height: 3px;
-          background: linear-gradient(90deg, #7c3aed, #818cf8, #60a5fa);
+          background: linear-gradient(90deg, #4f46e5, #818cf8, #0ea5e9);
           border-radius: 24px 24px 0 0;
         }
 
-        /* Popular badge */
         .price-popular-tag {
           position: absolute; top: 18px; right: 18px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           color: #fff; font-size: 0.68rem; font-weight: 700;
           padding: 4px 12px; border-radius: 100px; letter-spacing: 0.06em; text-transform: uppercase;
-          box-shadow: 0 4px 12px rgba(124,58,237,0.4);
+          box-shadow: 0 4px 12px rgba(79,70,229,0.35);
         }
 
-        /* Plan header */
         .price-plan-icon { font-size: 2rem; margin-bottom: 12px; }
-        .price-plan-name { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
-        .price-plan-tagline { font-size: 0.83rem; color: rgba(255,255,255,0.42); margin-bottom: 24px; line-height: 1.5; }
+        .price-plan-name { font-size: 1.2rem; font-weight: 800; color: #1e1b4b; margin-bottom: 6px; }
+        .price-plan-tagline { font-size: 0.83rem; color: #6b7280; margin-bottom: 24px; line-height: 1.5; }
 
         .price-amount-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
-        .price-currency { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.55); margin-top: 6px; }
-        .price-amount { font-size: 3rem; font-weight: 900; color: #fff; line-height: 1; }
-        .price-period { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
-        .price-yearly-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-bottom: 24px; min-height: 18px; }
-        .price-yearly-note.show { color: #34d399; }
+        .price-currency { font-size: 1.1rem; font-weight: 700; color: #9ca3af; margin-top: 6px; }
+        .price-amount { font-size: 3rem; font-weight: 900; color: #1e1b4b; line-height: 1; }
+        .price-period { font-size: 0.85rem; color: #9ca3af; }
+        .price-yearly-note { font-size: 0.75rem; color: #d1d5db; margin-bottom: 24px; min-height: 18px; }
+        .price-yearly-note.show { color: #10b981; }
 
-        /* Divider */
-        .price-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 20px 0; }
+        .price-divider { height: 1px; background: #f3f4f6; margin: 20px 0; }
 
-        /* Feature list */
         .price-feat-list { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 9px; }
         .price-feat-item { display: flex; align-items: center; gap: 10px; font-size: 0.84rem; }
-        .price-feat-item.yes { color: rgba(255,255,255,0.72); }
-        .price-feat-item.no { color: rgba(255,255,255,0.22); text-decoration: line-through; }
+        .price-feat-item.yes { color: #374151; }
+        .price-feat-item.no { color: #d1d5db; text-decoration: line-through; }
         .price-feat-tick { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
-        .price-feat-item.yes .price-feat-tick { background: rgba(52,211,153,0.15); color: #34d399; }
-        .price-feat-item.no .price-feat-tick { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.2); }
+        .price-feat-item.yes .price-feat-tick { background: rgba(16,185,129,0.12); color: #10b981; }
+        .price-feat-item.no .price-feat-tick { background: #f3f4f6; color: #d1d5db; }
 
-        /* Buttons */
         .price-btn {
           width: 100%; padding: 13px; border-radius: 12px;
           font-weight: 700; font-size: 0.92rem; cursor: pointer;
@@ -214,57 +208,56 @@ export default function PricingSection() {
           text-align: center;
         }
         .price-btn.primary {
-          background: linear-gradient(135deg, #7c3aed, #4f46e5); color: #fff;
-          box-shadow: 0 4px 18px rgba(124,58,237,0.38);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9); color: #fff;
+          box-shadow: 0 4px 18px rgba(79,70,229,0.3);
         }
-        .price-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.55); }
+        .price-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(79,70,229,0.45); }
         .price-btn.secondary {
-          background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.65);
-          border-color: rgba(255,255,255,0.1);
+          background: #f3f4f6; color: #374151;
+          border-color: #e5e7eb;
         }
-        .price-btn.secondary:hover { background: rgba(255,255,255,0.09); color: #fff; border-color: rgba(255,255,255,0.18); }
+        .price-btn.secondary:hover { background: #e5e7eb; color: #111827; }
         .price-btn.outline {
-          background: transparent; color: #60a5fa; border-color: rgba(96,165,250,0.25);
+          background: transparent; color: #0ea5e9; border-color: rgba(14,165,233,0.35);
         }
-        .price-btn.outline:hover { background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.4); }
+        .price-btn.outline:hover { background: rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.5); }
 
-        /* Guarantee bar */
         .price-guarantee {
-          background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.15);
+          background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.18);
           border-radius: 14px; padding: 18px 24px; margin-bottom: 60px;
           display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
         }
         .price-guarantee-icon { font-size: 1.6rem; flex-shrink: 0; }
-        .price-guarantee h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 3px; }
-        .price-guarantee p { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin: 0; }
+        .price-guarantee h4 { font-size: 0.95rem; font-weight: 700; color: #1e1b4b; margin: 0 0 3px; }
+        .price-guarantee p { font-size: 0.82rem; color: #6b7280; margin: 0; }
 
-        /* FAQ section */
-        .price-faq-label { font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.28); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
+        .price-faq-label { font-size: 0.72rem; font-weight: 600; color: #9ca3af; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
         .price-faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .price-faq-item {
-          background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
+          background: #fff; border: 1px solid #e5e7eb;
           border-radius: 14px; overflow: hidden; transition: border-color 0.2s;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.04);
         }
-        .price-faq-item.open { border-color: rgba(167,139,250,0.2); }
+        .price-faq-item.open { border-color: rgba(79,70,229,0.25); }
         .price-faq-btn {
           width: 100%; display: flex; align-items: center; justify-content: space-between;
           padding: 16px 18px; background: none; border: none;
           text-align: left; cursor: pointer; gap: 12px; font-family: 'Inter', sans-serif;
         }
-        .price-faq-q { font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.78); }
-        .price-faq-item.open .price-faq-q { color: #fff; }
+        .price-faq-q { font-size: 0.88rem; font-weight: 600; color: #374151; }
+        .price-faq-item.open .price-faq-q { color: #1e1b4b; }
         .price-faq-chevron {
           width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
-          background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+          background: #f3f4f6; border: 1px solid #e5e7eb;
           display: flex; align-items: center; justify-content: center;
-          font-size: 0.7rem; color: rgba(255,255,255,0.35); transition: all 0.25s;
+          font-size: 0.7rem; color: #9ca3af; transition: all 0.25s;
         }
-        .price-faq-item.open .price-faq-chevron { background: rgba(124,58,237,0.18); border-color: rgba(124,58,237,0.3); color: #a78bfa; transform: rotate(45deg); }
-        .price-faq-ans { padding: 0 18px 16px; font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.7; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; }
+        .price-faq-item.open .price-faq-chevron { background: rgba(79,70,229,0.1); border-color: rgba(79,70,229,0.25); color: #4f46e5; transform: rotate(45deg); }
+        .price-faq-ans { padding: 0 18px 16px; font-size: 0.83rem; color: #6b7280; line-height: 1.7; border-top: 1px solid #f3f4f6; padding-top: 12px; }
 
         @media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; } .price-card.popular { transform: none; } .price-faq-grid { grid-template-columns: 1fr; } }
         @media (max-width: 600px) { .price-guarantee { flex-direction: column; } }
-      `}</style>
+            `}</style>
 
       <div className="price-page">
         <div className="price-inner">

@@ -14,7 +14,7 @@ function Main() {
 
                 .main-hero {
                     min-height: 90vh;
-                    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+                    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 50%, #e0f2fe 100%);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -31,8 +31,8 @@ function Main() {
                     left: -50%;
                     width: 200%;
                     height: 200%;
-                    background: radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 60%),
-                                radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 60%);
+                    background: radial-gradient(ellipse at 30% 20%, rgba(79,70,229,0.08) 0%, transparent 60%),
+                                radial-gradient(ellipse at 70% 80%, rgba(14,165,233,0.07) 0%, transparent 60%);
                     pointer-events: none;
                 }
 
@@ -40,9 +40,9 @@ function Main() {
                     content: '';
                     position: absolute;
                     top: 0; left: 0; right: 0; bottom: 0;
-                    background-image: 
-                        radial-gradient(circle at 20% 50%, rgba(120,119,198,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255,107,107,0.05) 0%, transparent 50%);
+                    background-image:
+                        radial-gradient(circle at 20% 50%, rgba(79,70,229,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(16,185,129,0.04) 0%, transparent 50%);
                     pointer-events: none;
                 }
 
@@ -51,25 +51,25 @@ function Main() {
                     position: absolute;
                     border-radius: 50%;
                     filter: blur(60px);
-                    opacity: 0.5;
+                    opacity: 0.6;
                     pointer-events: none;
                     animation: floatOrb 8s ease-in-out infinite;
                 }
                 .orb-1 {
                     width: 300px; height: 300px;
-                    background: radial-gradient(circle, rgba(139,92,246,0.4), transparent);
+                    background: radial-gradient(circle, rgba(79,70,229,0.18), transparent);
                     top: 10%; left: 5%;
                     animation-delay: 0s;
                 }
                 .orb-2 {
                     width: 200px; height: 200px;
-                    background: radial-gradient(circle, rgba(59,130,246,0.3), transparent);
+                    background: radial-gradient(circle, rgba(14,165,233,0.15), transparent);
                     top: 60%; right: 10%;
                     animation-delay: 3s;
                 }
                 .orb-3 {
                     width: 150px; height: 150px;
-                    background: radial-gradient(circle, rgba(245,158,11,0.2), transparent);
+                    background: radial-gradient(circle, rgba(16,185,129,0.12), transparent);
                     bottom: 20%; left: 30%;
                     animation-delay: 5s;
                 }
@@ -92,25 +92,25 @@ function Main() {
                     align-items: center;
                     gap: 8px;
                     padding: 8px 20px;
-                    background: rgba(139, 92, 246, 0.15);
-                    border: 1px solid rgba(139, 92, 246, 0.3);
+                    background: rgba(79,70,229,0.08);
+                    border: 1px solid rgba(79,70,229,0.2);
                     border-radius: 100px;
-                    color: #a78bfa;
+                    color: #4f46e5;
                     font-size: 0.85rem;
                     font-weight: 600;
                     letter-spacing: 0.05em;
                     text-transform: uppercase;
                     margin-bottom: 2rem;
-                    backdrop-filter: blur(10px);
                     animation: fadeInDown 0.6s ease both;
                 }
 
                 .badge-dot {
                     width: 8px;
                     height: 8px;
-                    background: #a78bfa;
+                    background: #10b981;
                     border-radius: 50%;
                     animation: pulse 2s ease-in-out infinite;
+                    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
                 }
 
                 @keyframes pulse {
@@ -121,7 +121,7 @@ function Main() {
                 .main-title {
                     font-size: clamp(2.5rem, 5vw, 4rem);
                     font-weight: 900;
-                    color: #ffffff;
+                    color: #1e1b4b;
                     line-height: 1.15;
                     margin: 0 0 1.5rem;
                     letter-spacing: -0.02em;
@@ -129,7 +129,7 @@ function Main() {
                 }
 
                 .main-title .gradient-text {
-                    background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
+                    background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 50%, #10b981 100%);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     background-clip: text;
@@ -137,7 +137,7 @@ function Main() {
 
                 .main-desc {
                     font-size: 1.15rem;
-                    color: rgba(255, 255, 255, 0.6);
+                    color: #6b7280;
                     line-height: 1.7;
                     margin: 0 0 2.5rem;
                     max-width: 600px;
@@ -157,7 +157,7 @@ function Main() {
 
                 .explore-button {
                     padding: 14px 32px;
-                    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+                    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
                     color: white;
                     border: none;
                     border-radius: 100px;
@@ -169,13 +169,13 @@ function Main() {
                     align-items: center;
                     gap: 8px;
                     transition: all 0.3s ease;
-                    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+                    box-shadow: 0 4px 20px rgba(79,70,229,0.3);
                     font-family: 'Inter', sans-serif;
                 }
 
                 .explore-button:hover {
                     transform: translateY(-3px);
-                    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+                    box-shadow: 0 8px 30px rgba(79,70,229,0.5);
                     color: white;
                 }
 
@@ -191,9 +191,9 @@ function Main() {
 
                 .secondary-button {
                     padding: 14px 32px;
-                    background: rgba(255,255,255,0.05);
-                    color: rgba(255,255,255,0.85);
-                    border: 1px solid rgba(255,255,255,0.15);
+                    background: #fff;
+                    color: #374151;
+                    border: 1px solid #e5e7eb;
                     border-radius: 100px;
                     cursor: pointer;
                     font-size: 1rem;
@@ -202,15 +202,16 @@ function Main() {
                     display: inline-flex;
                     align-items: center;
                     transition: all 0.3s ease;
-                    backdrop-filter: blur(10px);
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
                     font-family: 'Inter', sans-serif;
                 }
 
                 .secondary-button:hover {
-                    background: rgba(255,255,255,0.1);
-                    border-color: rgba(255,255,255,0.3);
+                    background: #f0f4ff;
+                    border-color: rgba(79,70,229,0.3);
                     transform: translateY(-3px);
-                    color: white;
+                    color: #4f46e5;
+                    box-shadow: 0 4px 16px rgba(79,70,229,0.12);
                 }
 
                 /* Tech logos */
@@ -220,7 +221,7 @@ function Main() {
 
                 .logo-label {
                     font-size: 0.8rem;
-                    color: rgba(255,255,255,0.35);
+                    color: #9ca3af;
                     letter-spacing: 0.15em;
                     text-transform: uppercase;
                     font-weight: 500;
@@ -241,18 +242,18 @@ function Main() {
                     width: 56px;
                     height: 56px;
                     border-radius: 16px;
-                    background: rgba(255,255,255,0.05);
-                    border: 1px solid rgba(255,255,255,0.1);
-                    backdrop-filter: blur(10px);
+                    background: #fff;
+                    border: 1px solid #e5e7eb;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
                     transition: all 0.3s ease;
                     cursor: pointer;
                 }
 
                 .tech-badge:hover {
-                    background: rgba(139, 92, 246, 0.15);
-                    border-color: rgba(139, 92, 246, 0.4);
+                    background: #f0f4ff;
+                    border-color: rgba(79,70,229,0.3);
                     transform: translateY(-6px) scale(1.05);
-                    box-shadow: 0 10px 30px rgba(139,92,246,0.2);
+                    box-shadow: 0 10px 30px rgba(79,70,229,0.15);
                 }
 
                 .tech-logo {
@@ -279,7 +280,7 @@ function Main() {
                     display: block;
                     font-size: 2rem;
                     font-weight: 800;
-                    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+                    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     background-clip: text;
@@ -287,7 +288,7 @@ function Main() {
 
                 .stat-label {
                     font-size: 0.8rem;
-                    color: rgba(255,255,255,0.45);
+                    color: #9ca3af;
                     letter-spacing: 0.05em;
                     text-transform: uppercase;
                     font-weight: 500;
@@ -295,7 +296,7 @@ function Main() {
 
                 .stat-divider {
                     width: 1px;
-                    background: rgba(255,255,255,0.1);
+                    background: #e5e7eb;
                     align-self: stretch;
                 }
 
@@ -320,6 +321,8 @@ function Main() {
                     .explore-button, .secondary-button { width: 100%; justify-content: center; }
                 }
             `}</style>
+
+
 
             <div className="main-hero">
                 <div className="orb orb-1"></div>

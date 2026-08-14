@@ -17,7 +17,7 @@ function Press() {
 
         .press-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -46,14 +46,14 @@ function Press() {
           text-transform: uppercase;
           margin-bottom: 1.2rem;
         }
-        .press-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 1rem; letter-spacing: -0.03em; }
+        .press-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #1e1b4b; margin: 0 0 1rem; letter-spacing: -0.03em; }
         .press-title span {
           background: linear-gradient(135deg, #60a5fa, #a78bfa);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-        .press-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+        .press-subtitle { font-size: 1rem; color: #6b7280; max-width: 540px; margin: 0 auto; line-height: 1.7; }
 
         .press-release-box {
           background: rgba(96,165,250,0.06);
@@ -73,13 +73,13 @@ function Press() {
           border-radius: 4px 0 0 4px;
         }
         .press-release-label { font-size: 0.72rem; font-weight: 600; color: #60a5fa; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
-        .press-release-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 0 0 14px; }
-        .press-release-body { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8; margin: 0 0 10px; }
+        .press-release-title { font-size: 1.2rem; font-weight: 800; color: #1e1b4b; margin: 0 0 14px; }
+        .press-release-body { font-size: 0.9rem; color: #6b7280; line-height: 1.8; margin: 0 0 10px; }
 
         .press-sec-label {
           font-size: 0.72rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.28);
+          color: #9ca3af;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 16px;
@@ -91,25 +91,25 @@ function Press() {
           margin-bottom: 56px;
         }
         .press-feature-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 22px;
           transition: all 0.3s ease;
         }
         .press-feature-card:hover {
-          background: rgba(255,255,255,0.04);
+          background: #ffffff;
           border-color: rgba(96,165,250,0.2);
           transform: translateY(-4px);
           box-shadow: 0 16px 40px rgba(0,0,0,0.2);
         }
         .press-feat-icon { font-size: 1.5rem; margin-bottom: 10px; }
-        .press-feat-title { font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.88); margin-bottom: 8px; }
-        .press-feat-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .press-feat-title { font-size: 0.9rem; font-weight: 700; color: #374151; margin-bottom: 8px; }
+        .press-feat-desc { font-size: 0.8rem; color: #6b7280; line-height: 1.6; }
 
         .press-contact {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 28px 32px;
           display: flex;
@@ -118,8 +118,8 @@ function Press() {
           gap: 20px;
           flex-wrap: wrap;
         }
-        .press-contact-text h3 { font-size: 1rem; font-weight: 700; color: #fff; margin: 0 0 6px; }
-        .press-contact-text p { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin: 0; }
+        .press-contact-text h3 { font-size: 1rem; font-weight: 700; color: #1e1b4b; margin: 0 0 6px; }
+        .press-contact-text p { font-size: 0.85rem; color: #6b7280; margin: 0; }
         .press-contact-btn {
           padding: 11px 24px;
           background: rgba(96,165,250,0.12);

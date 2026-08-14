@@ -59,7 +59,7 @@ function Study() {
 
         .study-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -78,29 +78,29 @@ function Study() {
         .study-eyebrow {
           display: inline-block;
           padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
+          background: rgba(79,70,229,0.08);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 100px;
-          color: #a78bfa;
+          color: #4f46e5;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.1em;
           text-transform: uppercase;
           margin-bottom: 1.2rem;
         }
-        .study-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 1rem; letter-spacing: -0.03em; }
+        .study-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #1e1b4b; margin: 0 0 1rem; letter-spacing: -0.03em; }
         .study-title span {
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-        .study-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+        .study-subtitle { font-size: 1rem; color: #6b7280; max-width: 520px; margin: 0 auto; line-height: 1.7; }
 
         .study-paths { display: flex; flex-direction: column; gap: 24px; margin-bottom: 56px; }
         .study-path-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 20px;
           overflow: hidden;
           transition: all 0.3s ease;
@@ -114,10 +114,10 @@ function Study() {
           display: flex;
           align-items: center;
           gap: 14px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid #e5e7eb;
         }
         .study-path-icon { font-size: 1.5rem; }
-        .study-path-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin: 0; }
+        .study-path-title { font-size: 1.05rem; font-weight: 800; color: #1e1b4b; margin: 0; }
         .study-step-list {
           padding: 20px 26px;
           display: flex;
@@ -129,7 +129,7 @@ function Study() {
           align-items: flex-start;
           gap: 12px;
           font-size: 0.86rem;
-          color: rgba(255,255,255,0.6);
+          color: #374151;
           line-height: 1.6;
         }
         .study-step-num {
@@ -146,15 +146,15 @@ function Study() {
         }
 
         .study-footer-note {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 28px 32px;
           text-align: center;
         }
         .study-footer-note p {
           font-size: 0.95rem;
-          color: rgba(255,255,255,0.55);
+          color: #6b7280;
           font-style: italic;
           margin: 0 0 18px;
           line-height: 1.65;
@@ -162,8 +162,8 @@ function Study() {
         .study-footer-btn {
           display: inline-block;
           padding: 11px 28px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
-          color: #fff;
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+          color: #1e1b4b;
           border-radius: 10px;
           font-weight: 700;
           font-size: 0.88rem;

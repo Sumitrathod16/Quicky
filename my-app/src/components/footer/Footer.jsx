@@ -8,20 +8,29 @@ function Footer()
             {`
             .Footer {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping */
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 20px;
-  background-color: black;
-  color: white;
+  padding: 32px 20px;
+  background-color: #ffffff;
+  color: #374151;
   width: 100%;
+  border-top: 1px solid #e5e7eb;
+  font-family: 'Inter', sans-serif;
 }
 
 .footer-container1 {
   display: flex;
-  flex-direction: column; /* Stack inside each column */
+  flex-direction: column;
   align-items: flex-start;
   margin: 15px;
-  min-width: 150px; /* Prevent too small on large screens */
+  min-width: 150px;
+}
+
+.Footer h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-bottom: 12px;
 }
 
 .Footer ul {
@@ -35,13 +44,14 @@ function Footer()
 }
 
 .Footer ul li a {
-  color: white;
+  color: #6b7280;
   text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
 }
 
 .Footer ul li a:hover {
-  text-decoration: underline;
-  color: #ccc;
+  color: #4f46e5;
 }
 
 .Box1 {
@@ -50,44 +60,39 @@ function Footer()
   justify-content: center;
   align-items: center;
   margin: 15px;
-  padding: 15px;
-  border: 2px solid white;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 14px 20px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  border-radius: 12px;
+  color: #374151;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   min-width: 200px;
+  transition: all 0.2s ease;
 }
 
-/* -------- RESPONSIVE DESIGN -------- */
+.Box1:hover {
+  border-color: rgba(79,70,229,0.25);
+  background: #f0f4ff;
+  color: #4f46e5;
+}
+
+.Box1 h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: inherit;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
-  .Footer {
-    flex-direction: column; /* Stack everything */
-    align-items: center;
-    text-align: center;
-    height: auto;
-  }
-
-  .footer-container1 {
-    margin: 10px 0;
-    align-items: center;
-  }
-
-  .Box1 {
-    width: 90%;
-  }
+  .Footer { flex-direction: column; align-items: center; text-align: center; height: auto; }
+  .footer-container1 { margin: 10px 0; align-items: center; }
+  .Box1 { width: 90%; }
 }
 
 @media (max-width: 480px) {
-  .Footer h3 {
-    font-size: 1rem;
-  }
-
-  .Footer ul li {
-    font-size: 0.9rem;
-  }
+  .Footer h3 { font-size: 1rem; }
+  .Footer ul li { font-size: 0.9rem; }
 }
-
-            
-                
             `}
         </style>
         <div className="Footer">

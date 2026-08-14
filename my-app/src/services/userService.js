@@ -112,12 +112,13 @@ export const checkAndUnlockAchievements = async (userId, userData) => {
         case 'first_login':
           shouldUnlock = userData.loginHistory && userData.loginHistory.length > 0;
           break;
-        case 'course_master':
+        case 'course_master': {
           const completedCourses = Object.values(userData.courses || {}).filter(course =>
             course.completed >= 100
           ).length;
           shouldUnlock = completedCourses >= 5;
           break;
+        }
         case 'streak_champion':
           shouldUnlock = (userData.currentStreak || 0) >= 7;
           break;

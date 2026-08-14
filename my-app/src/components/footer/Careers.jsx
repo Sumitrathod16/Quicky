@@ -31,7 +31,7 @@ function Careers() {
 
         .careers-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -71,7 +71,7 @@ function Careers() {
         .careers-title {
           font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 900;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
         }
@@ -83,7 +83,7 @@ function Careers() {
         }
         .careers-subtitle {
           font-size: 1rem;
-          color: rgba(255,255,255,0.45);
+          color: #6b7280;
           max-width: 520px;
           margin: 0 auto;
           line-height: 1.7;
@@ -91,7 +91,7 @@ function Careers() {
         .careers-sec-label {
           font-size: 0.72rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.28);
+          color: #9ca3af;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 16px;
@@ -118,7 +118,7 @@ function Careers() {
           transform: translateY(-2px);
         }
         .reason-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-        .reason-text { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+        .reason-text { font-size: 0.88rem; color: #374151; line-height: 1.6; }
         .advice-list {
           display: flex;
           flex-direction: column;
@@ -126,8 +126,8 @@ function Careers() {
           margin-bottom: 60px;
         }
         .advice-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 14px;
           padding: 18px 22px;
           display: flex;
@@ -136,18 +136,18 @@ function Careers() {
           transition: all 0.3s ease;
         }
         .advice-card:hover {
-          background: rgba(255,255,255,0.04);
-          border-color: rgba(255,255,255,0.12);
+          background: #ffffff;
+          border-color: #e5e7eb;
           transform: translateX(4px);
         }
         .advice-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
         .advice-tip {
           font-size: 0.9rem;
           font-weight: 700;
-          color: #fff;
+          color: #1e1b4b;
           margin-bottom: 4px;
         }
-        .advice-detail { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .advice-detail { font-size: 0.83rem; color: #6b7280; line-height: 1.6; }
         .quotes-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -160,7 +160,7 @@ function Careers() {
           border-radius: 12px;
           padding: 18px 20px;
           font-size: 0.88rem;
-          color: rgba(255,255,255,0.6);
+          color: #374151;
           font-style: italic;
           line-height: 1.6;
           transition: all 0.3s ease;
@@ -168,7 +168,7 @@ function Careers() {
         .quote-card:hover {
           background: rgba(167,139,250,0.08);
           border-color: rgba(167,139,250,0.22);
-          color: rgba(255,255,255,0.8);
+          color: #374151;
         }
         .quote-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
         .careers-cta {
@@ -178,13 +178,13 @@ function Careers() {
           padding: 48px 40px;
           text-align: center;
         }
-        .cta-title { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 0 0 10px; }
-        .cta-sub { font-size: 0.92rem; color: rgba(255,255,255,0.5); margin: 0 0 24px; }
+        .cta-title { font-size: 1.4rem; font-weight: 800; color: #1e1b4b; margin: 0 0 10px; }
+        .cta-sub { font-size: 0.92rem; color: #6b7280; margin: 0 0 24px; }
         .cta-btn {
           display: inline-block;
           padding: 13px 32px;
           background: linear-gradient(135deg, #059669, #0284c7);
-          color: #fff;
+          color: #1e1b4b;
           border-radius: 12px;
           font-weight: 700;
           font-size: 0.92rem;

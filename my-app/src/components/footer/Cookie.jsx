@@ -35,7 +35,7 @@ function Cookie() {
 
         .cookie-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -64,13 +64,13 @@ function Cookie() {
           text-transform: uppercase;
           margin-bottom: 1.2rem;
         }
-        .cookie-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 0.5rem; letter-spacing: -0.03em; }
+        .cookie-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #1e1b4b; margin: 0 0 0.5rem; letter-spacing: -0.03em; }
         .cookie-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
-        .cookie-updated { font-size: 0.82rem; color: rgba(255,255,255,0.3); margin: 0; }
+        .cookie-updated { font-size: 0.82rem; color: #6b7280; margin: 0; }
         .cookie-sections { display: flex; flex-direction: column; gap: 14px; }
         .cookie-section {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 14px;
           padding: 22px 26px;
           position: relative;
@@ -87,17 +87,17 @@ function Cookie() {
           opacity: 0;
           transition: opacity 0.3s;
         }
-        .cookie-section:hover { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
+        .cookie-section:hover { background: #ffffff; border-color: #e5e7eb; }
         .cookie-section:hover::before { opacity: 1; }
-        .cookie-sec-title { font-size: 0.95rem; font-weight: 700; color: rgba(255,255,255,0.88); margin: 0 0 10px; }
-        .cookie-sec-body { font-size: 0.86rem; color: rgba(255,255,255,0.5); line-height: 1.75; margin: 0; }
+        .cookie-sec-title { font-size: 0.95rem; font-weight: 700; color: #374151; margin: 0 0 10px; }
+        .cookie-sec-body { font-size: 0.86rem; color: #6b7280; line-height: 1.75; margin: 0; }
         .cookie-footer {
           margin-top: 48px; padding: 24px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 12px; text-align: center;
         }
-        .cookie-footer p { font-size: 0.82rem; color: rgba(255,255,255,0.28); margin: 0; }
+        .cookie-footer p { font-size: 0.82rem; color: #9ca3af; margin: 0; }
         .cookie-footer a { color: #fbbf24; text-decoration: none; }
         .cookie-footer a:hover { text-decoration: underline; }
       `}</style>

@@ -22,7 +22,7 @@ export default function FAQAccordion() {
 
         .faq-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -49,10 +49,10 @@ export default function FAQAccordion() {
         .faq-eyebrow {
           display: inline-block;
           padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
+          background: rgba(79,70,229,0.08);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 100px;
-          color: #a78bfa;
+          color: #4f46e5;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.1em;
@@ -62,19 +62,19 @@ export default function FAQAccordion() {
         .faq-title {
           font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 900;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
         }
         .faq-title span {
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
         .faq-subtitle {
           font-size: 1rem;
-          color: rgba(255,255,255,0.45);
+          color: #6b7280;
           max-width: 480px;
           margin: 0 auto;
           line-height: 1.7;
@@ -85,14 +85,14 @@ export default function FAQAccordion() {
           gap: 10px;
         }
         .faq-item {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 14px;
           overflow: hidden;
           transition: all 0.3s ease;
         }
         .faq-item.open {
-          background: rgba(124,58,237,0.06);
+          background: rgba(79,70,229,0.06);
           border-color: rgba(124,58,237,0.22);
         }
         .faq-question-btn {
@@ -110,54 +110,54 @@ export default function FAQAccordion() {
         .faq-q-text {
           font-size: 0.95rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.85);
+          color: #374151;
           line-height: 1.5;
           font-family: 'Inter', sans-serif;
         }
-        .faq-item.open .faq-q-text { color: #fff; }
+        .faq-item.open .faq-q-text { color: #1e1b4b; }
         .faq-arrow {
           width: 28px;
           height: 28px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
           font-size: 0.85rem;
-          color: rgba(255,255,255,0.4);
+          color: #6b7280;
           transition: all 0.3s ease;
         }
         .faq-item.open .faq-arrow {
-          background: rgba(124,58,237,0.2);
+          background: rgba(79,70,229,0.06);
           border-color: rgba(124,58,237,0.3);
-          color: #a78bfa;
+          color: #4f46e5;
           transform: rotate(45deg);
         }
         .faq-answer {
           padding: 0 22px 18px;
           font-size: 0.88rem;
-          color: rgba(255,255,255,0.55);
+          color: #6b7280;
           line-height: 1.75;
-          border-top: 1px solid rgba(255,255,255,0.05);
+          border-top: 1px solid #e5e7eb;
           padding-top: 14px;
         }
         .faq-still {
           margin-top: 48px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 32px;
           text-align: center;
         }
-        .faq-still h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0 0 8px; }
-        .faq-still p { font-size: 0.88rem; color: rgba(255,255,255,0.45); margin: 0 0 18px; }
+        .faq-still h3 { font-size: 1.1rem; font-weight: 700; color: #1e1b4b; margin: 0 0 8px; }
+        .faq-still p { font-size: 0.88rem; color: #6b7280; margin: 0 0 18px; }
         .faq-contact-btn {
           display: inline-block;
           padding: 11px 28px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
-          color: #fff;
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+          color: #1e1b4b;
           border-radius: 10px;
           font-weight: 600;
           font-size: 0.88rem;

@@ -24,7 +24,7 @@ function About() {
 
         .about-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -48,10 +48,10 @@ function About() {
         .about-eyebrow {
           display: inline-block;
           padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
+          background: rgba(79,70,229,0.08);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 100px;
-          color: #a78bfa;
+          color: #4f46e5;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.1em;
@@ -65,20 +65,20 @@ function About() {
         .about-title {
           font-size: clamp(2rem, 4vw, 3rem);
           font-weight: 900;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
           line-height: 1.1;
         }
         .about-title span {
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
         .about-subtitle {
           font-size: 1.05rem;
-          color: rgba(255,255,255,0.5);
+          color: #6b7280;
           max-width: 560px;
           margin: 0 auto;
           line-height: 1.7;
@@ -90,22 +90,22 @@ function About() {
           margin-bottom: 60px;
         }
         .stat-card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 24px 16px;
           text-align: center;
           transition: all 0.3s ease;
         }
         .stat-card:hover {
-          background: rgba(124,58,237,0.08);
+          background: rgba(79,70,229,0.06);
           border-color: rgba(124,58,237,0.25);
           transform: translateY(-4px);
         }
         .stat-value {
           font-size: 2rem;
           font-weight: 900;
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -113,7 +113,7 @@ function About() {
         }
         .stat-label {
           font-size: 0.78rem;
-          color: rgba(255,255,255,0.4);
+          color: #6b7280;
           font-weight: 500;
           text-transform: uppercase;
           letter-spacing: 0.08em;
@@ -121,14 +121,14 @@ function About() {
         .about-section-label {
           font-size: 0.72rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.28);
+          color: #9ca3af;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 12px;
         }
         .about-mission {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 20px;
           padding: 36px 40px;
           margin-bottom: 60px;
@@ -146,12 +146,12 @@ function About() {
         .mission-title {
           font-size: 1.3rem;
           font-weight: 800;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 12px;
         }
         .mission-body {
           font-size: 1rem;
-          color: rgba(255,255,255,0.6);
+          color: #374151;
           line-height: 1.8;
           margin: 0;
         }
@@ -162,14 +162,14 @@ function About() {
           margin-bottom: 60px;
         }
         .value-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 24px;
           transition: all 0.3s ease;
         }
         .value-card:hover {
-          background: rgba(255,255,255,0.04);
+          background: #ffffff;
           border-color: rgba(167,139,250,0.2);
           transform: translateY(-4px);
           box-shadow: 0 16px 40px rgba(0,0,0,0.2);
@@ -181,17 +181,17 @@ function About() {
         .value-title {
           font-size: 0.95rem;
           font-weight: 700;
-          color: #fff;
+          color: #1e1b4b;
           margin-bottom: 8px;
         }
         .value-desc {
           font-size: 0.83rem;
-          color: rgba(255,255,255,0.5);
+          color: #6b7280;
           line-height: 1.65;
         }
         .about-cta {
           background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(79,70,229,0.1));
-          border: 1px solid rgba(124,58,237,0.25);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 20px;
           padding: 48px 40px;
           text-align: center;
@@ -199,19 +199,19 @@ function About() {
         .cta-title {
           font-size: 1.5rem;
           font-weight: 800;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 10px;
         }
         .cta-sub {
           font-size: 0.95rem;
-          color: rgba(255,255,255,0.5);
+          color: #6b7280;
           margin: 0 0 24px;
         }
         .cta-btn {
           display: inline-block;
           padding: 13px 32px;
-          background: linear-gradient(135deg, #7c3aed, #4f46e5);
-          color: #fff;
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+          color: #1e1b4b;
           border-radius: 12px;
           font-weight: 700;
           font-size: 0.95rem;

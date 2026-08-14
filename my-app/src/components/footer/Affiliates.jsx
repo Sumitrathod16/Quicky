@@ -22,7 +22,7 @@ const Affiliates = () => {
 
         .aff-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -51,19 +51,19 @@ const Affiliates = () => {
           text-transform: uppercase;
           margin-bottom: 1.2rem;
         }
-        .aff-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #fff; margin: 0 0 1rem; letter-spacing: -0.03em; }
+        .aff-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: #1e1b4b; margin: 0 0 1rem; letter-spacing: -0.03em; }
         .aff-title span {
           background: linear-gradient(135deg, #34d399, #60a5fa);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-        .aff-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+        .aff-subtitle { font-size: 1rem; color: #6b7280; max-width: 500px; margin: 0 auto; line-height: 1.7; }
 
         .aff-sec-label {
           font-size: 0.72rem;
           font-weight: 600;
-          color: rgba(255,255,255,0.28);
+          color: #9ca3af;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin-bottom: 16px;
@@ -76,8 +76,8 @@ const Affiliates = () => {
           margin-bottom: 60px;
         }
         .aff-step {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 14px;
           padding: 22px 18px;
           text-align: center;
@@ -97,8 +97,8 @@ const Affiliates = () => {
           background-clip: text;
           margin-bottom: 10px;
         }
-        .aff-step-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .aff-step-desc { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+        .aff-step-title { font-size: 0.9rem; font-weight: 700; color: #1e1b4b; margin-bottom: 8px; }
+        .aff-step-desc { font-size: 0.8rem; color: #6b7280; line-height: 1.6; }
 
         .aff-benefits {
           display: grid;
@@ -107,8 +107,8 @@ const Affiliates = () => {
           margin-bottom: 60px;
         }
         .aff-benefit {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 16px;
           padding: 24px;
           display: flex;
@@ -117,13 +117,13 @@ const Affiliates = () => {
           transition: all 0.3s ease;
         }
         .aff-benefit:hover {
-          background: rgba(255,255,255,0.04);
+          background: #ffffff;
           border-color: rgba(52,211,153,0.2);
           transform: translateY(-2px);
         }
         .aff-benefit-icon { font-size: 1.5rem; flex-shrink: 0; }
-        .aff-benefit-title { font-size: 0.92rem; font-weight: 700; color: rgba(255,255,255,0.88); margin-bottom: 6px; }
-        .aff-benefit-desc { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+        .aff-benefit-title { font-size: 0.92rem; font-weight: 700; color: #374151; margin-bottom: 6px; }
+        .aff-benefit-desc { font-size: 0.82rem; color: #6b7280; line-height: 1.65; }
 
         .aff-cta {
           background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(96,165,250,0.08));
@@ -132,13 +132,13 @@ const Affiliates = () => {
           padding: 48px 40px;
           text-align: center;
         }
-        .aff-cta h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 0 0 10px; }
-        .aff-cta p { font-size: 0.92rem; color: rgba(255,255,255,0.5); margin: 0 0 24px; }
+        .aff-cta h2 { font-size: 1.4rem; font-weight: 800; color: #1e1b4b; margin: 0 0 10px; }
+        .aff-cta p { font-size: 0.92rem; color: #6b7280; margin: 0 0 24px; }
         .aff-cta-btn {
           display: inline-block;
           padding: 13px 36px;
           background: linear-gradient(135deg, #059669, #0284c7);
-          color: #fff;
+          color: #1e1b4b;
           border-radius: 12px;
           font-weight: 700;
           font-size: 0.95rem;
@@ -147,7 +147,7 @@ const Affiliates = () => {
           transition: all 0.3s ease;
         }
         .aff-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(5,150,105,0.5); }
-        .aff-footer-note { margin-top: 20px; font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+        .aff-footer-note { margin-top: 20px; font-size: 0.8rem; color: #9ca3af; }
 
         @media (max-width: 768px) {
           .aff-steps { grid-template-columns: repeat(2, 1fr); }

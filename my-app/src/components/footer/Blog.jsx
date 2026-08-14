@@ -25,7 +25,7 @@ function Blog() {
 
         .blog-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -65,7 +65,7 @@ function Blog() {
         .blog-title {
           font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 900;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
         }
@@ -77,7 +77,7 @@ function Blog() {
         }
         .blog-subtitle {
           font-size: 1rem;
-          color: rgba(255,255,255,0.45);
+          color: #6b7280;
           max-width: 500px;
           margin: 0 auto;
           line-height: 1.7;
@@ -88,8 +88,8 @@ function Blog() {
           gap: 20px;
         }
         .blog-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 18px;
           padding: 24px;
           display: flex;
@@ -104,8 +104,8 @@ function Blog() {
           to { opacity: 1; transform: translateY(0); }
         }
         .blog-card:hover {
-          background: rgba(255,255,255,0.04);
-          border-color: rgba(255,255,255,0.12);
+          background: #ffffff;
+          border-color: #e5e7eb;
           transform: translateY(-4px);
           box-shadow: 0 20px 50px rgba(0,0,0,0.25);
         }
@@ -126,21 +126,21 @@ function Blog() {
         .blog-card-title {
           font-size: 0.95rem;
           font-weight: 700;
-          color: rgba(255,255,255,0.88);
+          color: #374151;
           line-height: 1.4;
           margin: 0;
         }
         .blog-card-desc {
           font-size: 0.82rem;
-          color: rgba(255,255,255,0.45);
+          color: #6b7280;
           line-height: 1.65;
           flex: 1;
         }
         .blog-card-date {
           font-size: 0.72rem;
-          color: rgba(255,255,255,0.25);
+          color: #9ca3af;
           font-weight: 500;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          border-top: 1px solid #e5e7eb;
           padding-top: 10px;
         }
         @media (max-width: 900px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }

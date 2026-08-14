@@ -16,7 +16,6 @@ const Explorepage = lazy(() => import('./components/ExplorePage'));
 const Profile = lazy(() => import('./components/Profile'));
 // New enhanced components
 const HeroSection = lazy(() => import('./components/HeroSection'));
-const PricingSection = lazy(() => import('./components/PricingSection'));
 const TestimonialsSection = lazy(() => import('./components/TestimonialsSection'));
 const FooterSection = lazy(() => import('./components/FooterSection'));
 // Footer components
@@ -103,7 +102,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/Support" element={<Support />} />
         <Route path="/Explorepage" element={<Explorepage />} /> 
-        <Route path="/pricing" element={<PricingSection />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/testimonials" element={<TestimonialsSection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/features" element={<Features />} />
@@ -149,7 +148,7 @@ function App() {
         <Route path="/Flutterassign" element={<Flutterassign/>}/>
         <Route path="/Pyassign" element={<Pyassign/>}/>
         <Route path="/Djassign" element={<Djassign/>}/>
-        <Route path="/flaskassign " element={<Flaskassign/>}/>
+        <Route path="/flaskassign" element={<Flaskassign/>}/>
         <Route path="/Javaassign" element={<Javaassign/>}/>
         <Route path="/Springassign" element={<Springassign/>}/>
         <Route path="/Hiberassign" element={<Hiberassign/>}/>

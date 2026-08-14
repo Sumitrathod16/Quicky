@@ -69,7 +69,7 @@ const HeroSection = () => {
         .hero-section {
           position: relative;
           min-height: 100vh;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: linear-gradient(135deg, #f0f4ff 0%, #e0f2fe 60%, #f8faff 100%);
           display: flex;
           align-items: center;
           overflow: hidden;
@@ -82,7 +82,7 @@ const HeroSection = () => {
           right: 0;
           bottom: 0;
           background: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-          opacity: 0.1;
+          opacity: 0.04;
         }
 
         .hero-content {
@@ -99,7 +99,7 @@ const HeroSection = () => {
         }
 
         .hero-text {
-          color: white;
+          color: #1e1b4b;
         }
 
         .hero-title {
@@ -137,12 +137,13 @@ const HeroSection = () => {
           display: block;
           font-size: 2.5rem;
           font-weight: 700;
-          color: #ffd93d;
+          color: #4f46e5;
         }
 
         .stat-label {
           font-size: 0.9rem;
-          opacity: 0.8;
+          opacity: 0.65;
+          color: #374151;
         }
 
         .hero-buttons {
@@ -175,15 +176,15 @@ const HeroSection = () => {
         }
 
         .btn-secondary {
-          background: rgba(255, 255, 255, 0.1);
-          color: white;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          backdrop-filter: blur(10px);
+          background: #fff;
+          color: #374151;
+          border: 2px solid #e5e7eb;
         }
 
         .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.5);
+          background: #f0f4ff;
+          border-color: rgba(79,70,229,0.3);
+          color: #4f46e5;
         }
 
         .hero-image {

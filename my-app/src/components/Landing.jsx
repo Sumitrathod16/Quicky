@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import CompanyIcon from "../assets/qlogo.svg";
 import Footer from "./Footer";
 import "./Landing.css";
 
@@ -11,8 +12,7 @@ function LandingPage() {
       <header className="lp-topbar">
         <div className="lp-shell lp-topbar-inner">
           <Link to="/" className="lp-brand" aria-label="Quicky home">
-            <span className="lp-brand-badge" aria-hidden="true" />
-            <span>Quicky</span>
+            <img src={CompanyIcon} alt="Quicky" style={{ height: "38px", width: "auto" }} />
           </Link>
 
           <nav className="lp-nav" aria-label="Landing navigation">

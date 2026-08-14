@@ -72,10 +72,11 @@ function Footer() {
       <style>
         {`
           .footer-block {
-            background: linear-gradient(180deg, #0b1220 0%, #131b2d 100%);
-            color: #f5f7fb;
+            background: #ffffff;
+            color: #374151;
             padding: 4rem 1.5rem 2rem;
             width: 100%;
+            border-top: 1px solid #e5e7eb;
           }
 
           .footer-top {
@@ -99,11 +100,11 @@ function Footer() {
           }
 
           .footer-logo span {
-            color: #6c63ff;
+            color: #4f46e5;
           }
 
           .footer-description {
-            color: #b8c2d6;
+            color: #6b7280;
             line-height: 1.8;
             max-width: 360px;
           }
@@ -112,8 +113,8 @@ function Footer() {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
             border-radius: 18px;
             padding: 1.3rem;
           }
@@ -121,12 +122,12 @@ function Footer() {
           .footer-contact-card strong {
             display: block;
             margin-bottom: 0.35rem;
-            color: #edf2ff;
+            color: #1e1b4b;
           }
 
           .footer-contact-card p {
             margin: 0;
-            color: #d3dce8;
+            color: #6b7280;
           }
 
           .footer-links-grid {
@@ -144,7 +145,7 @@ function Footer() {
           .footer-column h3 {
             font-size: 1.05rem;
             font-weight: 700;
-            color: #f8fbff;
+            color: #1e1b4b;
             margin: 0;
           }
 
@@ -161,17 +162,17 @@ function Footer() {
           }
 
           .footer-column a {
-            color: #b8c2d6;
+            color: #6b7280;
             text-decoration: none;
             transition: color 0.2s ease;
           }
 
           .footer-column a:hover {
-            color: #6c63ff;
+            color: #4f46e5;
           }
 
           .footer-cta p {
-            color: #d3dce8;
+            color: #6b7280;
             line-height: 1.75;
           }
 
@@ -188,20 +189,27 @@ function Footer() {
             min-width: 190px;
             padding: 0.95rem 1rem;
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            background: rgba(255, 255, 255, 0.05);
-            color: #f5f7fb;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            color: #111827;
+            outline: none;
+          }
+
+          .footer-form input:focus {
+            border-color: rgba(79,70,229,0.4);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.08);
           }
 
           .footer-form input::placeholder {
-            color: #9aa7c2;
+            color: #d1d5db;
           }
 
           .footer-form button {
             padding: 0.95rem 1.6rem;
             border: none;
             border-radius: 999px;
-            background: linear-gradient(135deg, #6c63ff, #8b5cf6);
+            background: linear-gradient(135deg, #4f46e5, #0ea5e9);
             color: white;
             font-weight: 700;
             cursor: pointer;
@@ -217,13 +225,13 @@ function Footer() {
             max-width: 1180px;
             margin: 2.5rem auto 0;
             padding-top: 1.75rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            color: #9aa7c2;
+            color: #9ca3af;
           }
 
           .footer-bottom-links {
@@ -233,13 +241,13 @@ function Footer() {
           }
 
           .footer-bottom-links a {
-            color: #9aa7c2;
+            color: #9ca3af;
             text-decoration: none;
             transition: color 0.2s ease;
           }
 
           .footer-bottom-links a:hover {
-            color: #6c63ff;
+            color: #4f46e5;
           }
 
           @media (max-width: 960px) {

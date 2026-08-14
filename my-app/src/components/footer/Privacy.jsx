@@ -43,7 +43,7 @@ const Privacy = () => {
 
         .policy-page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           font-family: 'Inter', sans-serif;
           padding: 80px 24px 100px;
           position: relative;
@@ -70,10 +70,10 @@ const Privacy = () => {
         .policy-eyebrow {
           display: inline-block;
           padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
+          background: rgba(79,70,229,0.08);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 100px;
-          color: #a78bfa;
+          color: #4f46e5;
           font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.1em;
@@ -83,13 +83,13 @@ const Privacy = () => {
         .policy-title {
           font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 900;
-          color: #fff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
         }
         .policy-updated {
           font-size: 0.82rem;
-          color: rgba(255,255,255,0.3);
+          color: #6b7280;
           margin: 0;
         }
         .policy-sections {
@@ -98,8 +98,8 @@ const Privacy = () => {
           gap: 14px;
         }
         .policy-section {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 14px;
           padding: 22px 26px;
           position: relative;
@@ -116,30 +116,30 @@ const Privacy = () => {
           opacity: 0;
           transition: opacity 0.3s;
         }
-        .policy-section:hover { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
+        .policy-section:hover { background: #ffffff; border-color: #e5e7eb; }
         .policy-section:hover::before { opacity: 1; }
         .policy-sec-title {
           font-size: 0.95rem;
           font-weight: 700;
-          color: rgba(255,255,255,0.88);
+          color: #374151;
           margin: 0 0 10px;
         }
         .policy-sec-body {
           font-size: 0.86rem;
-          color: rgba(255,255,255,0.5);
+          color: #6b7280;
           line-height: 1.75;
           margin: 0;
         }
         .policy-footer {
           margin-top: 48px;
           padding: 24px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 12px;
           text-align: center;
         }
-        .policy-footer p { font-size: 0.82rem; color: rgba(255,255,255,0.28); margin: 0; }
-        .policy-footer a { color: #a78bfa; text-decoration: none; }
+        .policy-footer p { font-size: 0.82rem; color: #9ca3af; margin: 0; }
+        .policy-footer a { color: #4f46e5; text-decoration: none; }
         .policy-footer a:hover { text-decoration: underline; }
       `}</style>
 

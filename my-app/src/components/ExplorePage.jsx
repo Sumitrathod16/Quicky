@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
-function CodeOutputContainer({ title, accent, accentBg, code, children }) {
+function CodeOutputContainer({ title, accent, code, children }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code.trim()).then(() => {
       setCopied(true);
+      toast.success("Code copied to clipboard!", { id: `copy-${title}` });
       setTimeout(() => setCopied(false), 2000);
     });
   };
@@ -159,11 +161,11 @@ function ThemeToggle() {
       code: counterCode,
       output: (
         <div style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '3rem', fontWeight: 800, margin: '0 0 16px', color: '#a78bfa' }}>{count}</h2>
+          <h2 style={{ fontSize: '3rem', fontWeight: 800, margin: '0 0 16px', color: '#4f46e5' }}>{count}</h2>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
-            <button className="out-btn" style={{ background: 'rgba(167,139,250,0.15)', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.3)' }} onClick={() => setCount(count + 1)}>+ Increment</button>
-            <button className="out-btn" style={{ background: 'rgba(167,139,250,0.15)', color: '#a78bfa', border: '1px solid rgba(167,139,250,0.3)' }} onClick={() => setCount(count - 1)}>− Decrement</button>
-            <button className="out-btn" style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)' }} onClick={() => setCount(0)}>Reset</button>
+            <button className="out-btn" style={{ background: 'rgba(167,139,250,0.15)', color: '#4f46e5', border: '1px solid rgba(167,139,250,0.3)' }} onClick={() => setCount(count + 1)}>+ Increment</button>
+            <button className="out-btn" style={{ background: 'rgba(167,139,250,0.15)', color: '#4f46e5', border: '1px solid rgba(167,139,250,0.3)' }} onClick={() => setCount(count - 1)}>− Decrement</button>
+            <button className="out-btn" style={{ background: '#ffffff', color: '#6b7280', border: '1px solid #e5e7eb' }} onClick={() => setCount(0)}>Reset</button>
           </div>
         </div>
       ),
@@ -181,18 +183,18 @@ function ThemeToggle() {
               onChange={(e) => setTodoInput(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter' && todoInput.trim()) { setTasks([...tasks, { text: todoInput, done: false }]); setTodoInput(''); }}}
               placeholder="Add a task..."
-              style={{ flex: 1, padding: '10px 14px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 10, color: '#fff', fontSize: '0.9rem', fontFamily: 'Inter, sans-serif', outline: 'none' }}
+              style={{ flex: 1, padding: '10px 14px', background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 10, color: '#1e1b4b', fontSize: '0.9rem', fontFamily: 'Inter, sans-serif', outline: 'none' }}
             />
             <button className="out-btn" style={{ background: 'rgba(52,211,153,0.15)', color: '#34d399', border: '1px solid rgba(52,211,153,0.3)' }} onClick={() => { if (!todoInput.trim()) return; setTasks([...tasks, { text: todoInput, done: false }]); setTodoInput(''); }}>Add</button>
           </div>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
             {tasks.map((t, i) => (
               <li key={i} onClick={() => setTasks(tasks.map((task, idx) => idx === i ? { ...task, done: !task.done } : task))}
-                style={{ padding: '10px 14px', background: t.done ? 'rgba(52,211,153,0.05)' : 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10, color: t.done ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.8)', textDecoration: t.done ? 'line-through' : 'none', cursor: 'pointer', fontSize: '0.9rem', transition: 'all 0.2s' }}>
+                style={{ padding: '10px 14px', background: t.done ? 'rgba(52,211,153,0.05)' : 'rgba(255,255,255,0.04)', border: '1px solid #e5e7eb', borderRadius: 10, color: t.done ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.8)', textDecoration: t.done ? 'line-through' : 'none', cursor: 'pointer', fontSize: '0.9rem', transition: 'all 0.2s' }}>
                 {t.done ? '✓ ' : '○ '}{t.text}
               </li>
             ))}
-            {tasks.length === 0 && <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.85rem', textAlign: 'center' }}>No tasks yet. Add one above!</p>}
+            {tasks.length === 0 && <p style={{ color: '#9ca3af', fontSize: '0.85rem', textAlign: 'center' }}>No tasks yet. Add one above!</p>}
           </ul>
         </div>
       ),
@@ -206,7 +208,7 @@ function ThemeToggle() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
           <div style={{ width: 80, height: 80, background: color, borderRadius: 20, boxShadow: `0 8px 30px ${color}66`, transition: 'all 0.3s' }} />
           <input type="color" value={color} onChange={(e) => setColor(e.target.value)} style={{ width: 60, height: 40, borderRadius: 8, border: 'none', cursor: 'pointer', background: 'none' }} />
-          <code style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', background: 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: 6 }}>{color}</code>
+          <code style={{ color: '#6b7280', fontSize: '0.9rem', background: '#ffffff', padding: '4px 12px', borderRadius: 6 }}>{color}</code>
         </div>
       ),
     },
@@ -217,7 +219,7 @@ function ThemeToggle() {
       code: quoteCode,
       output: (
         <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
-          <p style={{ fontStyle: 'italic', color: 'rgba(255,255,255,0.7)', fontSize: '1rem', lineHeight: 1.6, maxWidth: '90%' }}>"{quote}"</p>
+          <p style={{ fontStyle: 'italic', color: '#374151', fontSize: '1rem', lineHeight: 1.6, maxWidth: '90%' }}>"{quote}"</p>
           <button className="out-btn" style={{ background: 'rgba(96,165,250,0.15)', color: '#60a5fa', border: '1px solid rgba(96,165,250,0.3)' }} onClick={() => setQuote(quotes[Math.floor(Math.random() * quotes.length)])}>✨ New Quote</button>
         </div>
       ),
@@ -231,7 +233,7 @@ function ThemeToggle() {
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
           <div style={{ width: '100%', padding: '20px 24px', borderRadius: 14, background: dark ? 'rgba(26,26,46,0.8)' : 'rgba(240,240,250,0.1)', border: `1px solid ${dark ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.15)'}`, transition: 'all 0.4s ease', textAlign: 'center' }}>
             <p style={{ fontSize: '2rem', margin: '0 0 8px' }}>{dark ? '🌙' : '☀️'}</p>
-            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '0.9rem' }}>Current: <strong style={{ color: dark ? '#a78bfa' : '#fbbf24' }}>{dark ? 'Dark' : 'Light'}</strong> Theme</p>
+            <p style={{ color: '#374151', margin: 0, fontSize: '0.9rem' }}>Current: <strong style={{ color: dark ? '#a78bfa' : '#fbbf24' }}>{dark ? 'Dark' : 'Light'}</strong> Theme</p>
           </div>
           <button className="out-btn" style={{ background: 'rgba(251,191,36,0.15)', color: '#fbbf24', border: '1px solid rgba(251,191,36,0.3)' }} onClick={() => setDark(d => !d)}>
             {dark ? '☀️ Switch to Light' : '🌙 Switch to Dark'}
@@ -248,7 +250,7 @@ function ThemeToggle() {
 
         .explore-page {
           padding: 80px 24px 100px;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 50%, #0f0c29 100%);
+          background: #f8faff;
           min-height: 100vh;
           font-family: 'Inter', sans-serif;
           position: relative;
@@ -274,10 +276,10 @@ function ThemeToggle() {
         .explore-page-eyebrow {
           display: inline-block;
           padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
+          background: rgba(79,70,229,0.08);
+          border: 1px solid rgba(79,70,229,0.2);
           border-radius: 100px;
-          color: #a78bfa;
+          color: #4f46e5;
           font-size: 0.8rem;
           font-weight: 600;
           letter-spacing: 0.1em;
@@ -288,14 +290,14 @@ function ThemeToggle() {
         .explore-page-title {
           font-size: clamp(2rem, 4vw, 3.2rem);
           font-weight: 900;
-          color: #ffffff;
+          color: #1e1b4b;
           margin: 0 0 1rem;
           letter-spacing: -0.03em;
           line-height: 1.1;
         }
 
         .explore-page-title span {
-          background: linear-gradient(135deg, #a78bfa, #60a5fa);
+          background: linear-gradient(135deg, #4f46e5, #0ea5e9);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -303,7 +305,7 @@ function ThemeToggle() {
 
         .explore-page-subtitle {
           font-size: 1.05rem;
-          color: rgba(255,255,255,0.45);
+          color: #6b7280;
           max-width: 520px;
           margin: 0 auto;
           line-height: 1.65;
@@ -320,15 +322,15 @@ function ThemeToggle() {
         }
 
         .project-card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 24px;
           overflow: hidden;
           transition: all 0.3s ease;
         }
 
         .project-card:hover {
-          border-color: rgba(255,255,255,0.12);
+          border-color: #9ca3af;
           box-shadow: 0 20px 60px rgba(0,0,0,0.25);
         }
 
@@ -337,8 +339,8 @@ function ThemeToggle() {
           align-items: center;
           justify-content: space-between;
           padding: 18px 24px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          background: rgba(255,255,255,0.02);
+          border-bottom: 1px solid #e5e7eb;
+          background: #ffffff;
         }
 
         .project-card-title-row {
@@ -357,16 +359,16 @@ function ThemeToggle() {
         .project-card-title {
           font-size: 1rem;
           font-weight: 700;
-          color: rgba(255,255,255,0.85);
+          color: #374151;
           margin: 0;
         }
 
         .copy-btn {
           padding: 6px 16px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
           border-radius: 8px;
-          color: rgba(255,255,255,0.55);
+          color: #6b7280;
           font-size: 0.8rem;
           font-weight: 500;
           font-family: 'Inter', sans-serif;
@@ -375,8 +377,8 @@ function ThemeToggle() {
         }
 
         .copy-btn:hover {
-          background: rgba(255,255,255,0.09);
-          color: rgba(255,255,255,0.8);
+          background: #ffffff;
+          color: #374151;
         }
 
         .project-body {
@@ -395,7 +397,7 @@ function ThemeToggle() {
           gap: 6px;
           padding: 10px 16px;
           background: rgba(0,0,0,0.2);
-          border-bottom: 1px solid rgba(255,255,255,0.05);
+          border-bottom: 1px solid #e5e7eb;
         }
 
         .dot {
@@ -410,7 +412,7 @@ function ThemeToggle() {
         .code-panel-label {
           margin-left: 6px;
           font-size: 0.75rem;
-          color: rgba(255,255,255,0.25);
+          color: #9ca3af;
           font-family: 'Fira Code', monospace;
           letter-spacing: 0.05em;
         }
@@ -430,7 +432,7 @@ function ThemeToggle() {
         }
 
         .code-pre::-webkit-scrollbar { width: 4px; height: 4px; }
-        .code-pre::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.3); border-radius: 2px; }
+        .code-pre::-webkit-scrollbar-thumb { background: rgba(79,70,229,0.08); border-radius: 2px; }
 
         .output-panel {
           display: flex;
@@ -439,13 +441,13 @@ function ThemeToggle() {
 
         .output-panel-header {
           padding: 10px 16px;
-          border-bottom: 1px solid rgba(255,255,255,0.05);
+          border-bottom: 1px solid #e5e7eb;
           background: rgba(0,0,0,0.15);
         }
 
         .output-label {
           font-size: 0.75rem;
-          color: rgba(255,255,255,0.25);
+          color: #9ca3af;
           font-family: 'Fira Code', monospace;
           letter-spacing: 0.05em;
         }
@@ -479,7 +481,7 @@ function ThemeToggle() {
         @media (max-width: 768px) {
           .explore-page { padding: 60px 16px 80px; }
           .project-body { grid-template-columns: 1fr; }
-          .code-panel { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+          .code-panel { border-right: none; border-bottom: 1px solid #e5e7eb; }
           .explore-page-title { font-size: 2rem; }
         }
       `}</style>

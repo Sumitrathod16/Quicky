@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signOut, getRedirectResult } from "firebase/auth";
-import { doc, getDoc, updateDoc, setDoc, collection, query, orderBy, limit, getDocs, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged, signOut, getRedirectResult, sendPasswordResetEmail } from "firebase/auth";
+import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { AuthContext } from "./authContext";
+import toast from "react-hot-toast";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -173,6 +174,9 @@ export const AuthProvider = ({ children }) => {
           ...prev,
           achievements: [...(prev.achievements || []), achievementId]
         }));
+        toast.success(`🏆 Achievement Unlocked: ${achievementId.toUpperCase()}!`, {
+          duration: 4000,
+        });
       }
     } catch (error) {
       console.error("Error unlocking achievement:", error);
@@ -201,6 +205,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const resetPassword = async (emailToReset) => {
+    const targetEmail = emailToReset || user?.email;
+    if (!targetEmail) throw new Error("No email provided for password reset.");
+    await sendPasswordResetEmail(auth, targetEmail);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -209,6 +219,7 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated: Boolean(user),
         loading,
         logOut,
+        resetPassword,
         updateProfile,
         updateProgress,
         unlockAchievement,

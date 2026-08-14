@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Navigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { format, isSameDay } from 'date-fns';
@@ -13,11 +14,12 @@ import toast from 'react-hot-toast';
 import './Profile.css';
 
 const Profile = () => {
-  const { user, profile, updateProfile, updateProgress, unlockAchievement, updateStreak } = useAuth();
+  const { user, profile, updateProfile, updateProgress, unlockAchievement, updateStreak, resetPassword } = useAuth();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [assignmentsOnDate, setAssignmentsOnDate] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [imageUrl, setImageUrl] = useState(profile?.photoURL || null);
+  const [resetLoading, setResetLoading] = useState(false);
 
   // Real data states
   const [leaderboard, setLeaderboard] = useState([]);
@@ -127,7 +129,7 @@ const Profile = () => {
   const averageGrade = profile?.averageGrade || 'N/A';
   const userRank = leaderboard.findIndex(u => u.uid === user?.uid) + 1;
 
-  const handleProgressUpdate = async (courseId, increment) => {
+  const _handleProgressUpdate = async (courseId, increment) => {
     if (!profile?.courses?.[courseId]) return;
 
     const currentProgress = profile.courses[courseId].completed || 0;
@@ -149,6 +151,18 @@ const Profile = () => {
   const handleStreakUpdate = async () => {
     const newStreak = currentStreak + 1;
     await updateStreak(newStreak);
+  };
+
+  const handleResetPassword = async () => {
+    setResetLoading(true);
+    try {
+      await resetPassword();
+      toast.success(`Password reset email sent to ${user?.email}`);
+    } catch (err) {
+      toast.error(err?.message || 'Failed to send reset email');
+    } finally {
+      setResetLoading(false);
+    }
   };
 
   const handleImageUpload = async (event) => {
@@ -222,13 +236,18 @@ const Profile = () => {
     }
   };
 
-  if (!user || !profile) {
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!profile) {
     return (
       <div className="loading-container">
         <div className="loading-spinner">⏳ Loading your dashboard…</div>
       </div>
     );
   }
+
 
   return (
     <motion.div
@@ -508,6 +527,74 @@ const Profile = () => {
             ) : (
               <p>No assignments on this date.</p>
             )}
+          </div>
+        </motion.div>
+
+        {/* ── Account Settings ── */}
+        <motion.div
+          className="settings-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.45 }}
+          style={{
+            background: 'rgba(255,255,255,0.04)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 20,
+            padding: '24px 28px',
+            marginBottom: 24,
+          }}
+        >
+          <h2 style={{ marginBottom: 20 }}>⚙️ Account Settings</h2>
+
+          {/* Reset Password */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '16px 20px',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 14,
+            marginBottom: 12,
+            flexWrap: 'wrap',
+            gap: 12,
+          }}>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: '0.95rem', marginBottom: 4 }}>🔒 Reset Password</div>
+              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)' }}>
+                A reset link will be sent to <strong style={{ color: 'rgba(255,255,255,0.65)' }}>{user?.email}</strong>
+              </div>
+            </div>
+            <button
+              onClick={handleResetPassword}
+              disabled={resetLoading}
+              style={{
+                padding: '10px 22px',
+                background: resetLoading ? 'rgba(79,70,229,0.35)' : 'linear-gradient(135deg, #4f46e5, #7c3aed)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 10,
+                fontWeight: 600,
+                fontSize: '0.88rem',
+                cursor: resetLoading ? 'not-allowed' : 'pointer',
+                transition: 'opacity 0.2s',
+                opacity: resetLoading ? 0.7 : 1,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {resetLoading ? '⏳ Sending…' : '📧 Send Reset Email'}
+            </button>
+          </div>
+
+          {/* Email info */}
+          <div style={{
+            padding: '16px 20px',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 14,
+          }}>
+            <div style={{ fontWeight: 600, fontSize: '0.95rem', marginBottom: 4 }}>✉️ Email Address</div>
+            <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.55)' }}>{user?.email}</div>
           </div>
         </motion.div>
       </div>

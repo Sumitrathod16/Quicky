@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth } from '../../context/useAuth';
 import { submitAssignment } from '../../services/userService';
 import './Assign.css';

@@ -140,186 +140,69 @@ function Explore() {
   return (
     <>
       <style>{`
-        .explore-section {
-          padding: 90px 20px;
-          background: linear-gradient(180deg, #0f0c29 0%, #1a1535 100%);
-          font-family: 'Inter', sans-serif;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .explore-section::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent);
-        }
-
-        .explore-header {
-          text-align: center;
-          margin-bottom: 56px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .explore-eyebrow {
-          display: inline-block;
-          padding: 6px 18px;
-          background: rgba(139,92,246,0.12);
-          border: 1px solid rgba(139,92,246,0.25);
-          border-radius: 100px;
-          color: #a78bfa;
-          font-size: 0.8rem;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          margin-bottom: 1.2rem;
-        }
-
-        .explore-title {
-          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-          font-weight: 800;
-          color: #ffffff;
-          margin: 0 0 1rem;
-          letter-spacing: -0.02em;
-        }
-
-        .explore-subtitle {
-          font-size: 1.05rem;
-          color: rgba(255,255,255,0.45);
-          max-width: 520px;
-          margin: 0 auto;
-          line-height: 1.65;
-        }
-
-        .explore-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          max-width: 1100px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 1;
-        }
-
-        .course-card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 20px;
-          padding: 28px 24px;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          text-decoration: none;
-        }
-
-        .course-card::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 2px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .course-card:hover {
-          transform: translateY(-6px);
-          border-color: rgba(255,255,255,0.12);
-        }
-
-        .course-card:hover::before {
-          opacity: 1;
-        }
-
-        .card-header-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-        }
-
-        .card-emoji-wrap {
-          width: 46px;
-          height: 46px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.4rem;
-          flex-shrink: 0;
-          transition: transform 0.3s ease;
-        }
-
-        .course-card:hover .card-emoji-wrap {
-          transform: rotate(-5deg) scale(1.1);
-        }
-
-        .card-icon-row {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          flex-wrap: wrap;
-        }
-
-        .card-tech-icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 8px;
-          object-fit: contain;
-          padding: 4px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.08);
-          transition: transform 0.2s ease;
-        }
-
-        .course-card:hover .card-tech-icon {
-          transform: scale(1.1);
-        }
-
-        .card-title {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0;
-          line-height: 1.3;
-        }
-
-        .card-tags-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          margin-top: auto;
-        }
-
-        .card-tag {
-          padding: 5px 12px;
-          border-radius: 100px;
-          font-size: 0.78rem;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.2s ease;
-          letter-spacing: 0.01em;
-        }
-
-        .card-tag:hover {
-          transform: translateY(-1px);
-          filter: brightness(1.2);
-        }
-
-        @media (max-width: 900px) {
-          .explore-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 580px) {
-          .explore-section { padding: 70px 16px; }
-          .explore-grid { grid-template-columns: 1fr; max-width: 420px; }
-        }
-      `}</style>
+  .explore-section {
+    padding: 90px 20px;
+    background: #f8faff;
+    font-family: 'Inter', sans-serif;
+    position: relative; overflow: hidden;
+  }
+  .explore-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.2), transparent);
+  }
+  .explore-header { text-align: center; margin-bottom: 56px; position: relative; z-index: 1; }
+  .explore-eyebrow {
+    display: inline-block; padding: 6px 18px;
+    background: rgba(79,70,229,0.08); border: 1px solid rgba(79,70,229,0.2);
+    border-radius: 100px; color: #4f46e5; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .explore-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: #1e1b4b;
+    margin: 0 0 1rem; letter-spacing: -0.02em;
+  }
+  .explore-subtitle { font-size: 1.05rem; color: #6b7280; max-width: 520px; margin: 0 auto; line-height: 1.65; }
+  .explore-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+    max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+  }
+  .course-card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 16px; transition: all 0.3s ease;
+    position: relative; overflow: hidden; cursor: pointer; text-decoration: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .course-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    opacity: 0.7; transition: opacity 0.3s ease; border-radius: 20px 20px 0 0;
+  }
+  .course-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .card-header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .card-emoji-wrap {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0; transition: transform 0.3s ease;
+  }
+  .course-card:hover .card-emoji-wrap { transform: rotate(-5deg) scale(1.1); }
+  .card-icon-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .card-tech-icon {
+    width: 28px; height: 28px; border-radius: 8px; object-fit: contain; padding: 4px;
+    background: #f3f4f6; border: 1px solid #e5e7eb; transition: transform 0.2s ease;
+  }
+  .course-card:hover .card-tech-icon { transform: scale(1.1); }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: #1e1b4b; margin: 0; line-height: 1.3; }
+  .card-tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .card-tag {
+    padding: 5px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s ease; letter-spacing: 0.01em;
+  }
+  .card-tag:hover { transform: translateY(-1px); filter: brightness(0.92); }
+  @media (max-width: 900px) { .explore-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 580px) {
+    .explore-section { padding: 70px 16px; }
+    .explore-grid { grid-template-columns: 1fr; max-width: 420px; }
+  }
+`}</style>
 
       <section className="explore-section">
         <div className="explore-header">
@@ -345,8 +228,8 @@ function Explore() {
                 e.currentTarget.style.boxShadow = `0 16px 40px ${course.accent}22`;
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
+                e.currentTarget.style.background = '#fff';
+                e.currentTarget.style.borderColor = '#e5e7eb';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >

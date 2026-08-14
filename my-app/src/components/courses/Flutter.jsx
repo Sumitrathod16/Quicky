@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/useAuth";
 import { Link } from "react-router-dom";
 import './Syllabus.css';
+
 const syllabusData = [
   {
     id: 1,

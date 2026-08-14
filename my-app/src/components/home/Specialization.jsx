@@ -34,148 +34,71 @@ function Specialization() {
     return (
         <>
             <style>{`
-                .spec-section {
-                    padding: 90px 20px;
-                    background: linear-gradient(180deg, #0f0c29 0%, #1a1535 100%);
-                    font-family: 'Inter', sans-serif;
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                .spec-section::before {
-                    content: '';
-                    position: absolute;
-                    top: 0; left: 0; right: 0;
-                    height: 1px;
-                    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.4), transparent);
-                }
-
-                .spec-header {
-                    text-align: center;
-                    margin-bottom: 60px;
-                }
-
-                .spec-eyebrow {
-                    display: inline-block;
-                    padding: 6px 18px;
-                    background: rgba(139, 92, 246, 0.12);
-                    border: 1px solid rgba(139, 92, 246, 0.25);
-                    border-radius: 100px;
-                    color: #a78bfa;
-                    font-size: 0.8rem;
-                    font-weight: 600;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                    margin-bottom: 1.2rem;
-                }
-
-                .spec-title {
-                    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-                    font-weight: 800;
-                    color: #ffffff;
-                    margin: 0 0 1rem;
-                    letter-spacing: -0.02em;
-                }
-
-                .spec-desc-text {
-                    font-size: 1.05rem;
-                    color: rgba(255,255,255,0.5);
-                    max-width: 500px;
-                    margin: 0 auto;
-                    line-height: 1.6;
-                }
-
-                .spec-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    gap: 24px;
-                    max-width: 1000px;
-                    margin: 0 auto;
-                }
-
-                .spec-card {
-                    background: rgba(255,255,255,0.03);
-                    border: 1px solid rgba(255,255,255,0.08);
-                    border-radius: 20px;
-                    padding: 36px 28px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 16px;
-                    transition: all 0.35s ease;
-                    position: relative;
-                    overflow: hidden;
-                    backdrop-filter: blur(10px);
-                }
-
-                .spec-card::before {
-                    content: '';
-                    position: absolute;
-                    top: 0; left: 0; right: 0;
-                    height: 2px;
-                    opacity: 0;
-                    transition: opacity 0.35s ease;
-                }
-
-                .spec-card:hover {
-                    transform: translateY(-8px);
-                    background: rgba(255,255,255,0.06);
-                    border-color: rgba(255,255,255,0.15);
-                }
-
-                .spec-card:hover::before {
-                    opacity: 1;
-                }
-
-                .spec-card-0::before { background: linear-gradient(90deg, #7c3aed, #4f46e5); }
-                .spec-card-1::before { background: linear-gradient(90deg, #0ea5e9, #2563eb); }
-                .spec-card-2::before { background: linear-gradient(90deg, #10b981, #059669); }
-
-                .spec-icon-wrap {
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                }
-
-                .spec-card-0 .spec-icon-wrap { background: rgba(124,58,237,0.15); }
-                .spec-card-1 .spec-icon-wrap { background: rgba(14,165,233,0.15); }
-                .spec-card-2 .spec-icon-wrap { background: rgba(16,185,129,0.15); }
-
-                .spec-icon {
-                    width: 32px;
-                    height: 32px;
-                    object-fit: contain;
-                    filter: brightness(1.2);
-                    transition: transform 0.3s ease;
-                }
-
-                .spec-card:hover .spec-icon {
-                    transform: scale(1.15) rotate(-5deg);
-                }
-
-                .spec-card-title {
-                    font-size: 1.15rem;
-                    font-weight: 700;
-                    color: #ffffff;
-                    margin: 0;
-                }
-
-                .spec-card-desc {
-                    font-size: 0.9rem;
-                    color: rgba(255,255,255,0.5);
-                    line-height: 1.65;
-                    margin: 0;
-                }
-
-                @media (max-width: 768px) {
-                    .spec-section { padding: 70px 16px; }
-                    .spec-grid { grid-template-columns: 1fr; max-width: 420px; }
-                }
-            `}</style>
+  .spec-section {
+    padding: 90px 20px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .spec-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(79,70,229,0.2), transparent);
+  }
+  .spec-header { text-align: center; margin-bottom: 60px; }
+  .spec-eyebrow {
+    display: inline-block; padding: 6px 18px;
+    background: rgba(79,70,229,0.08); border: 1px solid rgba(79,70,229,0.2);
+    border-radius: 100px; color: #4f46e5; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .spec-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: #1e1b4b;
+    margin: 0 0 1rem; letter-spacing: -0.02em;
+  }
+  .spec-desc-text { font-size: 1.05rem; color: #6b7280; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+  }
+  .spec-card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 36px 28px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+    transition: all 0.35s ease; position: relative; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .spec-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .spec-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(79,70,229,0.1);
+    border-color: rgba(79,70,229,0.18);
+  }
+  .spec-card:hover::before { opacity: 1; }
+  .spec-card-0::before { background: linear-gradient(90deg, #7c3aed, #4f46e5); }
+  .spec-card-1::before { background: linear-gradient(90deg, #0ea5e9, #2563eb); }
+  .spec-card-2::before { background: linear-gradient(90deg, #10b981, #059669); }
+  .spec-icon-wrap {
+    width: 60px; height: 60px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .spec-card-0 .spec-icon-wrap { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); }
+  .spec-card-1 .spec-icon-wrap { background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.2); }
+  .spec-card-2 .spec-icon-wrap { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); }
+  .spec-icon { width: 32px; height: 32px; object-fit: contain; transition: transform 0.3s ease; }
+  .spec-card:hover .spec-icon { transform: scale(1.15) rotate(-5deg); }
+  .spec-card-title { font-size: 1.15rem; font-weight: 700; color: #1e1b4b; margin: 0; }
+  .spec-card-desc { font-size: 0.9rem; color: #6b7280; line-height: 1.65; margin: 0; }
+  @media (max-width: 768px) {
+    .spec-section { padding: 70px 16px; }
+    .spec-grid { grid-template-columns: 1fr; max-width: 420px; }
+  }
+`}</style>
 
             <section className="spec-section">
                 <div className="spec-header">
