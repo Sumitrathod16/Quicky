@@ -1,4 +1,10 @@
 {
+  "name": "quicky",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --prefix my-app",
+    "dev": "npm run dev --prefix my-app"
+  },
   "dependencies": {
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.26",
