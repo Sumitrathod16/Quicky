@@ -2,7 +2,7 @@
   "name": "quicky",
   "private": true,
   "scripts": {
-    "build": "npm run build --prefix my-app",
+    "build": "npm --prefix my-app install && npm run build --prefix my-app",
     "dev": "npm run dev --prefix my-app"
   },
   "dependencies": {

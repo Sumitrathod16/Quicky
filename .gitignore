@@ -1,2 +1,3 @@
 my-app/.env
 .env.local
+.vercel
