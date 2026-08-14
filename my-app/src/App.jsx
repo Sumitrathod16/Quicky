@@ -82,10 +82,33 @@ const Phpassign = lazy(() => import('./components/Assignment/Phpassign'));
 const Dbmsassign = lazy(() => import('./components/Assignment/Dbmsassign'));
 const Sqlassign = lazy(() => import('./components/Assignment/Sqlassign'));
 
+const PageLoader = () => (
+  <div style={{
+    minHeight: '60vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: "'Inter', sans-serif",
+    color: '#4f46e5',
+    gap: '12px'
+  }}>
+    <div style={{
+      width: '36px',
+      height: '36px',
+      border: '3px solid rgba(79, 70, 229, 0.15)',
+      borderTopColor: '#4f46e5',
+      borderRadius: '50%',
+      animation: 'spin 0.8s linear infinite'
+    }} />
+    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+  </div>
+);
+
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
@@ -96,7 +119,7 @@ function App() {
             element={
               <>
                 <Navbar />
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<PageLoader />}>
                   <Routes>
                 <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />

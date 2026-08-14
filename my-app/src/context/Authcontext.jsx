@@ -227,7 +227,7 @@ export const AuthProvider = ({ children }) => {
         initializeUserData
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
