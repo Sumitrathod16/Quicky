@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { loadAllCodes, loadSolvedIds } from '../services/practiceService';
 import { useAuth } from '../context/useAuth';
+import { PRACTICE_QUESTIONS } from '../data/practiceQuestions';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
-// ─── Mirror of the PROBLEMS array (lightweight version) ───────────
-const PROBLEMS = [
-  { id: 1, title: 'Two Sum',           difficulty: 'Easy',   category: 'Arrays' },
-  { id: 2, title: 'Reverse a String',  difficulty: 'Easy',   category: 'Strings' },
-  { id: 3, title: 'FizzBuzz',          difficulty: 'Easy',   category: 'Math' },
-  { id: 4, title: 'Valid Palindrome',  difficulty: 'Easy',   category: 'Strings' },
-  { id: 5, title: 'Maximum Subarray',  difficulty: 'Medium', category: 'Dynamic Programming' },
-  { id: 6, title: 'Fibonacci Number',  difficulty: 'Easy',   category: 'Recursion' },
-  { id: 7, title: 'Climbing Stairs',   difficulty: 'Medium', category: 'Dynamic Programming' },
-  { id: 8, title: 'Count Vowels',      difficulty: 'Easy',   category: 'Strings' },
-];
+const PROBLEMS = PRACTICE_QUESTIONS.map(({ id, title, difficulty, category }) => ({ id, title, difficulty, category }));
 
 const DIFFICULTY_COLORS = { Easy: '#34d399', Medium: '#fbbf24', Hard: '#f87171' };
 const CATEGORY_COLORS   = ['#8b5cf6','#3b82f6','#ec4899','#f97316','#10b981','#84cc16','#06b6d4'];

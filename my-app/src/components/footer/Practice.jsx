@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { saveCode, loadAllCodes, saveSolvedIds, loadSolvedIds } from '../../services/practiceService';
+import { PRACTICE_QUESTIONS, buildStarterForLanguage } from '../../data/practiceQuestions';
 import toast from 'react-hot-toast';
 
 // ─── Language Config ───────────────────────────────────────────────
@@ -12,128 +13,19 @@ const LANGUAGES = {
   c:          { id: 'c',          label: 'C',           piston: 'c',          ext: 'c',   dot: '#a78bfa', browser: false },
 };
 
-// ─── Starter Code per Problem per Language ─────────────────────────
-const STARTERS = {
-  1: {
-    javascript: `function twoSum(nums, target) {\n  // Write your solution here\n  \n}`,
-    python: `def twoSum(nums, target):\n    # Write your solution here\n    pass\n\n# --- Tests ---\nprint(twoSum([2,7,11,15], 9))   # [0, 1]\nprint(twoSum([3,2,4], 6))       # [1, 2]\nprint(twoSum([3,3], 6))         # [0, 1]`,
-    java: `import java.util.*;\npublic class Main {\n    public static int[] twoSum(int[] nums, int target) {\n        // Write your solution here\n        return new int[]{};\n    }\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(twoSum(new int[]{2,7,11,15}, 9)));\n        System.out.println(Arrays.toString(twoSum(new int[]{3,2,4}, 6)));\n        System.out.println(Arrays.toString(twoSum(new int[]{3,3}, 6)));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nvector<int> twoSum(vector<int>& nums, int target) {\n    // Write your solution here\n    return {};\n}\nint main() {\n    vector<int> n1 = {2,7,11,15};\n    auto r1 = twoSum(n1, 9);\n    cout << "[" << r1[0] << "," << r1[1] << "]\\n";\n    vector<int> n2 = {3,2,4};\n    auto r2 = twoSum(n2, 6);\n    cout << "[" << r2[0] << "," << r2[1] << "]\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\n#include <stdlib.h>\nint* twoSum(int* nums, int n, int target, int* rSize) {\n    // Write your solution here\n    *rSize = 2;\n    int* res = malloc(2 * sizeof(int));\n    res[0] = 0; res[1] = 0;\n    return res;\n}\nint main() {\n    int nums[] = {2,7,11,15};\n    int sz;\n    int* r = twoSum(nums, 4, 9, &sz);\n    printf("[%d,%d]\\n", r[0], r[1]);\n    free(r);\n    return 0;\n}`,
-  },
-  2: {
-    javascript: `function reverseString(s) {\n  // Write your solution here\n  \n}`,
-    python: `def reverseString(s):\n    # Write your solution here\n    pass\n\nprint(reverseString("hello"))    # olleh\nprint(reverseString("Hannah"))   # hannaH\nprint(reverseString("a"))        # a`,
-    java: `public class Main {\n    public static String reverseString(String s) {\n        // Write your solution here\n        return "";\n    }\n    public static void main(String[] args) {\n        System.out.println(reverseString("hello"));\n        System.out.println(reverseString("Hannah"));\n        System.out.println(reverseString("a"));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nstring reverseString(string s) {\n    // Write your solution here\n    return "";\n}\nint main() {\n    cout << reverseString("hello") << "\\n";\n    cout << reverseString("Hannah") << "\\n";\n    cout << reverseString("a") << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\n#include <string.h>\nvoid reverseString(char* s) {\n    // Write your solution here\n}\nint main() {\n    char s1[] = "hello";\n    reverseString(s1);\n    printf("%s\\n", s1);\n    return 0;\n}`,
-  },
-  3: {
-    javascript: `function fizzBuzz(n) {\n  // Write your solution here\n  \n}`,
-    python: `def fizzBuzz(n):\n    # Write your solution here\n    pass\n\nprint(fizzBuzz(3))   # ['1','2','Fizz']\nprint(fizzBuzz(5))   # ['1','2','Fizz','4','Buzz']\nprint(fizzBuzz(15))`,
-    java: `import java.util.*;\npublic class Main {\n    public static List<String> fizzBuzz(int n) {\n        // Write your solution here\n        return new ArrayList<>();\n    }\n    public static void main(String[] args) {\n        System.out.println(fizzBuzz(3));\n        System.out.println(fizzBuzz(5));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nvector<string> fizzBuzz(int n) {\n    // Write your solution here\n    return {};\n}\nint main() {\n    for (auto& s : fizzBuzz(5)) cout << s << " ";\n    cout << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\nvoid fizzBuzz(int n) {\n    // Write your solution here\n    for (int i = 1; i <= n; i++) {\n        if (i % 15 == 0) printf("FizzBuzz ");\n        else if (i % 3 == 0) printf("Fizz ");\n        else if (i % 5 == 0) printf("Buzz ");\n        else printf("%d ", i);\n    }\n}\nint main() {\n    fizzBuzz(15);\n    printf("\\n");\n    return 0;\n}`,
-  },
-  4: {
-    javascript: `function isPalindrome(s) {\n  // Write your solution here\n  \n}`,
-    python: `def isPalindrome(s):\n    # Write your solution here\n    pass\n\nprint(isPalindrome("A man, a plan, a canal: Panama"))  # True\nprint(isPalindrome("race a car"))  # False\nprint(isPalindrome(" "))  # True`,
-    java: `public class Main {\n    public static boolean isPalindrome(String s) {\n        // Write your solution here\n        return false;\n    }\n    public static void main(String[] args) {\n        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));\n        System.out.println(isPalindrome("race a car"));\n        System.out.println(isPalindrome(" "));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nbool isPalindrome(string s) {\n    // Write your solution here\n    return false;\n}\nint main() {\n    cout << isPalindrome("A man, a plan, a canal: Panama") << "\\n";\n    cout << isPalindrome("race a car") << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\n#include <ctype.h>\n#include <string.h>\nint isPalindrome(char* s) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    printf("%d\\n", isPalindrome("A man, a plan, a canal: Panama"));\n    printf("%d\\n", isPalindrome("race a car"));\n    return 0;\n}`,
-  },
-  5: {
-    javascript: `function maxSubArray(nums) {\n  // Write your solution here (Kadane's Algorithm)\n  \n}`,
-    python: `def maxSubArray(nums):\n    # Write your solution here\n    pass\n\nprint(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))  # 6\nprint(maxSubArray([1]))  # 1\nprint(maxSubArray([5,4,-1,7,8]))  # 23`,
-    java: `public class Main {\n    public static int maxSubArray(int[] nums) {\n        // Write your solution here\n        return 0;\n    }\n    public static void main(String[] args) {\n        System.out.println(maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));\n        System.out.println(maxSubArray(new int[]{1}));\n        System.out.println(maxSubArray(new int[]{5,4,-1,7,8}));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nint maxSubArray(vector<int>& nums) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    vector<int> v1 = {-2,1,-3,4,-1,2,1,-5,4};\n    cout << maxSubArray(v1) << "\\n";\n    vector<int> v2 = {5,4,-1,7,8};\n    cout << maxSubArray(v2) << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\nint maxSubArray(int* nums, int n) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    int a[] = {-2,1,-3,4,-1,2,1,-5,4};\n    printf("%d\\n", maxSubArray(a, 9));\n    int b[] = {5,4,-1,7,8};\n    printf("%d\\n", maxSubArray(b, 5));\n    return 0;\n}`,
-  },
-  6: {
-    javascript: `function fib(n) {\n  // Write your solution here\n  \n}`,
-    python: `def fib(n):\n    # Write your solution here\n    pass\n\nprint(fib(2))   # 1\nprint(fib(10))  # 55\nprint(fib(0))   # 0`,
-    java: `public class Main {\n    public static int fib(int n) {\n        // Write your solution here\n        return 0;\n    }\n    public static void main(String[] args) {\n        System.out.println(fib(2));\n        System.out.println(fib(10));\n        System.out.println(fib(0));\n    }\n}`,
-    cpp: `#include <iostream>\nusing namespace std;\nint fib(int n) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    cout << fib(2) << "\\n";\n    cout << fib(10) << "\\n";\n    cout << fib(0) << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\nint fib(int n) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    printf("%d\\n", fib(2));\n    printf("%d\\n", fib(10));\n    printf("%d\\n", fib(0));\n    return 0;\n}`,
-  },
-  7: {
-    javascript: `function climbStairs(n) {\n  // Write your solution here\n  \n}`,
-    python: `def climbStairs(n):\n    # Write your solution here\n    pass\n\nprint(climbStairs(2))   # 2\nprint(climbStairs(3))   # 3\nprint(climbStairs(10))  # 89`,
-    java: `public class Main {\n    public static int climbStairs(int n) {\n        // Write your solution here\n        return 0;\n    }\n    public static void main(String[] args) {\n        System.out.println(climbStairs(2));\n        System.out.println(climbStairs(3));\n        System.out.println(climbStairs(10));\n    }\n}`,
-    cpp: `#include <iostream>\nusing namespace std;\nint climbStairs(int n) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    cout << climbStairs(2) << "\\n";\n    cout << climbStairs(3) << "\\n";\n    cout << climbStairs(10) << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\nint climbStairs(int n) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    printf("%d\\n", climbStairs(2));\n    printf("%d\\n", climbStairs(3));\n    printf("%d\\n", climbStairs(10));\n    return 0;\n}`,
-  },
-  8: {
-    javascript: `function countVowels(s) {\n  // Write your solution here\n  \n}`,
-    python: `def countVowels(s):\n    # Write your solution here\n    pass\n\nprint(countVowels("Hello World"))  # 3\nprint(countVowels("aeiou"))        # 5\nprint(countVowels("xyz"))          # 0`,
-    java: `public class Main {\n    public static int countVowels(String s) {\n        // Write your solution here\n        return 0;\n    }\n    public static void main(String[] args) {\n        System.out.println(countVowels("Hello World"));\n        System.out.println(countVowels("aeiou"));\n        System.out.println(countVowels("xyz"));\n    }\n}`,
-    cpp: `#include <bits/stdc++.h>\nusing namespace std;\nint countVowels(string s) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    cout << countVowels("Hello World") << "\\n";\n    cout << countVowels("aeiou") << "\\n";\n    cout << countVowels("xyz") << "\\n";\n    return 0;\n}`,
-    c: `#include <stdio.h>\n#include <string.h>\nint countVowels(char* s) {\n    // Write your solution here\n    return 0;\n}\nint main() {\n    printf("%d\\n", countVowels("Hello World"));\n    printf("%d\\n", countVowels("aeiou"));\n    printf("%d\\n", countVowels("xyz"));\n    return 0;\n}`,
-  },
-};
+const STARTERS = Object.fromEntries(
+  PRACTICE_QUESTIONS.map((problem) => [
+    problem.id,
+    Object.fromEntries(
+      Object.keys(LANGUAGES).map((languageId) => [
+        languageId,
+        buildStarterForLanguage(problem, languageId),
+      ])
+    ),
+  ])
+);
 
-// ─── Problem Bank ─────────────────────────────────────────────────
-const PROBLEMS = [
-  {
-    id: 1, title: 'Two Sum', difficulty: 'Easy', category: 'Arrays', tags: ['Array', 'Hash Map'],
-    description: `Given an array of integers \`nums\` and an integer \`target\`, return indices of the two numbers such that they add up to \`target\`.\n\nYou may assume that each input would have **exactly one solution**, and you may not use the same element twice.\n\nYou can return the answer in any order.`,
-    examples: [
-      { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]', explanation: 'nums[0] + nums[1] = 2 + 7 = 9' },
-      { input: 'nums = [3,2,4], target = 6', output: '[1,2]', explanation: 'nums[1] + nums[2] = 2 + 4 = 6' },
-    ],
-    constraints: ['2 ≤ nums.length ≤ 10⁴', '-10⁹ ≤ nums[i] ≤ 10⁹', 'Only one valid answer exists.'],
-    testCases: [{ fn: 'twoSum([2,7,11,15], 9)', expected: '[0,1]' }, { fn: 'twoSum([3,2,4], 6)', expected: '[1,2]' }, { fn: 'twoSum([3,3], 6)', expected: '[0,1]' }],
-  },
-  {
-    id: 2, title: 'Reverse a String', difficulty: 'Easy', category: 'Strings', tags: ['String', 'Two Pointers'],
-    description: `Write a function that reverses a string.\n\nReturn the reversed string.`,
-    examples: [{ input: 's = "hello"', output: '"olleh"' }, { input: 's = "Hannah"', output: '"hannaH"' }],
-    constraints: ['1 ≤ s.length ≤ 10⁵'],
-    testCases: [{ fn: 'reverseString("hello")', expected: '"olleh"' }, { fn: 'reverseString("Hannah")', expected: '"hannaH"' }, { fn: 'reverseString("a")', expected: '"a"' }],
-  },
-  {
-    id: 3, title: 'FizzBuzz', difficulty: 'Easy', category: 'Math', tags: ['Math', 'String'],
-    description: `Given an integer \`n\`, return a string array where:\n- "FizzBuzz" if i divisible by 3 and 5\n- "Fizz" if divisible by 3\n- "Buzz" if divisible by 5\n- else the number as string`,
-    examples: [{ input: 'n = 3', output: '["1","2","Fizz"]' }, { input: 'n = 5', output: '["1","2","Fizz","4","Buzz"]' }],
-    constraints: ['1 ≤ n ≤ 10⁴'],
-    testCases: [{ fn: 'fizzBuzz(3)', expected: '["1","2","Fizz"]' }, { fn: 'fizzBuzz(5)', expected: '["1","2","Fizz","4","Buzz"]' }, { fn: 'JSON.stringify(fizzBuzz(15)).includes("FizzBuzz")', expected: 'true' }],
-  },
-  {
-    id: 4, title: 'Valid Palindrome', difficulty: 'Easy', category: 'Strings', tags: ['String', 'Two Pointers'],
-    description: `A phrase is a **palindrome** if, after converting to lowercase and removing non-alphanumeric characters, it reads the same forward and backward.\n\nReturn \`true\` if palindrome, \`false\` otherwise.`,
-    examples: [{ input: '"A man, a plan, a canal: Panama"', output: 'true' }, { input: '"race a car"', output: 'false' }],
-    constraints: ['1 ≤ s.length ≤ 2×10⁵'],
-    testCases: [{ fn: 'isPalindrome("A man, a plan, a canal: Panama")', expected: 'true' }, { fn: 'isPalindrome("race a car")', expected: 'false' }, { fn: 'isPalindrome(" ")', expected: 'true' }],
-  },
-  {
-    id: 5, title: 'Maximum Subarray', difficulty: 'Medium', category: 'Dynamic Programming', tags: ['Array', 'DP'],
-    description: `Given an integer array \`nums\`, find the subarray with the largest sum and return its sum.`,
-    examples: [{ input: '[-2,1,-3,4,-1,2,1,-5,4]', output: '6', explanation: '[4,-1,2,1] has sum 6' }],
-    constraints: ['1 ≤ nums.length ≤ 10⁵'],
-    testCases: [{ fn: 'maxSubArray([-2,1,-3,4,-1,2,1,-5,4])', expected: '6' }, { fn: 'maxSubArray([1])', expected: '1' }, { fn: 'maxSubArray([5,4,-1,7,8])', expected: '23' }],
-  },
-  {
-    id: 6, title: 'Fibonacci Number', difficulty: 'Easy', category: 'Recursion', tags: ['Math', 'Recursion'],
-    description: `Given \`n\`, calculate F(n) where F(0)=0, F(1)=1, and each subsequent number is the sum of the two preceding ones.`,
-    examples: [{ input: 'n = 2', output: '1' }, { input: 'n = 10', output: '55' }],
-    constraints: ['0 ≤ n ≤ 30'],
-    testCases: [{ fn: 'fib(2)', expected: '1' }, { fn: 'fib(10)', expected: '55' }, { fn: 'fib(0)', expected: '0' }],
-  },
-  {
-    id: 7, title: 'Climbing Stairs', difficulty: 'Medium', category: 'Dynamic Programming', tags: ['DP', 'Math'],
-    description: `You are climbing a staircase. It takes \`n\` steps to reach the top. Each time you can climb 1 or 2 steps. How many distinct ways can you climb?`,
-    examples: [{ input: 'n = 2', output: '2', explanation: '(1+1) or (2)' }, { input: 'n = 3', output: '3' }],
-    constraints: ['1 ≤ n ≤ 45'],
-    testCases: [{ fn: 'climbStairs(2)', expected: '2' }, { fn: 'climbStairs(3)', expected: '3' }, { fn: 'climbStairs(10)', expected: '89' }],
-  },
-  {
-    id: 8, title: 'Count Vowels', difficulty: 'Easy', category: 'Strings', tags: ['String', 'Counting'],
-    description: `Given a string \`s\`, return the number of vowels (a, e, i, o, u — both cases).`,
-    examples: [{ input: '"Hello World"', output: '3' }, { input: '"aeiou"', output: '5' }],
-    constraints: ['1 ≤ s.length ≤ 10⁵'],
-    testCases: [{ fn: 'countVowels("Hello World")', expected: '3' }, { fn: 'countVowels("aeiou")', expected: '5' }, { fn: 'countVowels("xyz")', expected: '0' }],
-  },
-];
+const PROBLEMS = PRACTICE_QUESTIONS;
 
 const DIFFICULTY_COLOR = {
   Easy:   { color: '#34d399', bg: 'rgba(52,211,153,0.1)',  border: 'rgba(52,211,153,0.25)' },
