@@ -21,12 +21,13 @@ export const getLeaderboard = async (limitCount = 10) => {
     return leaderboard;
   } catch (error) {
     console.error("Error fetching leaderboard:", error);
-    return [];
+    // Throw so callers can surface the error to the UI
+    throw error;
   }
 };
 
 // Real-time leaderboard subscription
-export const subscribeToLeaderboard = (callback, limitCount = 10) => {
+export const subscribeToLeaderboard = (callback, limitCount = 10, onError) => {
   const q = query(collection(db, "users"), orderBy("totalPoints", "desc"), limit(limitCount));
   return onSnapshot(
     q,
@@ -47,7 +48,11 @@ export const subscribeToLeaderboard = (callback, limitCount = 10) => {
     },
     (error) => {
       console.error("Leaderboard subscription error (check Firestore rules / indexes):", error);
-      callback([]);
+      if (typeof onError === 'function') {
+        onError(error);
+      } else {
+        callback([]);
+      }
     }
   );
 };

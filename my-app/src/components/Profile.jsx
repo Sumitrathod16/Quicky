@@ -23,6 +23,7 @@ const Profile = () => {
 
   // Real data states
   const [leaderboard, setLeaderboard] = useState([]);
+  const [leaderboardError, setLeaderboardError] = useState(null);
   const [userAssignments, setUserAssignments] = useState([]);
   const [weeklyActivity, setWeeklyActivity] = useState([]);
 
@@ -33,15 +34,28 @@ const Profile = () => {
   // Fetch real data on component mount
   useEffect(() => {
     if (user) {
-      // Fetch leaderboard
-      getLeaderboard(10).then(setLeaderboard);
+      // Fetch leaderboard (surface errors)
+      (async () => {
+        try {
+          const lb = await getLeaderboard(10);
+          setLeaderboard(lb);
+          setLeaderboardError(null);
+        } catch (err) {
+          console.error('Leaderboard fetch error:', err);
+          setLeaderboard([]);
+          setLeaderboardError(err?.message || 'Failed to load leaderboard');
+        }
+      })();
 
-      // Subscribe to real-time leaderboard updates
-      const unsubscribe = subscribeToLeaderboard(setLeaderboard, 10);
+      // Subscribe to real-time leaderboard updates (provide onError handler)
+      const unsubscribe = subscribeToLeaderboard(setLeaderboard, 10, (err) => {
+        console.error('Leaderboard subscription error:', err);
+        setLeaderboard([]);
+        setLeaderboardError(err?.message || 'Leaderboard subscription failed');
+      });
 
       // Fetch user assignments
-      getUserAssignments(user.uid).then(setUserAssignments);
-
+      getUserAssignments(user.uid).then(setUserAssignments).catch(() => {});
       // Generate weekly activity from login history
       if (profile?.loginHistory) {
         const last7Days = Array.from({ length: 7 }, (_, i) => {
@@ -455,14 +469,36 @@ const Profile = () => {
           <h2>🏆 Leaderboard</h2>
           <div className="leaderboard-list">
             {leaderboard.length === 0 ? (
-              <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', padding: '20px 0' }}>No leaderboard data yet.</div>
+              leaderboardError ? (
+                <div style={{ textAlign: 'center', color: '#f87171', fontSize: '0.9rem', padding: '18px 0' }}>
+                  Failed to load leaderboard: {leaderboardError}
+                </div>
+              ) : (
+                <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', padding: '20px 0' }}>No leaderboard data yet.</div>
+              )
             ) : leaderboard.map((userData, index) => (
               <div
                 key={userData.uid}
                 className={`leaderboard-item ${userData.uid === user?.uid ? 'current-user' : ''}`}
               >
                 <div className="rank">#{index + 1}</div>
-                <div className="avatar">{(userData.avatar || userData.name?.[0] || '?').toString().toUpperCase()}</div>
+                <div className="avatar">
+                  {(() => {
+                    const av = userData.avatar;
+                    const isUrl = typeof av === 'string' && /^https?:\/\//i.test(av);
+                    if (isUrl) {
+                      return (
+                        <img
+                          src={av}
+                          alt={userData.name || 'avatar'}
+                          className="leaderboard-avatar-img"
+                          style={{ width: 36, height: 36, borderRadius: 999 }}
+                        />
+                      );
+                    }
+                    return (av || userData.name?.[0] || '?').toString().toUpperCase();
+                  })()}
+                </div>
                 <div className="user-info">
                   <span className="name">{userData.name}</span>
                   <span className="points">{(userData.points || 0).toLocaleString()} XP</span>

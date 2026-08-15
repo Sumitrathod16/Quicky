@@ -3,7 +3,9 @@ import { createRoot } from 'react-dom/client'
 import  {AuthProvider}  from './context/Authcontext.jsx'
 import './index.css'
 import App from './App.jsx'
-import { Toaster } from 'react-hot-toast'
+import { Toaster, toast } from 'react-hot-toast'
+import { logClientError } from './services/logService'
+import { auth } from './firebase/firebase'
 
 
 
@@ -58,3 +60,28 @@ createRoot(document.getElementById('root')).render(
     </AuthProvider>
 </StrictMode>
 )
+
+// Capture unhandled promise rejections to aid debugging
+window.addEventListener('unhandledrejection', (event) => {
+  try {
+    console.error('Unhandled rejection captured:', event.reason);
+    const msg = event.reason?.message || String(event.reason) || 'Unhandled promise rejection';
+    // show a non-intrusive toast so user sees the error
+    toast.error(`Error: ${msg}`);
+    // send to Firestore for later inspection (best-effort)
+    try {
+      logClientError({
+        message: msg,
+        stack: event.reason?.stack || null,
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        userUid: auth?.currentUser?.uid || null,
+      });
+    } catch (e) {
+      console.error('Failed to call logClientError:', e);
+    }
+  } catch (e) {
+    console.error('Error handling unhandledrejection:', e);
+  }
+});
