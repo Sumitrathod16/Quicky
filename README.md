@@ -15,7 +15,6 @@
   <img src="https://img.shields.io/badge/React-19.1-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
   <img src="https://img.shields.io/badge/Vite-7.1-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite 7" />
   <img src="https://img.shields.io/badge/Firebase-v12-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
 </p>
 
 ---
@@ -233,9 +232,5 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
-
-<p align="center">Made with ❤️ by <a href="https://github.com/Sumitrathod16">Sumit Rathod</a></p>
+<p align="center">Made with ❤️ by <a href="https://github.com/Sumitrathod16">Sumit Rathod</a>&
+<a href= "https://github.com/areenphadtare"> Areen Phadtare</a></p>
