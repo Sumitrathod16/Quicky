@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { loadAllCodes, loadSolvedIds } from '../services/practiceService';
+import { loadAllCodes, loadSolvedIds, loadStreak } from '../services/practiceService';
 import { useAuth } from '../context/useAuth';
 import { PRACTICE_QUESTIONS } from '../data/practiceQuestions';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
@@ -13,12 +13,17 @@ export default function PracticeDashboard() {
   const { user } = useAuth();
   const [solvedIds, setSolvedIds]   = useState(new Set());
   const [savedCodes, setSavedCodes] = useState({});
+  const [streak, setStreak]         = useState({ currentStreak: 0, bestStreak: 0 });
   const [loading, setLoading]       = useState(true);
 
   useEffect(() => {
     if (!user?.uid) { setLoading(false); return; }
-    Promise.all([loadSolvedIds(user.uid), loadAllCodes(user.uid)])
-      .then(([ids, codes]) => { setSolvedIds(ids); setSavedCodes(codes); })
+    Promise.all([loadSolvedIds(user.uid), loadAllCodes(user.uid), loadStreak(user.uid)])
+      .then(([ids, codes, streakData]) => { 
+        setSolvedIds(ids); 
+        setSavedCodes(codes);
+        setStreak(streakData || { currentStreak: 0, bestStreak: 0 });
+      })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [user?.uid]);
@@ -99,7 +104,9 @@ export default function PracticeDashboard() {
         {[
           { icon: '✅', label: 'Solved',    value: totalSolved,      color: '#34d399' },
           { icon: '⚡', label: 'Attempted', value: totalAttempted,   color: '#fbbf24' },
-          { icon: '📚', label: 'Total',     value: totalProblems,    color: '#4f46e5' },
+          { icon: '�', label: 'Streak',    value: streak.currentStreak, color: '#f97316' },
+          { icon: '🏆', label: 'Best Streak', value: streak.bestStreak, color: '#ec4899' },
+          { icon: '�📚', label: 'Total',     value: totalProblems,    color: '#4f46e5' },
           { icon: '📈', label: 'Progress',  value: `${progressPct}%`,color: '#3b82f6' },
         ].map(s => (
           <div key={s.label} style={styles.statCard}>
@@ -228,7 +235,7 @@ const styles = {
   sectionTitle: { margin: 0, fontSize: '1.2rem', fontWeight: 700, color: '#1e1b4b', letterSpacing: '-0.02em' },
   sectionSub: { margin: '2px 0 0', fontSize: '0.78rem', color: '#6b7280' },
   practiceLink: { marginLeft: 'auto', padding: '7px 16px', background: 'linear-gradient(135deg, #4f46e5, #0ea5e9)', borderRadius: 8, color: '#1e1b4b', fontWeight: 600, fontSize: '0.8rem', textDecoration: 'none', flexShrink: 0 },
-  statRow: { display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 20 },
+  statRow: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(130px,1fr))', gap: 12, marginBottom: 20 },
   statCard: { background: '#ffffff', border: '1px solid #e5e7eb', borderRadius: 14, padding: '16px 12px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 },
   statValue: { fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.03em' },
   statLabel: { fontSize: '0.72rem', color: '#6b7280', fontWeight: 500 },

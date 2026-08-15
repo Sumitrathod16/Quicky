@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useAuth } from '../../context/useAuth';
-import { saveCode, loadAllCodes, saveSolvedIds, loadSolvedIds } from '../../services/practiceService';
+import { saveCode, loadAllCodes, saveSolvedIds, loadSolvedIds, updateStreak } from '../../services/practiceService';
 import { PRACTICE_QUESTIONS, buildStarterForLanguage } from '../../data/practiceQuestions';
 import toast from 'react-hot-toast';
 
@@ -83,7 +83,7 @@ export default function Practice() {
   const [stderr, setStderr]           = useState('');
   const [running, setRunning]         = useState(false);
   const [submitted, setSubmitted]     = useState(false);
-  const [filter, setFilter]           = useState({ difficulty: 'All', category: 'All' });
+  const [filter, setFilter]           = useState({ difficulty: 'All', category: 'All', search: '' });
   const [solvedIds, setSolvedIds]     = useState(new Set());
   const [activeTab, setActiveTab]     = useState('description');
   const [dbLoading, setDbLoading]     = useState(true);
@@ -138,8 +138,13 @@ export default function Practice() {
   const langCfg    = LANGUAGES[lang];
   const currentCode = codes[selectedId]?.[lang] || '';
   const filtered    = PROBLEMS.filter(p => {
-    return (filter.difficulty === 'All' || p.difficulty === filter.difficulty) &&
-           (filter.category   === 'All' || p.category   === filter.category);
+    const matchesDifficulty = filter.difficulty === 'All' || p.difficulty === filter.difficulty;
+    const matchesCategory = filter.category === 'All' || p.category === filter.category;
+    const matchesSearch = !filter.search || 
+      p.title.toLowerCase().includes(filter.search) || 
+      p.category.toLowerCase().includes(filter.search) ||
+      p.tags?.some(t => t.toLowerCase().includes(filter.search));
+    return matchesDifficulty && matchesCategory && matchesSearch;
   });
 
   const setCode = (val) => {
@@ -175,11 +180,16 @@ export default function Practice() {
           const next = new Set([...solvedIds, selectedId]);
           setSolvedIds(next);
           if (user?.uid) {
-            saveSolvedIds(user.uid, next)
-              .then(() => toast.success('Progress saved', { id: 'practice-progress' }))
+            Promise.all([
+              saveSolvedIds(user.uid, next),
+              updateStreak(user.uid)
+            ])
+              .then(([_, streakData]) => {
+                toast.success(`✅ Problem solved! 🔥 Streak: ${streakData?.currentStreak || 1}`, { id: 'practice-progress' });
+              })
               .catch((e) => {
                 console.error(e);
-                toast.error('Progress save failed', { id: 'practice-progress' });
+                toast.error('⚠️ Could not save progress. Try again?', { id: 'practice-progress' });
               });
           }
         }
@@ -193,16 +203,25 @@ export default function Practice() {
           const next = new Set([...solvedIds, selectedId]);
           setSolvedIds(next);
           if (user?.uid) {
-            saveSolvedIds(user.uid, next)
-              .then(() => toast.success('Progress saved', { id: 'practice-progress' }))
+            Promise.all([
+              saveSolvedIds(user.uid, next),
+              updateStreak(user.uid)
+            ])
+              .then(([_, streakData]) => {
+                toast.success(`✅ Problem solved! 🔥 Streak: ${streakData?.currentStreak || 1}`, { id: 'practice-progress' });
+              })
               .catch((e) => {
                 console.error(e);
-                toast.error('Progress save failed', { id: 'practice-progress' });
+                toast.error('⚠️ Could not save progress. Try again?', { id: 'practice-progress' });
               });
           }
+        } else if (out.stderr) {
+          toast.error('❌ Code has errors. Check output below.', { id: 'practice-error' });
         }
-      } catch {
-        setStderr('Network error.'); setRunning(false);
+      } catch (err) {
+        setStderr('❌ Network error: Could not reach code execution service.'); 
+        setRunning(false);
+        toast.error('🌐 Network error. Check your connection.', { id: 'practice-network' });
       }
     }
   }, [currentCode, problem, langCfg, selectedId, solvedIds, user]);
@@ -340,7 +359,14 @@ export default function Practice() {
         {/* Sidebar */}
         <aside className="practice-sidebar">
           <div className="sidebar-header">
-            <p className="sidebar-title">🧩 Problems</p>
+            <p className="sidebar-title">🧩 Problems ({filtered.length})</p>
+            <input
+              type="text"
+              placeholder="Search titles, tags..."
+              className="filter-select"
+              style={{ marginBottom: '6px', padding: '7px 10px' }}
+              onChange={e => setFilter(f => ({ ...f, search: e.target.value.toLowerCase() }))}
+            />
             <select className="filter-select" value={filter.difficulty} onChange={e => setFilter(f => ({ ...f, difficulty: e.target.value }))}>
               {['All','Easy','Medium','Hard'].map(d => <option key={d}>{d}</option>)}
             </select>
