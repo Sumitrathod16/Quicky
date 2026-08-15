@@ -232,5 +232,5 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-<p align="center">Made with ❤️ by <a href="https://github.com/Sumitrathod16">Sumit Rathod</a>,
+<p align="center">Made with ❤️ by <a href="https://github.com/Sumitrathod16">Sumit Rathod</a>&
 <a href= "https://github.com/areenphadtare"> Areen Phadtare</a></p>
