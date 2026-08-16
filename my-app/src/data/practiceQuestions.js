@@ -925,6 +925,940 @@ int** generate(int numRows, int* outRows) {
 }`,
     },
   },
+  {
+    id: 21,
+    title: 'Valid Parentheses',
+    difficulty: 'Easy',
+    category: 'Stacks & Queues',
+    tags: ['Stack', 'String'],
+    functionName: 'isValid',
+    description: `Given a string \`s\` containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if open brackets are closed by the same type of brackets, in the correct order, and every close bracket has a corresponding open bracket.`,
+    examples: [
+      { input: 's = "()"', output: 'true' },
+      { input: 's = "()[]{}"', output: 'true' },
+      { input: 's = "(]"', output: 'false' },
+    ],
+    constraints: ['1 ≤ s.length ≤ 10⁴', 's consists of parentheses only \'()[]{}\'.'],
+    testCases: [
+      { fn: 'isValid("()")', expected: 'true' },
+      { fn: 'isValid("()[]{}")', expected: 'true' },
+      { fn: 'isValid("(]")', expected: 'false' },
+      { fn: 'isValid("([)]")', expected: 'false' },
+    ],
+    starterCode: {
+      javascript: `function isValid(s) {
+  // Write your solution here
+  return false;
+}`,
+      python: `def isValid(s):
+    # Write your solution here
+    return False
+`,
+      java: `import java.util.*;
+public class Main {
+    public static boolean isValid(String s) {
+        // Write your solution here
+        return false;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+bool isValid(string s) {
+    // Write your solution here
+    return false;
+}`,
+      c: `#include <stdio.h>
+#include <stdbool.h>
+bool isValid(char* s) {
+    // Write your solution here
+    return false;
+}`,
+    },
+  },
+  {
+    id: 22,
+    title: 'Binary Tree Inorder Traversal',
+    difficulty: 'Easy',
+    category: 'Trees',
+    tags: ['Tree', 'DFS', 'Stack'],
+    functionName: 'inorderTraversal',
+    description: `Given an array representation of a binary tree \`root\`, return the inorder traversal of its nodes' values.`,
+    examples: [
+      { input: 'root = [1,null,2,3]', output: '[1,3,2]' },
+      { input: 'root = []', output: '[]' },
+      { input: 'root = [1]', output: '[1]' },
+    ],
+    constraints: ['The number of nodes in the tree is in the range [0, 100].'],
+    testCases: [
+      { fn: 'JSON.stringify(inorderTraversal([1, null, 2, 3]))', expected: '[1,3,2]' },
+      { fn: 'JSON.stringify(inorderTraversal([]))', expected: '[]' },
+      { fn: 'JSON.stringify(inorderTraversal([1]))', expected: '[1]' },
+    ],
+    starterCode: {
+      javascript: `function inorderTraversal(root) {
+  // Write your solution here
+  return [];
+}`,
+      python: `def inorderTraversal(root):
+    # Write your solution here
+    return []
+`,
+      java: `import java.util.*;
+public class Main {
+    public static List<Integer> inorderTraversal(Integer[] root) {
+        // Write your solution here
+        return new ArrayList<>();
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<int> inorderTraversal(vector<int> root) {
+    // Write your solution here
+    return {};
+}`,
+      c: `#include <stdio.h>
+int* inorderTraversal(int* root, int n, int* returnSize) {
+    // Write your solution here
+    *returnSize = 0;
+    return NULL;
+}`,
+    },
+  },
+  {
+    id: 23,
+    title: 'Maximum Depth of Binary Tree',
+    difficulty: 'Easy',
+    category: 'Trees',
+    tags: ['Tree', 'DFS', 'BFS'],
+    functionName: 'maxDepth',
+    description: `Given the root array representation of a binary tree, return its maximum depth. Maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.`,
+    examples: [
+      { input: 'root = [3,9,20,null,null,15,7]', output: '3' },
+      { input: 'root = [1,null,2]', output: '2' },
+    ],
+    constraints: ['0 ≤ number of nodes ≤ 10⁴'],
+    testCases: [
+      { fn: 'maxDepth([3,9,20,null,null,15,7])', expected: '3' },
+      { fn: 'maxDepth([1,null,2])', expected: '2' },
+      { fn: 'maxDepth([])', expected: '0' },
+    ],
+    starterCode: {
+      javascript: `function maxDepth(root) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def maxDepth(root):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int maxDepth(Integer[] root) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int maxDepth(vector<int> root) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int maxDepth(int* root, int n) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 24,
+    title: 'Invert Binary Tree',
+    difficulty: 'Easy',
+    category: 'Trees',
+    tags: ['Tree', 'DFS', 'BFS'],
+    functionName: 'invertTree',
+    description: `Given the root array of a binary tree, invert the tree (mirror left and right subtrees) and return its root array.`,
+    examples: [
+      { input: 'root = [4,2,7,1,3,6,9]', output: '[4,7,2,9,6,3,1]' },
+      { input: 'root = [2,1,3]', output: '[2,3,1]' },
+    ],
+    constraints: ['0 ≤ number of nodes ≤ 100'],
+    testCases: [
+      { fn: 'JSON.stringify(invertTree([4,2,7,1,3,6,9]))', expected: '[4,7,2,9,6,3,1]' },
+      { fn: 'JSON.stringify(invertTree([2,1,3]))', expected: '[2,3,1]' },
+    ],
+    starterCode: {
+      javascript: `function invertTree(root) {
+  // Write your solution here
+  return root;
+}`,
+      python: `def invertTree(root):
+    # Write your solution here
+    return root
+`,
+      java: `public class Main {
+    public static Integer[] invertTree(Integer[] root) {
+        // Write your solution here
+        return root;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<int> invertTree(vector<int> root) {
+    // Write your solution here
+    return root;
+}`,
+      c: `#include <stdio.h>
+int* invertTree(int* root, int n) {
+    // Write your solution here
+    return root;
+}`,
+    },
+  },
+  {
+    id: 25,
+    title: 'Binary Search',
+    difficulty: 'Easy',
+    category: 'Searching',
+    tags: ['Binary Search', 'Array'],
+    functionName: 'search',
+    description: `Given an array of integers \`nums\` which is sorted in ascending order, and an integer \`target\`, write a function to search \`target\` in \`nums\`. Return its index if found, else return -1.`,
+    examples: [
+      { input: 'nums = [-1,0,3,5,9,12], target = 9', output: '4' },
+      { input: 'nums = [-1,0,3,5,9,12], target = 2', output: '-1' },
+    ],
+    constraints: ['1 ≤ nums.length ≤ 10⁴', 'All integers in nums are unique.'],
+    testCases: [
+      { fn: 'search([-1,0,3,5,9,12], 9)', expected: '4' },
+      { fn: 'search([-1,0,3,5,9,12], 2)', expected: '-1' },
+      { fn: 'search([5], 5)', expected: '0' },
+    ],
+    starterCode: {
+      javascript: `function search(nums, target) {
+  // Write your solution here
+  return -1;
+}`,
+      python: `def search(nums, target):
+    # Write your solution here
+    return -1
+`,
+      java: `public class Main {
+    public static int search(int[] nums, int target) {
+        // Write your solution here
+        return -1;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int search(vector<int>& nums, int target) {
+    // Write your solution here
+    return -1;
+}`,
+      c: `#include <stdio.h>
+int search(int* nums, int n, int target) {
+    // Write your solution here
+    return -1;
+}`,
+    },
+  },
+  {
+    id: 26,
+    title: 'Reverse Linked List',
+    difficulty: 'Easy',
+    category: 'Linked Lists',
+    tags: ['Linked List', 'Recursion'],
+    functionName: 'reverseList',
+    description: `Given the head array of a singly linked list, reverse the list, and return the reversed list array.`,
+    examples: [
+      { input: 'head = [1,2,3,4,5]', output: '[5,4,3,2,1]' },
+      { input: 'head = [1,2]', output: '[2,1]' },
+    ],
+    constraints: ['0 ≤ number of nodes ≤ 5000'],
+    testCases: [
+      { fn: 'JSON.stringify(reverseList([1,2,3,4,5]))', expected: '[5,4,3,2,1]' },
+      { fn: 'JSON.stringify(reverseList([1,2]))', expected: '[2,1]' },
+      { fn: 'JSON.stringify(reverseList([]))', expected: '[]' },
+    ],
+    starterCode: {
+      javascript: `function reverseList(head) {
+  // Write your solution here
+  return [];
+}`,
+      python: `def reverseList(head):
+    # Write your solution here
+    return []
+`,
+      java: `public class Main {
+    public static int[] reverseList(int[] head) {
+        // Write your solution here
+        return new int[]{};
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<int> reverseList(vector<int> head) {
+    // Write your solution here
+    return {};
+}`,
+      c: `#include <stdio.h>
+int* reverseList(int* head, int n) {
+    // Write your solution here
+    return head;
+}`,
+    },
+  },
+  {
+    id: 27,
+    title: 'Linked List Cycle',
+    difficulty: 'Easy',
+    category: 'Linked Lists',
+    tags: ['Linked List', 'Two Pointers'],
+    functionName: 'hasCycle',
+    description: `Given an array representing a linked list and an index \`pos\` indicating where the tail points to (-1 for no cycle), determine if the linked list has a cycle in it.`,
+    examples: [
+      { input: 'head = [3,2,0,-4], pos = 1', output: 'true' },
+      { input: 'head = [1,2], pos = 0', output: 'true' },
+      { input: 'head = [1], pos = -1', output: 'false' },
+    ],
+    constraints: ['0 ≤ number of nodes ≤ 10⁴'],
+    testCases: [
+      { fn: 'hasCycle([3,2,0,-4], 1)', expected: 'true' },
+      { fn: 'hasCycle([1,2], 0)', expected: 'true' },
+      { fn: 'hasCycle([1], -1)', expected: 'false' },
+    ],
+    starterCode: {
+      javascript: `function hasCycle(head, pos) {
+  // Write your solution here
+  return false;
+}`,
+      python: `def hasCycle(head, pos):
+    # Write your solution here
+    return False
+`,
+      java: `public class Main {
+    public static boolean hasCycle(int[] head, int pos) {
+        // Write your solution here
+        return false;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+bool hasCycle(vector<int> head, int pos) {
+    // Write your solution here
+    return false;
+}`,
+      c: `#include <stdio.h>
+int hasCycle(int* head, int n, int pos) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 28,
+    title: 'Coin Change',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    tags: ['DP', 'BFS'],
+    functionName: 'coinChange',
+    description: `You are given an integer array \`coins\` representing coins of different denominations and an integer \`amount\`. Return the fewest number of coins that you need to make up that amount. Return -1 if that amount of money cannot be made up.`,
+    examples: [
+      { input: 'coins = [1,2,5], amount = 11', output: '3', explanation: '11 = 5 + 5 + 1' },
+      { input: 'coins = [2], amount = 3', output: '-1' },
+      { input: 'coins = [1], amount = 0', output: '0' },
+    ],
+    constraints: ['1 ≤ coins.length ≤ 12', '1 ≤ coins[i] ≤ 2³¹ - 1', '0 ≤ amount ≤ 10⁴'],
+    testCases: [
+      { fn: 'coinChange([1,2,5], 11)', expected: '3' },
+      { fn: 'coinChange([2], 3)', expected: '-1' },
+      { fn: 'coinChange([1], 0)', expected: '0' },
+    ],
+    starterCode: {
+      javascript: `function coinChange(coins, amount) {
+  // Write your solution here
+  return -1;
+}`,
+      python: `def coinChange(coins, amount):
+    # Write your solution here
+    return -1
+`,
+      java: `public class Main {
+    public static int coinChange(int[] coins, int amount) {
+        // Write your solution here
+        return -1;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int coinChange(vector<int>& coins, int amount) {
+    // Write your solution here
+    return -1;
+}`,
+      c: `#include <stdio.h>
+int coinChange(int* coins, int n, int amount) {
+    // Write your solution here
+    return -1;
+}`,
+    },
+  },
+  {
+    id: 29,
+    title: 'Longest Substring Without Repeating Characters',
+    difficulty: 'Medium',
+    category: 'Sliding Window',
+    tags: ['Sliding Window', 'Hash Table', 'String'],
+    functionName: 'lengthOfLongestSubstring',
+    description: `Given a string \`s\`, find the length of the longest substring without repeating characters.`,
+    examples: [
+      { input: 's = "abcabcbb"', output: '3', explanation: 'The answer is "abc", with length 3.' },
+      { input: 's = "bbbbb"', output: '1' },
+      { input: 's = "pwwkew"', output: '3' },
+    ],
+    constraints: ['0 ≤ s.length ≤ 5×10⁴'],
+    testCases: [
+      { fn: 'lengthOfLongestSubstring("abcabcbb")', expected: '3' },
+      { fn: 'lengthOfLongestSubstring("bbbbb")', expected: '1' },
+      { fn: 'lengthOfLongestSubstring("pwwkew")', expected: '3' },
+    ],
+    starterCode: {
+      javascript: `function lengthOfLongestSubstring(s) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def lengthOfLongestSubstring(s):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int lengthOfLongestSubstring(String s) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int lengthOfLongestSubstring(string s) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+#include <string.h>
+int lengthOfLongestSubstring(char* s) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 30,
+    title: 'Container With Most Water',
+    difficulty: 'Medium',
+    category: 'Two Pointers',
+    tags: ['Two Pointers', 'Array', 'Greedy'],
+    functionName: 'maxArea',
+    description: `Given an integer array \`height\` of length n, find two lines that together with the x-axis form a container that holds the maximum amount of water. Return the maximum area.`,
+    examples: [
+      { input: 'height = [1,8,6,2,5,4,8,3,7]', output: '49' },
+      { input: 'height = [1,1]', output: '1' },
+    ],
+    constraints: ['2 ≤ height.length ≤ 10⁵', '0 ≤ height[i] ≤ 10⁴'],
+    testCases: [
+      { fn: 'maxArea([1,8,6,2,5,4,8,3,7])', expected: '49' },
+      { fn: 'maxArea([1,1])', expected: '1' },
+    ],
+    starterCode: {
+      javascript: `function maxArea(height) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def maxArea(height):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int maxArea(int[] height) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int maxArea(vector<int>& height) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int maxArea(int* height, int n) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 31,
+    title: '3Sum',
+    difficulty: 'Medium',
+    category: 'Two Pointers',
+    tags: ['Array', 'Two Pointers', 'Sorting'],
+    functionName: 'threeSum',
+    description: `Given an integer array \`nums\`, return all unique triplets \`[nums[i], nums[j], nums[k]]\` such that \`i != j\`, \`i != k\`, \`j != k\`, and \`nums[i] + nums[j] + nums[k] == 0\`.`,
+    examples: [
+      { input: 'nums = [-1,0,1,2,-1,-4]', output: '[[-1,-1,2],[-1,0,1]]' },
+      { input: 'nums = [0,1,1]', output: '[]' },
+    ],
+    constraints: ['3 ≤ nums.length ≤ 3000', '-10⁵ ≤ nums[i] ≤ 10⁵'],
+    testCases: [
+      { fn: 'JSON.stringify(threeSum([-1,0,1,2,-1,-4]))', expected: '[[-1,-1,2],[-1,0,1]]' },
+      { fn: 'JSON.stringify(threeSum([0,1,1]))', expected: '[]' },
+      { fn: 'JSON.stringify(threeSum([0,0,0]))', expected: '[[0,0,0]]' },
+    ],
+    starterCode: {
+      javascript: `function threeSum(nums) {
+  // Write your solution here
+  return [];
+}`,
+      python: `def threeSum(nums):
+    # Write your solution here
+    return []
+`,
+      java: `import java.util.*;
+public class Main {
+    public static List<List<Integer>> threeSum(int[] nums) {
+        // Write your solution here
+        return new ArrayList<>();
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<vector<int>> threeSum(vector<int>& nums) {
+    // Write your solution here
+    return {};
+}`,
+      c: `#include <stdio.h>
+int** threeSum(int* nums, int n, int* returnSize) {
+    // Write your solution here
+    *returnSize = 0;
+    return NULL;
+}`,
+    },
+  },
+  {
+    id: 32,
+    title: 'Number of Islands',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    tags: ['Graph', 'DFS', 'BFS', 'Matrix'],
+    functionName: 'numIslands',
+    description: `Given an m x n 2D binary grid \`grid\` which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.`,
+    examples: [
+      { input: 'grid = [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]', output: '1' },
+      { input: 'grid = [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]', output: '3' },
+    ],
+    constraints: ['m == grid.length', 'n == grid[i].length', '1 ≤ m, n ≤ 300', 'grid[i][j] is \'0\' or \'1\'.'],
+    testCases: [
+      { fn: 'numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]])', expected: '1' },
+      { fn: 'numIslands([["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]])', expected: '3' },
+    ],
+    starterCode: {
+      javascript: `function numIslands(grid) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def numIslands(grid):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int numIslands(char[][] grid) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int numIslands(vector<vector<char>>& grid) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int numIslands(char** grid, int rowSize, int colSize) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 33,
+    title: 'Search in Rotated Sorted Array',
+    difficulty: 'Medium',
+    category: 'Searching',
+    tags: ['Array', 'Binary Search'],
+    functionName: 'searchRotated',
+    description: `Given an integer array \`nums\` sorted in ascending order (with distinct values) that has been rotated at an unknown pivot index, and an integer \`target\`, return the index of \`target\` if it is in \`nums\`, or -1 if it is not.`,
+    examples: [
+      { input: 'nums = [4,5,6,7,0,1,2], target = 0', output: '4' },
+      { input: 'nums = [4,5,6,7,0,1,2], target = 3', output: '-1' },
+    ],
+    constraints: ['1 ≤ nums.length ≤ 5000', '-10⁴ ≤ nums[i] ≤ 10⁴'],
+    testCases: [
+      { fn: 'searchRotated([4,5,6,7,0,1,2], 0)', expected: '4' },
+      { fn: 'searchRotated([4,5,6,7,0,1,2], 3)', expected: '-1' },
+      { fn: 'searchRotated([1], 0)', expected: '-1' },
+    ],
+    starterCode: {
+      javascript: `function searchRotated(nums, target) {
+  // Write your solution here
+  return -1;
+}`,
+      python: `def searchRotated(nums, target):
+    # Write your solution here
+    return -1
+`,
+      java: `public class Main {
+    public static int searchRotated(int[] nums, int target) {
+        // Write your solution here
+        return -1;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int searchRotated(vector<int>& nums, int target) {
+    // Write your solution here
+    return -1;
+}`,
+      c: `#include <stdio.h>
+int searchRotated(int* nums, int n, int target) {
+    // Write your solution here
+    return -1;
+}`,
+    },
+  },
+  {
+    id: 34,
+    title: 'Trapping Rain Water',
+    difficulty: 'Hard',
+    category: 'Two Pointers',
+    tags: ['Two Pointers', 'Stack', 'DP'],
+    functionName: 'trap',
+    description: `Given \`n\` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.`,
+    examples: [
+      { input: 'height = [0,1,0,2,1,0,1,3,2,1,2,1]', output: '6' },
+      { input: 'height = [4,2,0,3,2,5]', output: '9' },
+    ],
+    constraints: ['n == height.length', '1 ≤ n ≤ 2×10⁴', '0 ≤ height[i] ≤ 10⁵'],
+    testCases: [
+      { fn: 'trap([0,1,0,2,1,0,1,3,2,1,2,1])', expected: '6' },
+      { fn: 'trap([4,2,0,3,2,5])', expected: '9' },
+    ],
+    starterCode: {
+      javascript: `function trap(height) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def trap(height):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int trap(int[] height) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int trap(vector<int>& height) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int trap(int* height, int n) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 35,
+    title: 'Single Number',
+    difficulty: 'Easy',
+    category: 'Bit Manipulation',
+    tags: ['Bit Manipulation', 'Array'],
+    functionName: 'singleNumber',
+    description: `Given a non-empty array of integers \`nums\`, every element appears twice except for one. Find that single element. You must implement a solution with a linear runtime complexity and use only constant extra space.`,
+    examples: [
+      { input: 'nums = [2,2,1]', output: '1' },
+      { input: 'nums = [4,1,2,1,2]', output: '4' },
+      { input: 'nums = [1]', output: '1' },
+    ],
+    constraints: ['1 ≤ nums.length ≤ 3×10⁴', '-3×10⁴ ≤ nums[i] ≤ 3×10⁴'],
+    testCases: [
+      { fn: 'singleNumber([2,2,1])', expected: '1' },
+      { fn: 'singleNumber([4,1,2,1,2])', expected: '4' },
+      { fn: 'singleNumber([1])', expected: '1' },
+    ],
+    starterCode: {
+      javascript: `function singleNumber(nums) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def singleNumber(nums):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int singleNumber(int[] nums) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int singleNumber(vector<int>& nums) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int singleNumber(int* nums, int n) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 36,
+    title: 'Kth Largest Element in an Array',
+    difficulty: 'Medium',
+    category: 'Sorting & Searching',
+    tags: ['Heap', 'Sorting', 'Quickselect'],
+    functionName: 'findKthLargest',
+    description: `Given an integer array \`nums\` and an integer \`k\`, return the \`kth\` largest element in the array. Note that it is the kth largest element in sorted order, not the kth distinct element.`,
+    examples: [
+      { input: 'nums = [3,2,1,5,6,4], k = 2', output: '5' },
+      { input: 'nums = [3,2,3,1,2,4,5,5,6], k = 4', output: '4' },
+    ],
+    constraints: ['1 ≤ k ≤ nums.length ≤ 10⁵', '-10⁴ ≤ nums[i] ≤ 10⁴'],
+    testCases: [
+      { fn: 'findKthLargest([3,2,1,5,6,4], 2)', expected: '5' },
+      { fn: 'findKthLargest([3,2,3,1,2,4,5,5,6], 4)', expected: '4' },
+    ],
+    starterCode: {
+      javascript: `function findKthLargest(nums, k) {
+  // Write your solution here
+  return 0;
+}`,
+      python: `def findKthLargest(nums, k):
+    # Write your solution here
+    return 0
+`,
+      java: `public class Main {
+    public static int findKthLargest(int[] nums, int k) {
+        // Write your solution here
+        return 0;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+int findKthLargest(vector<int>& nums, int k) {
+    // Write your solution here
+    return 0;
+}`,
+      c: `#include <stdio.h>
+int findKthLargest(int* nums, int n, int k) {
+    // Write your solution here
+    return 0;
+}`,
+    },
+  },
+  {
+    id: 37,
+    title: 'Word Break',
+    difficulty: 'Medium',
+    category: 'Dynamic Programming',
+    tags: ['DP', 'Hash Table', 'String'],
+    functionName: 'wordBreak',
+    description: `Given a string \`s\` and a dictionary of strings \`wordDict\`, return \`true\` if \`s\` can be segmented into a space-separated sequence of one or more dictionary words.`,
+    examples: [
+      { input: 's = "leetcode", wordDict = ["leet","code"]', output: 'true' },
+      { input: 's = "applepenapple", wordDict = ["apple","pen"]', output: 'true' },
+      { input: 's = "catsandog", wordDict = ["cats","dog","sand","and","cat"]', output: 'false' },
+    ],
+    constraints: ['1 ≤ s.length ≤ 300', '1 ≤ wordDict.length ≤ 1000'],
+    testCases: [
+      { fn: 'wordBreak("leetcode", ["leet", "code"])', expected: 'true' },
+      { fn: 'wordBreak("applepenapple", ["apple", "pen"])', expected: 'true' },
+      { fn: 'wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])', expected: 'false' },
+    ],
+    starterCode: {
+      javascript: `function wordBreak(s, wordDict) {
+  // Write your solution here
+  return false;
+}`,
+      python: `def wordBreak(s, wordDict):
+    # Write your solution here
+    return False
+`,
+      java: `import java.util.*;
+public class Main {
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        // Write your solution here
+        return false;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+bool wordBreak(string s, vector<string>& wordDict) {
+    // Write your solution here
+    return false;
+}`,
+      c: `#include <stdio.h>
+#include <stdbool.h>
+bool wordBreak(char* s, char** wordDict, int dictSize) {
+    // Write your solution here
+    return false;
+}`,
+    },
+  },
+  {
+    id: 38,
+    title: 'Course Schedule',
+    difficulty: 'Medium',
+    category: 'Graphs',
+    tags: ['Graph', 'DFS', 'BFS', 'Topological Sort'],
+    functionName: 'canFinish',
+    description: `There are a total of \`numCourses\` courses you have to take, labeled from \`0\` to \`numCourses - 1\`. You are given an array \`prerequisites\` where \`prerequisites[i] = [a, b]\` indicates that you must take course b first if you want to take course a. Return \`true\` if you can finish all courses; otherwise, return \`false\`.`,
+    examples: [
+      { input: 'numCourses = 2, prerequisites = [[1,0]]', output: 'true' },
+      { input: 'numCourses = 2, prerequisites = [[1,0],[0,1]]', output: 'false' },
+    ],
+    constraints: ['1 ≤ numCourses ≤ 2000', '0 ≤ prerequisites.length ≤ 5000'],
+    testCases: [
+      { fn: 'canFinish(2, [[1,0]])', expected: 'true' },
+      { fn: 'canFinish(2, [[1,0],[0,1]])', expected: 'false' },
+    ],
+    starterCode: {
+      javascript: `function canFinish(numCourses, prerequisites) {
+  // Write your solution here
+  return true;
+}`,
+      python: `def canFinish(numCourses, prerequisites):
+    # Write your solution here
+    return True
+`,
+      java: `public class Main {
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        // Write your solution here
+        return true;
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+    // Write your solution here
+    return true;
+}`,
+      c: `#include <stdio.h>
+#include <stdbool.h>
+bool canFinish(int numCourses, int** prerequisites, int n, int* colSizes) {
+    // Write your solution here
+    return true;
+}`,
+    },
+  },
+  {
+    id: 39,
+    title: 'Min Stack',
+    difficulty: 'Medium',
+    category: 'Stacks & Queues',
+    tags: ['Stack', 'Design'],
+    functionName: 'minStackOps',
+    description: `Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. Execute operations array and return the result array.`,
+    examples: [
+      { input: 'ops = ["push","push","push","getMin","pop","top","getMin"], vals = [[-2],[0],[-3],[],[],[],[]]', output: '[null,null,null,-3,null,0,-2]' },
+    ],
+    constraints: ['Methods pop, top and getMin will always be called on non-empty stacks.'],
+    testCases: [
+      { fn: 'JSON.stringify(minStackOps(["push","push","push","getMin","pop","top","getMin"], [[-2],[0],[-3],[],[],[],[]]))', expected: '[null,null,null,-3,null,0,-2]' },
+    ],
+    starterCode: {
+      javascript: `function minStackOps(ops, vals) {
+  // Write your solution here
+  return [];
+}`,
+      python: `def minStackOps(ops, vals):
+    # Write your solution here
+    return []
+`,
+      java: `import java.util.*;
+public class Main {
+    public static List<Object> minStackOps(String[] ops, int[][] vals) {
+        // Write your solution here
+        return new ArrayList<>();
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<string> minStackOps(vector<string> ops, vector<vector<int>> vals) {
+    // Write your solution here
+    return {};
+}`,
+      c: `#include <stdio.h>
+void minStackOps() {
+    // Write your solution here
+}`,
+    },
+  },
+  {
+    id: 40,
+    title: 'Merge K Sorted Lists',
+    difficulty: 'Hard',
+    category: 'Linked Lists',
+    tags: ['Linked List', 'Heap', 'Divide and Conquer'],
+    functionName: 'mergeKLists',
+    description: `You are given an array of \`k\` linked-lists arrays, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list array and return it.`,
+    examples: [
+      { input: 'lists = [[1,4,5],[1,3,4],[2,6]]', output: '[1,1,2,3,4,4,5,6]' },
+      { input: 'lists = []', output: '[]' },
+      { input: 'lists = [[]]', output: '[]' },
+    ],
+    constraints: ['k == lists.length', '0 ≤ k ≤ 10⁴', '0 ≤ lists[i].length ≤ 500'],
+    testCases: [
+      { fn: 'JSON.stringify(mergeKLists([[1,4,5],[1,3,4],[2,6]]))', expected: '[1,1,2,3,4,4,5,6]' },
+      { fn: 'JSON.stringify(mergeKLists([]))', expected: '[]' },
+      { fn: 'JSON.stringify(mergeKLists([[]]))', expected: '[]' },
+    ],
+    starterCode: {
+      javascript: `function mergeKLists(lists) {
+  // Write your solution here
+  return [];
+}`,
+      python: `def mergeKLists(lists):
+    # Write your solution here
+    return []
+`,
+      java: `import java.util.*;
+public class Main {
+    public static int[] mergeKLists(int[][] lists) {
+        // Write your solution here
+        return new int[]{};
+    }
+}`,
+      cpp: `#include <bits/stdc++.h>
+using namespace std;
+vector<int> mergeKLists(vector<vector<int>>& lists) {
+    // Write your solution here
+    return {};
+}`,
+      c: `#include <stdio.h>
+int* mergeKLists(int** lists, int k, int* colSizes, int* returnSize) {
+    // Write your solution here
+    *returnSize = 0;
+    return NULL;
+}`,
+    },
+  },
 ];
 
 export function buildStarterForLanguage(problem, languageId) {
